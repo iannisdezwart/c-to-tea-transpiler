@@ -1,0 +1,8 @@
+[package]
+name = "c-to-tea-transpiler"
+version = "0.1.0"
+authors = ["Iannis de Zwart"]
+edition = "2018"
+
+[dependencies]
+lang-c = "0.15.1"
