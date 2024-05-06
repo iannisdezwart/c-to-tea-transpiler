@@ -579,7 +579,25 @@ fn transpile_expression_(node: &lang_c::ast::Expression, state: &mut State) -> S
             }
         },
         lang_c::ast::Expression::StringLiteral(s) => {
-            return "\"".to_string() + &s.node.join("").to_string() + "\"";
+            match s
+                .node
+                .iter()
+                .find(|c| !c.starts_with("\"") || !c.ends_with("\""))
+            {
+                Some(_) => {
+                    eprintln!("Invalid string literal: {:?}", s.node);
+                }
+                None => {}
+            }
+
+            return "\"".to_string()
+                + &s.node
+                    .iter()
+                    .map(|z| &z[1..z.len() - 1])
+                    .collect::<Vec<&str>>()
+                    .join("")
+                    .to_string()
+                + "\"";
         }
         lang_c::ast::Expression::GenericSelection(_) => {}
         lang_c::ast::Expression::Member(m) => {
