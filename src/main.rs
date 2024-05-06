@@ -55,7 +55,9 @@ fn transpile_storage_class_specifier(node: &lang_c::ast::StorageClassSpecifier) 
         lang_c::ast::StorageClassSpecifier::Typedef => {
             return "\\typedef".to_string();
         }
-        lang_c::ast::StorageClassSpecifier::Extern => {}
+        lang_c::ast::StorageClassSpecifier::Extern => {
+            return "\\extern".to_string();
+        }
         lang_c::ast::StorageClassSpecifier::Static => {}
         lang_c::ast::StorageClassSpecifier::ThreadLocal => {}
         lang_c::ast::StorageClassSpecifier::Auto => {}
@@ -278,6 +280,7 @@ fn transpile_init_declarator(node: &lang_c::ast::InitDeclarator, state: &mut Sta
 fn transpile_parameter_declaration(
     node: &lang_c::ast::ParameterDeclaration,
     state: &mut State,
+    index: usize,
 ) -> String {
     let mut code = String::new();
 
@@ -294,6 +297,7 @@ fn transpile_parameter_declaration(
         }
         None => {
             code = spec;
+            code += format!("$arg___{}", index.to_string()).as_str();
         }
     }
 
@@ -342,7 +346,7 @@ fn transpile_declarator(
             after_id_code += "(";
 
             for (i, param) in f.node.parameters.iter().enumerate() {
-                after_id_code += transpile_parameter_declaration(&param.node, state).as_str();
+                after_id_code += transpile_parameter_declaration(&param.node, state, i).as_str();
 
                 if i < f.node.parameters.len() - 1 {
                     after_id_code += ", ";
@@ -912,6 +916,7 @@ fn transpile_declaration(node: &lang_c::ast::Declaration, state: &mut State) -> 
     let mut is_typedef = false;
     let mut typedef_struct_or_enum_name: String = String::new();
     let mut typedef_struct_or_enum_has_body = false;
+    let mut is_extern = false;
 
     node.specifiers.iter().for_each(|specifier| {
         let res = is_struct_or_enum(&specifier.node);
@@ -923,6 +928,8 @@ fn transpile_declaration(node: &lang_c::ast::Declaration, state: &mut State) -> 
 
         if sp == "\\typedef" {
             is_typedef = true;
+        } else if sp == "\\extern" {
+            is_extern = true;
         } else {
             spec += sp.as_str();
             spec += " ";
@@ -939,6 +946,7 @@ fn transpile_declaration(node: &lang_c::ast::Declaration, state: &mut State) -> 
     }
 
     let mut code = String::new();
+
     node.declarators.iter().for_each(|decl| {
         let name = get_name(&decl.node);
 
@@ -972,10 +980,33 @@ fn transpile_declaration(node: &lang_c::ast::Declaration, state: &mut State) -> 
             None => {}
         }
 
-        code += &spec;
-        code += " ";
-        code += transpile_init_declarator(&decl.node, state).as_str();
-        code += ";\n";
+        match decl
+            .node
+            .declarator
+            .node
+            .derived
+            .iter()
+            .any(|d| match &d.node {
+                lang_c::ast::DerivedDeclarator::Function(_) => true,
+                lang_c::ast::DerivedDeclarator::KRFunction(_) => true,
+                _ => false,
+            }) {
+            true => {
+                // Skip function declarations unless they are extern.
+                if is_extern {
+                    code += &spec;
+                    code += " ";
+                    code += transpile_init_declarator(&decl.node, state).as_str();
+                    code += "{}\n";
+                }
+            }
+            false => {
+                code += &spec;
+                code += " ";
+                code += transpile_init_declarator(&decl.node, state).as_str();
+                code += ";\n";
+            }
+        }
     });
 
     return code;

@@ -1,15 +1,19 @@
-int test(int n)
-{
-    switch (n)
-    {
-    case 3:
-    case 4:
-        return 1;
-    case 5:
-    default:
-        return 0;
-    }
-}
+int decl(int, int);
+
+extern int ext_decl(int, int);
+
+// int test(int n)
+// {
+//     switch (n)
+//     {
+//     case 3:
+//     case 4:
+//         return 1;
+//     case 5:
+//     default:
+//         return 0;
+//     }
+// }
 
 // typedef enum EnumTy
 // {
