@@ -1,8 +1,63 @@
 use lang_c;
+use std::collections::HashMap;
+
+struct State {
+    typedefs: HashMap<String, String>,
+}
+
+fn shrink_spec(real_input: String) -> String {
+    let mut input = real_input.clone();
+
+    // 4
+    input = input.replace("\\unsigned \\long \\long \\int", "u64");
+    input = input.replace("\\signed \\long \\long \\int", "i64");
+    // 3
+    input = input.replace("\\long \\long \\int", "i64");
+    input = input.replace("\\unsigned \\short \\int", "u16");
+    input = input.replace("\\signed \\short \\int", "i16");
+    input = input.replace("\\unsigned \\long \\long", "u64");
+    input = input.replace("\\signed \\long \\long", "i64");
+    input = input.replace("\\long \\unsigned \\int", "u32");
+    input = input.replace("\\unsigned \\long \\int", "u32");
+    input = input.replace("\\signed \\long \\int", "i32");
+    // 2
+    input = input.replace("\\short \\int", "i16");
+    input = input.replace("\\long \\long", "i64");
+    input = input.replace("\\long \\int", "i32");
+    input = input.replace("\\unsigned \\char", "u8");
+    input = input.replace("\\signed \\char", "i8");
+    input = input.replace("\\unsigned \\short", "u16");
+    input = input.replace("\\signed \\short", "i16");
+    input = input.replace("\\unsigned \\long", "u32");
+    input = input.replace("\\signed \\long", "i32");
+    input = input.replace("\\unsigned \\int", "u32");
+    input = input.replace("\\signed \\int", "i32");
+    input = input.replace("\\long \\long", "i64");
+    input = input.replace("\\long \\double", "f64");
+    // 1
+    input = input.replace("\\unsigned", "u32");
+    input = input.replace("\\signed", "i32");
+    input = input.replace("\\int", "i32");
+    input = input.replace("\\short", "i16");
+    input = input.replace("\\char", "i8");
+    input = input.replace("\\long", "i32");
+    input = input.replace("\\float", "f32");
+    input = input.replace("\\double", "f64");
+    input = input.replace("\\bool", "i8");
+    input = input.replace("\\void", "v0");
+
+    if input.trim().contains(" ") && real_input.contains("\\") {
+        eprintln!("Unknown specifiers: {}", real_input);
+    }
+
+    return input;
+}
 
 fn transpile_storage_class_specifier(node: &lang_c::ast::StorageClassSpecifier) -> String {
     match node {
-        lang_c::ast::StorageClassSpecifier::Typedef => {}
+        lang_c::ast::StorageClassSpecifier::Typedef => {
+            return "\\typedef".to_string();
+        }
         lang_c::ast::StorageClassSpecifier::Extern => {}
         lang_c::ast::StorageClassSpecifier::Static => {}
         lang_c::ast::StorageClassSpecifier::ThreadLocal => {}
@@ -13,10 +68,14 @@ fn transpile_storage_class_specifier(node: &lang_c::ast::StorageClassSpecifier) 
     return String::new();
 }
 
-fn transpile_struct_declarator(node: &lang_c::ast::StructDeclarator, spec: &String) -> String {
+fn transpile_struct_declarator(
+    node: &lang_c::ast::StructDeclarator,
+    spec: &String,
+    state: &mut State,
+) -> String {
     match &node.declarator {
         Some(decl) => {
-            return transpile_declarator(&decl.node, spec);
+            return transpile_declarator(&decl.node, spec, state);
         }
         None => {}
     }
@@ -24,27 +83,28 @@ fn transpile_struct_declarator(node: &lang_c::ast::StructDeclarator, spec: &Stri
     return String::new();
 }
 
-fn transpile_struct_field(node: &lang_c::ast::StructField) -> String {
+fn transpile_struct_field(node: &lang_c::ast::StructField, state: &mut State) -> String {
     let mut code = String::new();
 
     let mut spec = String::new();
     node.specifiers.iter().for_each(|specifier| {
-        spec += transpile_specifier_qualifier(&specifier.node).as_str();
+        spec += transpile_specifier_qualifier(&specifier.node, state).as_str();
         spec += " ";
     });
+    spec = shrink_spec(spec);
 
     node.declarators.iter().for_each(|decl| {
-        code += transpile_struct_declarator(&decl.node, &spec).as_str();
+        code += transpile_struct_declarator(&decl.node, &spec, state).as_str();
         code += ";\n";
     });
 
     return code;
 }
 
-fn transpile_struct_decl(node: &lang_c::ast::StructDeclaration) -> String {
+fn transpile_struct_decl(node: &lang_c::ast::StructDeclaration, state: &mut State) -> String {
     match node {
         lang_c::ast::StructDeclaration::Field(f) => {
-            return transpile_struct_field(&f.node);
+            return transpile_struct_field(&f.node, state);
         }
         lang_c::ast::StructDeclaration::StaticAssert(_) => {}
     }
@@ -52,7 +112,7 @@ fn transpile_struct_decl(node: &lang_c::ast::StructDeclaration) -> String {
     return String::new();
 }
 
-fn transpile_struct(node: &lang_c::ast::StructType) -> String {
+fn transpile_struct(node: &lang_c::ast::StructType, state: &mut State) -> String {
     let name: String;
 
     match &node.identifier {
@@ -74,7 +134,7 @@ fn transpile_struct(node: &lang_c::ast::StructType) -> String {
             code += " {\n";
 
             for decl in d.iter() {
-                code += transpile_struct_decl(&decl.node).as_str();
+                code += transpile_struct_decl(&decl.node, state).as_str();
             }
 
             code += "}";
@@ -84,45 +144,52 @@ fn transpile_struct(node: &lang_c::ast::StructType) -> String {
     }
 }
 
-fn transpile_type_specifier(node: &lang_c::ast::TypeSpecifier) -> String {
+fn transpile_type_specifier(node: &lang_c::ast::TypeSpecifier, state: &mut State) -> String {
     match node {
         lang_c::ast::TypeSpecifier::Void => {
-            return "v0".to_string();
+            return "\\void".to_string();
         }
         lang_c::ast::TypeSpecifier::Char => {
-            return "i8".to_string();
+            return "\\char".to_string();
         }
         lang_c::ast::TypeSpecifier::Short => {
-            return "i16".to_string();
+            return "\\short".to_string();
         }
         lang_c::ast::TypeSpecifier::Int => {
-            return "i32".to_string();
+            return "\\int".to_string();
         }
         lang_c::ast::TypeSpecifier::Long => {
-            return "i64".to_string();
+            return "\\long".to_string();
         }
         lang_c::ast::TypeSpecifier::Float => {
-            return "f32".to_string();
+            return "\\float".to_string();
         }
         lang_c::ast::TypeSpecifier::Double => {
-            return "f64".to_string();
+            return "\\double".to_string();
         }
         lang_c::ast::TypeSpecifier::Signed => {
-            return "i32".to_string();
+            return "\\signed".to_string();
         }
         lang_c::ast::TypeSpecifier::Unsigned => {
-            return "u32".to_string();
+            return "\\unsigned".to_string();
         }
         lang_c::ast::TypeSpecifier::Bool => {
-            return "i8".to_string();
+            return "\\bool".to_string();
         }
         lang_c::ast::TypeSpecifier::Complex => {}
         lang_c::ast::TypeSpecifier::Atomic(_) => {}
         lang_c::ast::TypeSpecifier::Struct(s) => {
-            return transpile_struct(&s.node);
+            return transpile_struct(&s.node, state);
         }
         lang_c::ast::TypeSpecifier::Enum(_) => {}
-        lang_c::ast::TypeSpecifier::TypedefName(_) => {}
+        lang_c::ast::TypeSpecifier::TypedefName(ident) => {
+            let typedef = state.typedefs.get(&ident.node.name);
+            if typedef.is_none() {
+                eprintln!("Unknown typedef: {}", ident.node.name);
+                return ident.node.name.to_string();
+            }
+            return typedef.unwrap().to_string();
+        }
         lang_c::ast::TypeSpecifier::TypeOf(_) => {}
         lang_c::ast::TypeSpecifier::TS18661Float(_) => {}
     }
@@ -144,13 +211,16 @@ fn transpile_type_qualifier(node: &lang_c::ast::TypeQualifier) -> String {
     return String::new();
 }
 
-fn transpile_declaration_specifier(node: &lang_c::ast::DeclarationSpecifier) -> String {
+fn transpile_declaration_specifier(
+    node: &lang_c::ast::DeclarationSpecifier,
+    state: &mut State,
+) -> String {
     match node {
         lang_c::ast::DeclarationSpecifier::StorageClass(n) => {
             return transpile_storage_class_specifier(&n.node);
         }
         lang_c::ast::DeclarationSpecifier::TypeSpecifier(n) => {
-            return transpile_type_specifier(&n.node);
+            return transpile_type_specifier(&n.node, state);
         }
         lang_c::ast::DeclarationSpecifier::TypeQualifier(n) => {
             return transpile_type_qualifier(&n.node);
@@ -163,10 +233,10 @@ fn transpile_declaration_specifier(node: &lang_c::ast::DeclarationSpecifier) -> 
     return String::new();
 }
 
-fn transpile_initializer(node: &lang_c::ast::Initializer) -> String {
+fn transpile_initializer(node: &lang_c::ast::Initializer, state: &mut State) -> String {
     match node {
         lang_c::ast::Initializer::Expression(e) => {
-            return transpile_expression(&e.node);
+            return transpile_expression(&e.node, state);
         }
         lang_c::ast::Initializer::List(_) => {}
     }
@@ -174,15 +244,15 @@ fn transpile_initializer(node: &lang_c::ast::Initializer) -> String {
     return String::new();
 }
 
-fn transpile_init_declarator(node: &lang_c::ast::InitDeclarator) -> String {
+fn transpile_init_declarator(node: &lang_c::ast::InitDeclarator, state: &mut State) -> String {
     let mut code = String::new();
 
-    code += transpile_declarator(&node.declarator.node, &String::new()).as_str();
+    code += transpile_declarator(&node.declarator.node, &String::new(), state).as_str();
 
     match &node.initializer {
         Some(init) => {
             code += " = ";
-            code += transpile_initializer(&init.node).as_str();
+            code += transpile_initializer(&init.node, state).as_str();
         }
         None => {}
     }
@@ -190,26 +260,36 @@ fn transpile_init_declarator(node: &lang_c::ast::InitDeclarator) -> String {
     return code;
 }
 
-fn transpile_parameter_declaration(node: &lang_c::ast::ParameterDeclaration) -> String {
+fn transpile_parameter_declaration(
+    node: &lang_c::ast::ParameterDeclaration,
+    state: &mut State,
+) -> String {
     let mut code = String::new();
 
     let mut spec = String::new();
     node.specifiers.iter().for_each(|specifier| {
-        spec += transpile_declaration_specifier(&specifier.node).as_str();
+        spec += transpile_declaration_specifier(&specifier.node, state).as_str();
         spec += " ";
     });
+    spec = shrink_spec(spec);
 
     match &node.declarator {
         Some(declarator) => {
-            code += transpile_declarator(&declarator.node, &spec).as_str();
+            code += transpile_declarator(&declarator.node, &spec, state).as_str();
         }
-        None => {}
+        None => {
+            code = spec;
+        }
     }
 
     return code;
 }
 
-fn transpile_declarator(node: &lang_c::ast::Declarator, spec: &String) -> String {
+fn transpile_declarator(
+    node: &lang_c::ast::Declarator,
+    spec: &String,
+    state: &mut State,
+) -> String {
     let mut id_code = String::new();
 
     match &node.kind.node {
@@ -234,10 +314,10 @@ fn transpile_declarator(node: &lang_c::ast::Declarator, spec: &String) -> String
                 lang_c::ast::ArraySize::Unknown => {}
                 lang_c::ast::ArraySize::VariableUnknown => {}
                 lang_c::ast::ArraySize::VariableExpression(e) => {
-                    before_id_code += transpile_expression(&e.node).as_str();
+                    before_id_code += transpile_expression(&e.node, state).as_str();
                 }
                 lang_c::ast::ArraySize::StaticExpression(e) => {
-                    before_id_code += transpile_expression(&e.node).as_str();
+                    before_id_code += transpile_expression(&e.node, state).as_str();
                 }
             }
 
@@ -247,7 +327,7 @@ fn transpile_declarator(node: &lang_c::ast::Declarator, spec: &String) -> String
             after_id_code += "(";
 
             for (i, param) in f.node.parameters.iter().enumerate() {
-                after_id_code += transpile_parameter_declaration(&param.node).as_str();
+                after_id_code += transpile_parameter_declaration(&param.node, state).as_str();
 
                 if i < f.node.parameters.len() - 1 {
                     after_id_code += ", ";
@@ -278,14 +358,14 @@ fn transpile_declarator(node: &lang_c::ast::Declarator, spec: &String) -> String
     return code;
 }
 
-fn transpile_block_item(node: &lang_c::ast::BlockItem) -> String {
+fn transpile_block_item(node: &lang_c::ast::BlockItem, state: &mut State) -> String {
     match node {
         lang_c::ast::BlockItem::Declaration(decl) => {
-            return transpile_declaration(&decl.node);
+            return transpile_declaration(&decl.node, state);
         }
         lang_c::ast::BlockItem::StaticAssert(_) => {}
         lang_c::ast::BlockItem::Statement(stmt) => {
-            return transpile_statement(&stmt.node);
+            return transpile_statement(&stmt.node, state);
         }
     }
 
@@ -327,10 +407,13 @@ fn transpile_unary_operator(node: &lang_c::ast::UnaryOperator, operand: String) 
     }
 }
 
-fn transpile_specifier_qualifier(node: &lang_c::ast::SpecifierQualifier) -> String {
+fn transpile_specifier_qualifier(
+    node: &lang_c::ast::SpecifierQualifier,
+    state: &mut State,
+) -> String {
     match node {
         lang_c::ast::SpecifierQualifier::TypeSpecifier(t) => {
-            return transpile_type_specifier(&t.node);
+            return transpile_type_specifier(&t.node, state);
         }
         lang_c::ast::SpecifierQualifier::TypeQualifier(t) => {
             return transpile_type_qualifier(&t.node);
@@ -341,18 +424,19 @@ fn transpile_specifier_qualifier(node: &lang_c::ast::SpecifierQualifier) -> Stri
     return String::new();
 }
 
-fn transpile_type_name(node: &lang_c::ast::TypeName) -> String {
+fn transpile_type_name(node: &lang_c::ast::TypeName, state: &mut State) -> String {
     let mut code = String::new();
 
     let mut spec = String::new();
     node.specifiers.iter().for_each(|specifier| {
-        spec += transpile_specifier_qualifier(&specifier.node).as_str();
+        spec += transpile_specifier_qualifier(&specifier.node, state).as_str();
         spec += " ";
     });
+    spec = shrink_spec(spec);
 
     match &node.declarator {
         Some(declarator) => {
-            code += transpile_declarator(&declarator.node, &spec).as_str();
+            code += transpile_declarator(&declarator.node, &spec, state).as_str();
         }
         None => {}
     }
@@ -459,11 +543,11 @@ fn transpile_binary_operator(
     }
 }
 
-fn transpile_expression(node: &lang_c::ast::Expression) -> String {
-    return "(".to_string() + &transpile_expression_(node) + ")";
+fn transpile_expression(node: &lang_c::ast::Expression, state: &mut State) -> String {
+    return "(".to_string() + &transpile_expression_(node, state) + ")";
 }
 
-fn transpile_expression_(node: &lang_c::ast::Expression) -> String {
+fn transpile_expression_(node: &lang_c::ast::Expression, state: &mut State) -> String {
     match node {
         lang_c::ast::Expression::Identifier(i) => {
             return i.node.name.to_string();
@@ -484,7 +568,7 @@ fn transpile_expression_(node: &lang_c::ast::Expression) -> String {
         }
         lang_c::ast::Expression::GenericSelection(_) => {}
         lang_c::ast::Expression::Member(m) => {
-            let mut code = transpile_expression(&m.node.expression.node);
+            let mut code = transpile_expression(&m.node.expression.node, state);
 
             match m.node.operator.node {
                 lang_c::ast::MemberOperator::Direct => {
@@ -500,11 +584,11 @@ fn transpile_expression_(node: &lang_c::ast::Expression) -> String {
             return code;
         }
         lang_c::ast::Expression::Call(c) => {
-            let mut code = transpile_expression(&c.node.callee.node);
+            let mut code = transpile_expression(&c.node.callee.node, state);
 
             code += "(";
             for (i, a) in c.node.arguments.iter().enumerate() {
-                code += transpile_expression(&a.node).as_str();
+                code += transpile_expression(&a.node, state).as_str();
                 if i < c.node.arguments.len() - 1 {
                     code += ", ";
                 }
@@ -520,15 +604,15 @@ fn transpile_expression_(node: &lang_c::ast::Expression) -> String {
         lang_c::ast::Expression::UnaryOperator(u) => {
             return transpile_unary_operator(
                 &u.node.operator.node,
-                transpile_expression(&u.node.operand.node),
+                transpile_expression(&u.node.operand.node, state),
             );
         }
         lang_c::ast::Expression::Cast(c) => {
             let mut code = String::new();
 
-            code += transpile_type_name(&c.node.type_name.node).as_str();
+            code += transpile_type_name(&c.node.type_name.node, state).as_str();
             code += "(";
-            code += transpile_expression(&c.node.expression.node).as_str();
+            code += transpile_expression(&c.node.expression.node, state).as_str();
             code += ")";
 
             return code;
@@ -536,8 +620,8 @@ fn transpile_expression_(node: &lang_c::ast::Expression) -> String {
         lang_c::ast::Expression::BinaryOperator(b) => {
             return transpile_binary_operator(
                 &b.node.operator.node,
-                transpile_expression(&b.node.lhs.node),
-                transpile_expression(&b.node.rhs.node),
+                transpile_expression(&b.node.lhs.node, state),
+                transpile_expression(&b.node.rhs.node, state),
             );
         }
         lang_c::ast::Expression::Conditional(_) => {}
@@ -545,28 +629,28 @@ fn transpile_expression_(node: &lang_c::ast::Expression) -> String {
         lang_c::ast::Expression::OffsetOf(_) => {}
         lang_c::ast::Expression::VaArg(_) => {}
         lang_c::ast::Expression::Statement(s) => {
-            return transpile_statement(&s.node);
+            return transpile_statement(&s.node, state);
         }
     }
 
     return String::new();
 }
 
-fn transpile_statement(node: &lang_c::ast::Statement) -> String {
+fn transpile_statement(node: &lang_c::ast::Statement, state: &mut State) -> String {
     match node {
         lang_c::ast::Statement::Labeled(_) => {}
         lang_c::ast::Statement::Compound(compound) => {
             let mut code = String::new();
 
             for item in compound.iter() {
-                code += transpile_block_item(&item.node).as_str();
+                code += transpile_block_item(&item.node, state).as_str();
             }
 
             return code;
         }
         lang_c::ast::Statement::Expression(e) => match e {
             Some(expr) => {
-                return transpile_expression(&expr.node) + ";\n";
+                return transpile_expression(&expr.node, state) + ";\n";
             }
             None => {}
         },
@@ -586,7 +670,7 @@ fn transpile_statement(node: &lang_c::ast::Statement) -> String {
         }
         lang_c::ast::Statement::Return(r) => match r {
             Some(expr) => {
-                return format!("return {};\n", transpile_expression(&expr.node));
+                return format!("return {};\n", transpile_expression(&expr.node, state));
             }
             None => {
                 return "return;\n".to_string();
@@ -598,20 +682,24 @@ fn transpile_statement(node: &lang_c::ast::Statement) -> String {
     return String::new();
 }
 
-fn transpile_function_definition(node: &lang_c::ast::FunctionDefinition) -> String {
+fn transpile_function_definition(
+    node: &lang_c::ast::FunctionDefinition,
+    state: &mut State,
+) -> String {
     let mut code = String::new();
 
     let mut spec = String::new();
     node.specifiers.iter().for_each(|specifier| {
-        spec += transpile_declaration_specifier(&specifier.node).as_str();
+        spec += transpile_declaration_specifier(&specifier.node, state).as_str();
         spec += " ";
     });
+    spec = shrink_spec(spec);
 
-    code += transpile_declarator(&node.declarator.node, &spec).as_str();
+    code += transpile_declarator(&node.declarator.node, &spec, state).as_str();
     code += "\n";
     code += "{\n";
 
-    code += transpile_statement(&node.statement.node).as_str();
+    code += transpile_statement(&node.statement.node, state).as_str();
 
     code += "}\n";
     code += "\n";
@@ -619,39 +707,134 @@ fn transpile_function_definition(node: &lang_c::ast::FunctionDefinition) -> Stri
     return code;
 }
 
-fn transpile_declaration(node: &lang_c::ast::Declaration) -> String {
+fn get_name(node: &lang_c::ast::InitDeclarator) -> Option<String> {
+    match &node.declarator.node.kind.node {
+        lang_c::ast::DeclaratorKind::Identifier(ident) => {
+            return Some(ident.node.name.to_string());
+        }
+        _ => {
+            return None;
+        }
+    }
+}
+
+fn is_struct(node: &lang_c::ast::DeclarationSpecifier) -> Option<&lang_c::ast::StructType> {
+    match node {
+        lang_c::ast::DeclarationSpecifier::TypeSpecifier(t) => match &t.node {
+            lang_c::ast::TypeSpecifier::Struct(s) => {
+                return Some(&s.node);
+            }
+            _ => {
+                return None;
+            }
+        },
+        _ => {
+            return None;
+        }
+    }
+}
+
+fn transpile_declaration(node: &lang_c::ast::Declaration, state: &mut State) -> String {
     let mut spec = String::new();
+    let mut is_typedef = false;
+    let mut typedef_struct_name: String = String::new();
+    let mut typedef_struct_has_body = false;
+
     node.specifiers.iter().for_each(|specifier| {
-        spec += transpile_declaration_specifier(&specifier.node).as_str();
-        spec += " ";
+        let is_struct_res = is_struct(&specifier.node);
+
+        if is_typedef && is_struct_res.is_some() {
+            let struct_node = is_struct_res.unwrap();
+
+            match &struct_node.identifier {
+                Some(ident) => {
+                    typedef_struct_name = ident.node.name.to_string();
+                }
+                None => {
+                    typedef_struct_name = "???".to_string();
+                }
+            }
+
+            typedef_struct_has_body = struct_node.declarations.is_some();
+        }
+
+        let sp = transpile_declaration_specifier(&specifier.node, state);
+
+        if sp == "\\typedef" {
+            is_typedef = true;
+        } else {
+            spec += sp.as_str();
+            spec += " ";
+        }
     });
 
+    spec = shrink_spec(spec);
+
     if node.declarators.is_empty() {
+        if is_typedef {
+            eprintln!("Typedef without declarators: {}", spec);
+        }
         return spec + ";\n";
     }
 
     let mut code = String::new();
     node.declarators.iter().for_each(|decl| {
+        let name = get_name(&decl.node);
+
+        match &name {
+            Some(n) => {
+                if is_typedef {
+                    if !typedef_struct_name.is_empty() {
+                        if typedef_struct_name == "???" {
+                            spec = spec.clone().replacen(
+                                "class ???",
+                                format!("class {}", n).as_str(),
+                                1,
+                            );
+                            code += spec.as_str();
+                            code += ";\n";
+                        } else if typedef_struct_has_body {
+                            code += spec.as_str();
+                            code += ";\n";
+                        }
+                        state.typedefs.insert(
+                            n.to_string(),
+                            if typedef_struct_name == "???" {
+                                n.to_string()
+                            } else {
+                                typedef_struct_name.clone()
+                            },
+                        );
+                    } else {
+                        state.typedefs.insert(n.to_string(), spec.clone());
+                    }
+
+                    return;
+                }
+            }
+            None => {}
+        }
+
         code += &spec;
         code += " ";
-        code += transpile_init_declarator(&decl.node).as_str();
+        code += transpile_init_declarator(&decl.node, state).as_str();
         code += ";\n";
     });
 
     return code;
 }
 
-fn transpile(parse: lang_c::driver::Parse) -> String {
+fn transpile(parse: lang_c::driver::Parse, state: &mut State) -> String {
     let mut code = String::new();
 
     for item in parse.unit.0 {
         match item.node {
             lang_c::ast::ExternalDeclaration::Declaration(d) => {
-                code += transpile_declaration(&d.node).as_str();
+                code += transpile_declaration(&d.node, state).as_str();
             }
             lang_c::ast::ExternalDeclaration::StaticAssert(_) => {}
             lang_c::ast::ExternalDeclaration::FunctionDefinition(f) => {
-                code += transpile_function_definition(&f.node).as_str();
+                code += transpile_function_definition(&f.node, state).as_str();
             }
         }
     }
@@ -661,13 +844,20 @@ fn transpile(parse: lang_c::driver::Parse) -> String {
 
 fn main() {
     let source_path = std::env::args().nth(1).unwrap();
-    let config = lang_c::driver::Config::default();
+    let config = lang_c::driver::Config {
+        cpp_command: "clang".to_string(),
+        cpp_options: vec!["-E".to_string()],
+        flavor: lang_c::driver::Flavor::ClangC11,
+    };
     let parse_res = lang_c::driver::parse(&config, source_path);
 
     match parse_res {
         Ok(parse) => {
             println!("{:#?}", parse);
-            println!("{}", transpile(parse));
+            let mut state = State {
+                typedefs: HashMap::new(),
+            };
+            println!("{}", transpile(parse, &mut state));
         }
         Err(err) => {
             eprintln!("Error: {}", err);

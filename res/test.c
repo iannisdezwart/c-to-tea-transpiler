@@ -1,8 +1,15 @@
-static int global;
+typedef struct Point {
+    int x;
+    int y;
+} Point;
 
-int add(int a, int b) {
-    return a + b + global;
-}
+Point t = {1, 2};
+
+// static int global;
+
+// int add(int a, int b) {
+//     return a + b + global;
+// }
 
 
 // struct Complex {
