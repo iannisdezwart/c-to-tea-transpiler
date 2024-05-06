@@ -1,8 +1,5 @@
-use lang_c;
-use std::collections::HashMap;
-
 struct State {
-    typedefs: HashMap<String, String>,
+    typedefs: std::collections::HashMap<String, String>,
 }
 
 fn shrink_spec(real_input: String) -> String {
@@ -664,6 +661,126 @@ fn transpile_expression_(node: &lang_c::ast::Expression, state: &mut State) -> S
     return String::new();
 }
 
+fn transpile_if_statement(node: &lang_c::ast::IfStatement, state: &mut State) -> String {
+    let mut code = String::new();
+
+    code += "if (";
+    code += transpile_expression(&node.condition.node, state).as_str();
+    code += ") {\n";
+    code += transpile_statement(&node.then_statement.node, state).as_str();
+    code += "}\n";
+
+    match &node.else_statement {
+        Some(else_stmt) => {
+            code += "else {\n";
+            code += transpile_statement(&else_stmt.node, state).as_str();
+            code += "}\n";
+        }
+        None => {}
+    }
+
+    return code;
+}
+
+fn transpile_switch_statement(node: &lang_c::ast::SwitchStatement, state: &mut State) -> String {
+    let mut code = String::new();
+    let mut cases: Vec<(&lang_c::ast::Expression, Vec<&lang_c::ast::Statement>)> = Vec::new();
+    let mut default_statement: Option<&lang_c::ast::Statement> = None;
+
+    match &node.statement.node {
+        lang_c::ast::Statement::Compound(compound) => {
+            for item in compound.iter() {
+                match &item.node {
+                    lang_c::ast::BlockItem::Declaration(_) => {}
+                    lang_c::ast::BlockItem::StaticAssert(_) => {}
+                    lang_c::ast::BlockItem::Statement(stmt) => match &stmt.node {
+                        lang_c::ast::Statement::Labeled(l) => {
+                            let mut labeled = l;
+                            let mut inner_cases: Vec<&lang_c::ast::Expression> = Vec::new();
+
+                            loop {
+                                match &labeled.node.label.node {
+                                    lang_c::ast::Label::Case(e) => {
+                                        inner_cases.push(&e.node);
+                                    }
+                                    lang_c::ast::Label::Default => {
+                                        default_statement = Some(&labeled.node.statement.node);
+                                    }
+                                    _ => {
+                                        eprintln!("Unknown label: {:?}", labeled.node.label.node);
+                                    }
+                                }
+
+                                match &labeled.node.statement.node {
+                                    lang_c::ast::Statement::Labeled(l) => {
+                                        labeled = l;
+                                    }
+                                    _ => {
+                                        for case in inner_cases.iter() {
+                                            cases.push((
+                                                case,
+                                                [&labeled.node.statement.node].to_vec(),
+                                            ));
+                                        }
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                        _ => match cases.last_mut() {
+                            Some((_, stmts)) => {
+                                stmts.push(&stmt.node);
+                            }
+                            None => {
+                                eprintln!(
+                                        "Unknown switch statement (dangling statement with no label before it): {:?}",
+                                        stmt.node
+                                    );
+                            }
+                        },
+                    },
+                }
+            }
+        }
+        _ => {
+            eprintln!(
+                "Unknown switch statement (not compound): {:?}",
+                node.statement.node
+            );
+        }
+    }
+
+    for (i, c) in cases.iter().enumerate() {
+        if i > 0 {
+            code += "else ";
+        }
+        code += "if (";
+        code += transpile_expression(&node.expression.node, state).as_str();
+        code += " == ";
+        code += transpile_expression(&c.0, state).as_str();
+        code += ") {\n";
+        for s in c.1.iter() {
+            code += transpile_statement(s, state).as_str();
+        }
+        code += "}\n";
+    }
+
+    match default_statement {
+        Some(stmt) => {
+            if cases.len() > 0 {
+                code += "else {\n";
+            }
+            code += transpile_statement(stmt, state).as_str();
+            if cases.len() > 0 {
+                code += "}\n";
+            }
+        }
+        None => {}
+    }
+
+    return code;
+}
+
 fn transpile_statement(node: &lang_c::ast::Statement, state: &mut State) -> String {
     match node {
         lang_c::ast::Statement::Labeled(_) => {}
@@ -682,10 +799,12 @@ fn transpile_statement(node: &lang_c::ast::Statement, state: &mut State) -> Stri
             }
             None => {}
         },
-        lang_c::ast::Statement::If(_) => {
-            // return transpile_if_statement(&i.node);
+        lang_c::ast::Statement::If(i) => {
+            return transpile_if_statement(&i.node, state);
         }
-        lang_c::ast::Statement::Switch(_) => {}
+        lang_c::ast::Statement::Switch(s) => {
+            return transpile_switch_statement(&s.node, state);
+        }
         lang_c::ast::Statement::While(_) => {}
         lang_c::ast::Statement::DoWhile(_) => {}
         lang_c::ast::Statement::For(_) => {}
@@ -810,11 +929,7 @@ fn transpile_declaration(node: &lang_c::ast::Declaration, state: &mut State) -> 
                 if is_typedef {
                     if !typedef_struct_or_enum_name.is_empty() {
                         if typedef_struct_or_enum_name == "???" {
-                            spec = spec.replacen(
-                                "class ???",
-                                format!("class {}", n).as_str(),
-                                1,
-                            );
+                            spec = spec.replacen("class ???", format!("class {}", n).as_str(), 1);
                             code += spec.as_str();
                             code += ";\n";
                         } else if typedef_struct_or_enum_has_body {
@@ -879,7 +994,7 @@ fn main() {
         Ok(parse) => {
             println!("{:#?}", parse);
             let mut state = State {
-                typedefs: HashMap::new(),
+                typedefs: std::collections::HashMap::new(),
             };
             println!("{}", transpile(parse, &mut state));
         }

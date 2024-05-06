@@ -5,4 +5,4 @@ Yet to be implemented features for transpiler:
 - [ ] Extern functions
 - [ ] Unnamed parameters
 - [x] Enums
-- [ ] Switches
+- [x] Switches

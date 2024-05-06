@@ -1,21 +1,34 @@
-typedef enum EnumTy
+int test(int n)
 {
-    A,
-    B,
-    C
+    switch (n)
+    {
+    case 3:
+    case 4:
+        return 1;
+    case 5:
+    default:
+        return 0;
+    }
 }
-EnumTy;
 
-typedef struct StructTy
-{
-    int x;
-    int y;
-}
-StructTy;
+// typedef enum EnumTy
+// {
+//     A,
+//     B,
+//     C
+// }
+// EnumTy;
 
-void f(EnumTy e, StructTy t)
-{
-}
+// typedef struct StructTy
+// {
+//     int x;
+//     int y;
+// }
+// StructTy;
+
+// void f(EnumTy e, StructTy t)
+// {
+// }
 
 // typedef struct Point {
 //     int x;
