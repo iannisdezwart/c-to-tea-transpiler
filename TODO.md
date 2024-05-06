@@ -3,6 +3,6 @@ Yet to be implemented features for transpiler:
 - [ ] Init lists
 - [ ] Function pointers
 - [x] Extern functions
-- [ ] Unnamed parameters
+- [x] Unnamed parameters
 - [x] Enums
 - [x] Switches
