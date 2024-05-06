@@ -1,16 +1,34 @@
-typedef struct Point {
+typedef enum EnumTy
+{
+    A,
+    B,
+    C
+}
+EnumTy;
+
+typedef struct StructTy
+{
     int x;
     int y;
-} Point;
+}
+StructTy;
 
-Point t = {1, 2};
+void f(EnumTy e, StructTy t)
+{
+}
+
+// typedef struct Point {
+//     int x;
+//     int y;
+// } Point;
+
+// Point t = {1, 2};
 
 // static int global;
 
 // int add(int a, int b) {
 //     return a + b + global;
 // }
-
 
 // struct Complex {
 //     double re;
@@ -36,53 +54,6 @@ Point t = {1, 2};
 // int main() {
 //     int a;
 // }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // int global;
 

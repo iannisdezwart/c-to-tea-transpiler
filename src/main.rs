@@ -181,7 +181,25 @@ fn transpile_type_specifier(node: &lang_c::ast::TypeSpecifier, state: &mut State
         lang_c::ast::TypeSpecifier::Struct(s) => {
             return transpile_struct(&s.node, state);
         }
-        lang_c::ast::TypeSpecifier::Enum(_) => {}
+        lang_c::ast::TypeSpecifier::Enum(e) => {
+            let mut code = String::new();
+            if e.node.enumerators.is_empty() {
+                code += "i32";
+            } else {
+                for (i, enumerator) in e.node.enumerators.iter().enumerate() {
+                    code += "i32 ";
+                    code += enumerator.node.identifier.node.name.as_str();
+                    code += " = ";
+                    code += i.to_string().as_str();
+
+                    if i < e.node.enumerators.len() - 1 {
+                        code += ";\n";
+                    }
+                }
+            }
+
+            return code;
+        }
         lang_c::ast::TypeSpecifier::TypedefName(ident) => {
             let typedef = state.typedefs.get(&ident.node.name);
             if typedef.is_none() {
@@ -584,7 +602,17 @@ fn transpile_expression_(node: &lang_c::ast::Expression, state: &mut State) -> S
             return code;
         }
         lang_c::ast::Expression::Call(c) => {
-            let mut code = transpile_expression(&c.node.callee.node, state);
+            // let mut code = transpile_expression(&c.node.callee.node, state);
+            // Expect identifier. TODO: Allow function pointers.
+            let mut code = String::new();
+            match &c.node.callee.node {
+                lang_c::ast::Expression::Identifier(i) => {
+                    code += i.node.name.as_str();
+                }
+                _ => {
+                    eprintln!("Unknown callee: {:?}", c.node.callee.node);
+                }
+            }
 
             code += "(";
             for (i, a) in c.node.arguments.iter().enumerate() {
@@ -718,11 +746,19 @@ fn get_name(node: &lang_c::ast::InitDeclarator) -> Option<String> {
     }
 }
 
-fn is_struct(node: &lang_c::ast::DeclarationSpecifier) -> Option<&lang_c::ast::StructType> {
+fn is_struct_or_enum(node: &lang_c::ast::DeclarationSpecifier) -> Option<(String, bool)> {
     match node {
         lang_c::ast::DeclarationSpecifier::TypeSpecifier(t) => match &t.node {
-            lang_c::ast::TypeSpecifier::Struct(s) => {
-                return Some(&s.node);
+            lang_c::ast::TypeSpecifier::Struct(s) => match &s.node.identifier {
+                Some(ident) => {
+                    return Some((ident.node.name.to_string(), s.node.declarations.is_some()));
+                }
+                None => {
+                    return Some(("???".to_string(), s.node.declarations.is_some()));
+                }
+            },
+            lang_c::ast::TypeSpecifier::Enum(e) => {
+                return Some(("i32".to_string(), !e.node.enumerators.is_empty()));
             }
             _ => {
                 return None;
@@ -737,25 +773,13 @@ fn is_struct(node: &lang_c::ast::DeclarationSpecifier) -> Option<&lang_c::ast::S
 fn transpile_declaration(node: &lang_c::ast::Declaration, state: &mut State) -> String {
     let mut spec = String::new();
     let mut is_typedef = false;
-    let mut typedef_struct_name: String = String::new();
-    let mut typedef_struct_has_body = false;
+    let mut typedef_struct_or_enum_name: String = String::new();
+    let mut typedef_struct_or_enum_has_body = false;
 
     node.specifiers.iter().for_each(|specifier| {
-        let is_struct_res = is_struct(&specifier.node);
-
-        if is_typedef && is_struct_res.is_some() {
-            let struct_node = is_struct_res.unwrap();
-
-            match &struct_node.identifier {
-                Some(ident) => {
-                    typedef_struct_name = ident.node.name.to_string();
-                }
-                None => {
-                    typedef_struct_name = "???".to_string();
-                }
-            }
-
-            typedef_struct_has_body = struct_node.declarations.is_some();
+        let res = is_struct_or_enum(&specifier.node);
+        if is_typedef && res.is_some() {
+            (typedef_struct_or_enum_name, typedef_struct_or_enum_has_body) = res.unwrap();
         }
 
         let sp = transpile_declaration_specifier(&specifier.node, state);
@@ -784,25 +808,25 @@ fn transpile_declaration(node: &lang_c::ast::Declaration, state: &mut State) -> 
         match &name {
             Some(n) => {
                 if is_typedef {
-                    if !typedef_struct_name.is_empty() {
-                        if typedef_struct_name == "???" {
-                            spec = spec.clone().replacen(
+                    if !typedef_struct_or_enum_name.is_empty() {
+                        if typedef_struct_or_enum_name == "???" {
+                            spec = spec.replacen(
                                 "class ???",
                                 format!("class {}", n).as_str(),
                                 1,
                             );
                             code += spec.as_str();
                             code += ";\n";
-                        } else if typedef_struct_has_body {
+                        } else if typedef_struct_or_enum_has_body {
                             code += spec.as_str();
                             code += ";\n";
                         }
                         state.typedefs.insert(
                             n.to_string(),
-                            if typedef_struct_name == "???" {
+                            if typedef_struct_or_enum_name == "???" {
                                 n.to_string()
                             } else {
-                                typedef_struct_name.clone()
+                                typedef_struct_or_enum_name.clone()
                             },
                         );
                     } else {
