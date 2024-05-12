@@ -1,6 +1,23 @@
-int decl(int, int);
+struct Foo
+{
+    long long (*bar)(int, char);
+};
 
-extern int ext_decl(int, int);
+long long baz(int a, char b)
+{
+    return a + b;
+}
+
+void foo()
+{
+    struct Foo f;
+    f.bar = &baz;
+    f.bar(1, 'a');
+}
+
+// int decl(int, int);
+
+// extern int ext_decl(int, int);
 
 // int test(int n)
 // {

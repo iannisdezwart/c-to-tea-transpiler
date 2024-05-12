@@ -44,86 +44,104 @@ fn shrink_spec(real_input: String) -> String {
     input = input.replace("\\void", "v0");
 
     if input.trim().contains(" ") && real_input.contains("\\") {
-        eprintln!("Unknown specifiers: {}", real_input);
+        eprintln!("!! Unknown specifiers: {}", real_input);
     }
 
     return input;
 }
 
-fn transpile_storage_class_specifier(node: &lang_c::ast::StorageClassSpecifier) -> String {
+fn transpile_storage_class_specifier(node: &lang_c::ast::StorageClassSpecifier) -> Option<String> {
     match node {
         lang_c::ast::StorageClassSpecifier::Typedef => {
-            return "\\typedef".to_string();
+            return Some("\\typedef".to_string());
         }
         lang_c::ast::StorageClassSpecifier::Extern => {
-            return "\\extern".to_string();
+            return Some("\\extern".to_string());
         }
         lang_c::ast::StorageClassSpecifier::Static => {
             // [Ignored] Think this is fine.
+            return Some(String::new());
         }
         lang_c::ast::StorageClassSpecifier::ThreadLocal => {
             // [Ignored] Fine.
+            return Some(String::new());
         }
         lang_c::ast::StorageClassSpecifier::Auto => {
             // [Ignored] Not supported.
+            eprintln!("!! auto keyword not supported: {:?}", node);
+            return None;
         }
         lang_c::ast::StorageClassSpecifier::Register => {
             // [Ignored] Fine.
+            return Some(String::new());
         }
     }
-
-    return String::new();
 }
 
 fn transpile_struct_declarator(
     node: &lang_c::ast::StructDeclarator,
     spec: &String,
     state: &mut State,
-) -> String {
+) -> Option<String> {
     match &node.declarator {
         Some(decl) => {
             return transpile_declarator(&decl.node, spec, state);
         }
         None => {
             // Anonymous struct.
+            return Some(String::new());
         }
     }
-
-    return String::new();
 }
 
-fn transpile_struct_field(node: &lang_c::ast::StructField, state: &mut State) -> String {
+fn transpile_struct_field(node: &lang_c::ast::StructField, state: &mut State) -> Option<String> {
     let mut code = String::new();
 
     let mut spec = String::new();
-    node.specifiers.iter().for_each(|specifier| {
-        spec += transpile_specifier_qualifier(&specifier.node, state).as_str();
-        spec += " ";
-    });
+    for specifier in node.specifiers.iter() {
+        match transpile_specifier_qualifier(&specifier.node, state) {
+            Some(spec_qual) => {
+                spec += spec_qual.as_str();
+                spec += " ";
+            }
+            None => {
+                return None;
+            }
+        }
+    }
     spec = shrink_spec(spec);
 
-    node.declarators.iter().for_each(|decl| {
-        code += transpile_struct_declarator(&decl.node, &spec, state).as_str();
+    for decl in node.declarators.iter() {
+        match transpile_struct_declarator(&decl.node, &spec, state) {
+            Some(strt_decl) => {
+                code += strt_decl.as_str();
+            }
+            None => {
+                return None;
+            }
+        }
         code += ";\n";
-    });
+    }
 
-    return code;
+    return Some(code);
 }
 
-fn transpile_struct_decl(node: &lang_c::ast::StructDeclaration, state: &mut State) -> String {
+fn transpile_struct_decl(
+    node: &lang_c::ast::StructDeclaration,
+    state: &mut State,
+) -> Option<String> {
     match node {
         lang_c::ast::StructDeclaration::Field(f) => {
             return transpile_struct_field(&f.node, state);
         }
         lang_c::ast::StructDeclaration::StaticAssert(_) => {
             // [Ignored] Fine.
+            return Some(String::new());
         }
     }
-
-    return String::new();
 }
 
-fn transpile_struct(node: &lang_c::ast::StructType, state: &mut State) -> String {
+fn transpile_struct(node: &lang_c::ast::StructType, state: &mut State) -> Option<String> {
     let name: String;
 
     match &node.identifier {
@@ -137,7 +155,7 @@ fn transpile_struct(node: &lang_c::ast::StructType, state: &mut State) -> String
 
     match &node.declarations {
         None => {
-            return name;
+            return Some(name);
         }
         Some(d) => {
             let mut code = "class ".to_string() + name.as_str();
@@ -145,53 +163,67 @@ fn transpile_struct(node: &lang_c::ast::StructType, state: &mut State) -> String
             code += " {\n";
 
             for decl in d.iter() {
-                code += transpile_struct_decl(&decl.node, state).as_str();
+                match transpile_struct_decl(&decl.node, state) {
+                    Some(strt_decl) => {
+                        code += strt_decl.as_str();
+                    }
+                    None => {
+                        return None;
+                    }
+                }
             }
 
             code += "}";
 
-            return code;
+            return Some(code);
         }
     }
 }
 
-fn transpile_type_specifier(node: &lang_c::ast::TypeSpecifier, state: &mut State) -> String {
+fn transpile_type_specifier(
+    node: &lang_c::ast::TypeSpecifier,
+    state: &mut State,
+) -> Option<String> {
     match node {
         lang_c::ast::TypeSpecifier::Void => {
-            return "\\void".to_string();
+            return Some("\\void".to_string());
         }
         lang_c::ast::TypeSpecifier::Char => {
-            return "\\char".to_string();
+            return Some("\\char".to_string());
         }
         lang_c::ast::TypeSpecifier::Short => {
-            return "\\short".to_string();
+            return Some("\\short".to_string());
         }
         lang_c::ast::TypeSpecifier::Int => {
-            return "\\int".to_string();
+            return Some("\\int".to_string());
         }
         lang_c::ast::TypeSpecifier::Long => {
-            return "\\long".to_string();
+            return Some("\\long".to_string());
         }
         lang_c::ast::TypeSpecifier::Float => {
-            return "\\float".to_string();
+            return Some("\\float".to_string());
         }
         lang_c::ast::TypeSpecifier::Double => {
-            return "\\double".to_string();
+            return Some("\\double".to_string());
         }
         lang_c::ast::TypeSpecifier::Signed => {
-            return "\\signed".to_string();
+            return Some("\\signed".to_string());
         }
         lang_c::ast::TypeSpecifier::Unsigned => {
-            return "\\unsigned".to_string();
+            return Some("\\unsigned".to_string());
         }
         lang_c::ast::TypeSpecifier::Bool => {
-            return "\\bool".to_string();
+            return Some("\\bool".to_string());
         }
         lang_c::ast::TypeSpecifier::Complex => {
             // [Ignored] Not supported.
+            eprintln!("!! complex keyword not supported: {:?}", node);
+            return None;
         }
         lang_c::ast::TypeSpecifier::Atomic(_) => {
             // [Ignored] Not supported.
+            eprintln!("!! atomic keyword not supported: {:?}", node);
+            return None;
         }
         lang_c::ast::TypeSpecifier::Struct(s) => {
             return transpile_struct(&s.node, state);
@@ -213,25 +245,27 @@ fn transpile_type_specifier(node: &lang_c::ast::TypeSpecifier, state: &mut State
                 }
             }
 
-            return code;
+            return Some(code);
         }
         lang_c::ast::TypeSpecifier::TypedefName(ident) => {
             let typedef = state.typedefs.get(&ident.node.name);
             if typedef.is_none() {
-                eprintln!("Unknown typedef: {}", ident.node.name);
-                return ident.node.name.to_string();
+                eprintln!("!! Unknown typedef: {}", ident.node.name);
+                return Some(ident.node.name.to_string());
             }
-            return typedef.unwrap().to_string();
+            return Some(typedef.unwrap().to_string());
         }
         lang_c::ast::TypeSpecifier::TypeOf(_) => {
             // [Ignored] Not supported.
+            eprintln!("!! typeof keyword not supported: {:?}", node);
+            return None;
         }
         lang_c::ast::TypeSpecifier::TS18661Float(_) => {
             // [Ignored] Not supported.
+            eprintln!("!! ts18661float not supported: {:?}", node);
+            return None;
         }
     }
-
-    return String::new();
 }
 
 fn transpile_type_qualifier(node: &lang_c::ast::TypeQualifier) -> String {
@@ -265,7 +299,7 @@ fn transpile_type_qualifier(node: &lang_c::ast::TypeQualifier) -> String {
 fn transpile_declaration_specifier(
     node: &lang_c::ast::DeclarationSpecifier,
     state: &mut State,
-) -> String {
+) -> Option<String> {
     match node {
         lang_c::ast::DeclarationSpecifier::StorageClass(n) => {
             return transpile_storage_class_specifier(&n.node);
@@ -274,85 +308,114 @@ fn transpile_declaration_specifier(
             return transpile_type_specifier(&n.node, state);
         }
         lang_c::ast::DeclarationSpecifier::TypeQualifier(n) => {
-            return transpile_type_qualifier(&n.node);
+            return Some(transpile_type_qualifier(&n.node));
         }
         lang_c::ast::DeclarationSpecifier::Function(_) => {
             // [Ignored] Fine.
+            return Some(String::new());
         }
         lang_c::ast::DeclarationSpecifier::Alignment(_) => {
-            // [Ignored] Think this is fine.
+            // [Ignored] Not supported.
+            eprintln!("!! alignment keyword not supported: {:?}", node);
+            return None;
         }
         lang_c::ast::DeclarationSpecifier::Extension(_) => {
             // [Ignored] Fine.
+            return Some(String::new());
         }
     }
-
-    return String::new();
 }
 
-fn transpile_initializer(node: &lang_c::ast::Initializer, state: &mut State) -> String {
+fn transpile_initializer(node: &lang_c::ast::Initializer, state: &mut State) -> Option<String> {
     match node {
         lang_c::ast::Initializer::Expression(e) => {
             return transpile_expression(&e.node, state);
         }
         lang_c::ast::Initializer::List(_) => {
             // [TODO] Implement.
+            eprintln!("!! initializer list not supported: {:?}", node);
+            return None;
+        }
+    }
+}
+
+fn transpile_init_declarator(
+    node: &lang_c::ast::InitDeclarator,
+    state: &mut State,
+) -> Option<String> {
+    let mut code = String::new();
+
+    match transpile_declarator(&node.declarator.node, &String::new(), state) {
+        Some(decl) => {
+            code += decl.as_str();
+        }
+        None => {
+            return None;
         }
     }
 
-    return String::new();
-}
-
-fn transpile_init_declarator(node: &lang_c::ast::InitDeclarator, state: &mut State) -> String {
-    let mut code = String::new();
-
-    code += transpile_declarator(&node.declarator.node, &String::new(), state).as_str();
-
     match &node.initializer {
-        Some(init) => {
-            code += " = ";
-            code += transpile_initializer(&init.node, state).as_str();
-        }
+        Some(init) => match transpile_initializer(&init.node, state) {
+            Some(init) => {
+                code += " = ";
+                code += init.as_str();
+            }
+            None => {
+                return None;
+            }
+        },
         None => {
             // Has no initializer.
         }
     }
 
-    return code;
+    return Some(code);
 }
 
 fn transpile_parameter_declaration(
     node: &lang_c::ast::ParameterDeclaration,
     state: &mut State,
     index: usize,
-) -> String {
+) -> Option<String> {
     let mut code = String::new();
 
     let mut spec = String::new();
-    node.specifiers.iter().for_each(|specifier| {
-        spec += transpile_declaration_specifier(&specifier.node, state).as_str();
-        spec += " ";
-    });
+    for specifier in node.specifiers.iter() {
+        match transpile_declaration_specifier(&specifier.node, state) {
+            Some(decl_spec) => {
+                spec += decl_spec.as_str();
+                spec += " ";
+            }
+            None => {
+                return None;
+            }
+        }
+    }
     spec = shrink_spec(spec);
 
     match &node.declarator {
-        Some(declarator) => {
-            code += transpile_declarator(&declarator.node, &spec, state).as_str();
-        }
+        Some(declarator) => match transpile_declarator(&declarator.node, &spec, state) {
+            Some(decl) => {
+                code += decl.as_str();
+            }
+            None => {
+                return None;
+            }
+        },
         None => {
             code = spec;
             code += format!("$arg___{}", index.to_string()).as_str();
         }
     }
 
-    return code;
+    return Some(code);
 }
 
 fn transpile_declarator(
     node: &lang_c::ast::Declarator,
     spec: &String,
     state: &mut State,
-) -> String {
+) -> Option<String> {
     let mut id_code = String::new();
 
     match &node.kind.node {
@@ -363,63 +426,89 @@ fn transpile_declarator(
             // [Ignored] Don't know what this is.
         }
         lang_c::ast::DeclaratorKind::Declarator(_) => {
-            // [Ignored] Don't know what this is.
+            // [Ignored] Think this is function pointers. Implement.
+            eprintln!("!! function pointer declarator not supported: {:?}", node);
+            return None;
         }
     }
 
     let mut before_id_code = String::new();
     let mut after_id_code = String::new();
 
-    node.derived.iter().for_each(|derived| match &derived.node {
-        lang_c::ast::DerivedDeclarator::Pointer(_) => {
-            before_id_code += "*";
-        }
-        lang_c::ast::DerivedDeclarator::Array(a) => {
-            before_id_code += "[";
-
-            match &a.node.size {
-                lang_c::ast::ArraySize::Unknown => {
-                    // [Ignored] Fine.
-                }
-                lang_c::ast::ArraySize::VariableUnknown => {
-                    // [Ignored] Not supported.
-                }
-                lang_c::ast::ArraySize::VariableExpression(e) => {
-                    before_id_code += transpile_expression(&e.node, state).as_str();
-                }
-                lang_c::ast::ArraySize::StaticExpression(e) => {
-                    before_id_code += transpile_expression(&e.node, state).as_str();
-                }
+    for derived in node.derived.iter() {
+        match &derived.node {
+            lang_c::ast::DerivedDeclarator::Pointer(_) => {
+                before_id_code += "*";
             }
+            lang_c::ast::DerivedDeclarator::Array(a) => {
+                before_id_code += "[";
 
-            before_id_code += "]";
-        }
-        lang_c::ast::DerivedDeclarator::Function(f) => {
-            after_id_code += "(";
-
-            for (i, param) in f.node.parameters.iter().enumerate() {
-                after_id_code += transpile_parameter_declaration(&param.node, state, i).as_str();
-
-                if i < f.node.parameters.len() - 1 {
-                    after_id_code += ", ";
+                match &a.node.size {
+                    lang_c::ast::ArraySize::Unknown => {
+                        // [Ignored] Fine.
+                    }
+                    lang_c::ast::ArraySize::VariableUnknown => {
+                        // [Ignored] Not supported.
+                    }
+                    lang_c::ast::ArraySize::VariableExpression(e) => {
+                        match transpile_expression(&e.node, state) {
+                            Some(expr) => {
+                                before_id_code += expr.as_str();
+                            }
+                            None => {
+                                return None;
+                            }
+                        }
+                    }
+                    lang_c::ast::ArraySize::StaticExpression(e) => {
+                        match transpile_expression(&e.node, state) {
+                            Some(expr) => {
+                                before_id_code += expr.as_str();
+                            }
+                            None => {
+                                return None;
+                            }
+                        }
+                    }
                 }
+
+                before_id_code += "]";
             }
+            lang_c::ast::DerivedDeclarator::Function(f) => {
+                after_id_code += "(";
 
-            after_id_code += ")";
-        }
-        lang_c::ast::DerivedDeclarator::KRFunction(i) => {
-            after_id_code += "(";
+                for (i, param) in f.node.parameters.iter().enumerate() {
+                    match transpile_parameter_declaration(&param.node, state, i) {
+                        Some(param_decl) => {
+                            after_id_code += param_decl.as_str();
+                        }
 
-            for id in i.iter() {
-                after_id_code += id.node.name.as_str();
+                        None => {
+                            return None;
+                        }
+                    }
+
+                    if i < f.node.parameters.len() - 1 {
+                        after_id_code += ", ";
+                    }
+                }
+
+                after_id_code += ")";
             }
+            lang_c::ast::DerivedDeclarator::KRFunction(i) => {
+                after_id_code += "(";
 
-            after_id_code += ")";
+                for id in i.iter() {
+                    after_id_code += id.node.name.as_str();
+                }
+
+                after_id_code += ")";
+            }
+            lang_c::ast::DerivedDeclarator::Block(_) => {
+                // [Ignored] Don't know what this is.
+            }
         }
-        lang_c::ast::DerivedDeclarator::Block(_) => {
-            // [Ignored] Don't know what this is.
-        }
-    });
+    }
 
     let mut code = String::new();
 
@@ -428,23 +517,22 @@ fn transpile_declarator(
     code += id_code.as_str();
     code += after_id_code.as_str();
 
-    return code;
+    return Some(code);
 }
 
-fn transpile_block_item(node: &lang_c::ast::BlockItem, state: &mut State) -> String {
+fn transpile_block_item(node: &lang_c::ast::BlockItem, state: &mut State) -> Option<String> {
     match node {
         lang_c::ast::BlockItem::Declaration(decl) => {
             return transpile_declaration(&decl.node, state);
         }
         lang_c::ast::BlockItem::StaticAssert(_) => {
             // [Ignored] Fine.
+            return Some(String::new());
         }
         lang_c::ast::BlockItem::Statement(stmt) => {
             return transpile_statement(&stmt.node, state);
         }
     }
-
-    return String::new();
 }
 
 fn transpile_unary_operator(node: &lang_c::ast::UnaryOperator, operand: String) -> String {
@@ -485,42 +573,53 @@ fn transpile_unary_operator(node: &lang_c::ast::UnaryOperator, operand: String) 
 fn transpile_specifier_qualifier(
     node: &lang_c::ast::SpecifierQualifier,
     state: &mut State,
-) -> String {
+) -> Option<String> {
     match node {
         lang_c::ast::SpecifierQualifier::TypeSpecifier(t) => {
             return transpile_type_specifier(&t.node, state);
         }
         lang_c::ast::SpecifierQualifier::TypeQualifier(t) => {
-            return transpile_type_qualifier(&t.node);
+            return Some(transpile_type_qualifier(&t.node));
         }
         lang_c::ast::SpecifierQualifier::Extension(_) => {
             // [Ignored] Fine.
+            return Some(String::new());
         }
     }
-
-    return String::new();
 }
 
-fn transpile_type_name(node: &lang_c::ast::TypeName, state: &mut State) -> String {
+fn transpile_type_name(node: &lang_c::ast::TypeName, state: &mut State) -> Option<String> {
     let mut code = String::new();
 
     let mut spec = String::new();
-    node.specifiers.iter().for_each(|specifier| {
-        spec += transpile_specifier_qualifier(&specifier.node, state).as_str();
-        spec += " ";
-    });
+    for specifier in node.specifiers.iter() {
+        match transpile_specifier_qualifier(&specifier.node, state) {
+            Some(spec_qual) => {
+                spec += spec_qual.as_str();
+                spec += " ";
+            }
+            None => {
+                return None;
+            }
+        }
+    }
     spec = shrink_spec(spec);
 
     match &node.declarator {
-        Some(declarator) => {
-            code += transpile_declarator(&declarator.node, &spec, state).as_str();
-        }
+        Some(declarator) => match transpile_declarator(&declarator.node, &spec, state) {
+            Some(decl) => {
+                code += decl.as_str();
+            }
+            None => {
+                return None;
+            }
+        },
         None => {
             // No declarator.
         }
     }
 
-    return code;
+    return Some(code);
 }
 
 fn transpile_binary_operator(
@@ -622,24 +721,31 @@ fn transpile_binary_operator(
     }
 }
 
-fn transpile_expression(node: &lang_c::ast::Expression, state: &mut State) -> String {
-    return "(".to_string() + &transpile_expression_(node, state) + ")";
+fn transpile_expression(node: &lang_c::ast::Expression, state: &mut State) -> Option<String> {
+    match transpile_expression_(node, state) {
+        Some(expr) => {
+            return Some("(".to_string() + &expr + ")");
+        }
+        None => {
+            return None;
+        }
+    }
 }
 
-fn transpile_expression_(node: &lang_c::ast::Expression, state: &mut State) -> String {
+fn transpile_expression_(node: &lang_c::ast::Expression, state: &mut State) -> Option<String> {
     match node {
         lang_c::ast::Expression::Identifier(i) => {
-            return i.node.name.to_string();
+            return Some(i.node.name.to_string());
         }
         lang_c::ast::Expression::Constant(c) => match &c.node {
             lang_c::ast::Constant::Character(c) => {
-                return "'".to_string() + &c + "'";
+                return Some(c.to_string());
             }
             lang_c::ast::Constant::Integer(i) => {
-                return i.number.to_string();
+                return Some(i.number.to_string());
             }
             lang_c::ast::Constant::Float(f) => {
-                return f.number.to_string();
+                return Some(f.number.to_string());
             }
         },
         lang_c::ast::Expression::StringLiteral(s) => {
@@ -649,40 +755,51 @@ fn transpile_expression_(node: &lang_c::ast::Expression, state: &mut State) -> S
                 .find(|c| !c.starts_with("\"") || !c.ends_with("\""))
             {
                 Some(_) => {
-                    eprintln!("Invalid string literal: {:?}", s.node);
+                    eprintln!("!! Invalid string literal: {:?}", s.node);
                 }
                 None => {
                     // Happy path.
                 }
             }
 
-            return "\"".to_string()
-                + &s.node
-                    .iter()
-                    .map(|z| &z[1..z.len() - 1])
-                    .collect::<Vec<&str>>()
-                    .join("")
-                    .to_string()
-                + "\"";
+            return Some(
+                "\"".to_string()
+                    + &s.node
+                        .iter()
+                        .map(|z| &z[1..z.len() - 1])
+                        .collect::<Vec<&str>>()
+                        .join("")
+                        .to_string()
+                    + "\"",
+            );
         }
         lang_c::ast::Expression::GenericSelection(_) => {
             // [Ignored] Don't know what this is.
+            eprintln!("!! generic selection not supported: {:?}", node);
+            return None;
         }
         lang_c::ast::Expression::Member(m) => {
-            let mut code = transpile_expression(&m.node.expression.node, state);
+            match transpile_expression(&m.node.expression.node, state) {
+                Some(expr) => {
+                    let mut code = expr;
 
-            match m.node.operator.node {
-                lang_c::ast::MemberOperator::Direct => {
-                    code += ".";
+                    match m.node.operator.node {
+                        lang_c::ast::MemberOperator::Direct => {
+                            code += ".";
+                        }
+                        lang_c::ast::MemberOperator::Indirect => {
+                            code += "->";
+                        }
+                    }
+
+                    code += m.node.identifier.node.name.as_str();
+
+                    return Some(code);
                 }
-                lang_c::ast::MemberOperator::Indirect => {
-                    code += "->";
+                None => {
+                    return None;
                 }
             }
-
-            code += m.node.identifier.node.name.as_str();
-
-            return code;
         }
         lang_c::ast::Expression::Call(c) => {
             // let mut code = transpile_expression(&c.node.callee.node, state);
@@ -693,89 +810,163 @@ fn transpile_expression_(node: &lang_c::ast::Expression, state: &mut State) -> S
                     code += i.node.name.as_str();
                 }
                 _ => {
-                    eprintln!("Unknown callee: {:?}", c.node.callee.node);
+                    eprintln!("!! Unknown callee: {:?}", c.node.callee.node);
+                    return None;
                 }
             }
 
             code += "(";
             for (i, a) in c.node.arguments.iter().enumerate() {
-                code += transpile_expression(&a.node, state).as_str();
-                if i < c.node.arguments.len() - 1 {
-                    code += ", ";
+                match transpile_expression(&a.node, state) {
+                    Some(expr) => {
+                        code += expr.as_str();
+                        if i < c.node.arguments.len() - 1 {
+                            code += ", ";
+                        }
+                    }
+                    None => {
+                        return None;
+                    }
                 }
             }
             code += ")";
 
-            return code;
+            return Some(code);
         }
         lang_c::ast::Expression::CompoundLiteral(_) => {
             // [Ignored] Don't know what this is.
+            eprintln!("!! compound literal not supported: {:?}", node);
+            return None;
         }
         lang_c::ast::Expression::SizeOfTy(_) => {
             // [Ignored] Not supported.
+            eprintln!("!! sizeof (type) keyword not supported: {:?}", node);
+            return None;
         }
         lang_c::ast::Expression::SizeOfVal(_) => {
             // [Ignored] Not supported.
+            eprintln!("!! sizeof (val) keyword not supported: {:?}", node);
+            return None;
         }
         lang_c::ast::Expression::AlignOf(_) => {
             // [Ignored] Not supported.
+            eprintln!("!! alignof keyword not supported: {:?}", node);
+            return None;
         }
         lang_c::ast::Expression::UnaryOperator(u) => {
-            return transpile_unary_operator(
-                &u.node.operator.node,
-                transpile_expression(&u.node.operand.node, state),
-            );
+            match transpile_expression(&u.node.operand.node, state) {
+                Some(expr) => {
+                    return Some(transpile_unary_operator(&u.node.operator.node, expr));
+                }
+                None => {
+                    return None;
+                }
+            }
         }
         lang_c::ast::Expression::Cast(c) => {
             let mut code = String::new();
 
-            code += transpile_type_name(&c.node.type_name.node, state).as_str();
-            code += "(";
-            code += transpile_expression(&c.node.expression.node, state).as_str();
-            code += ")";
+            match transpile_type_name(&c.node.type_name.node, state) {
+                Some(type_name) => {
+                    code += type_name.as_str();
+                    code += "(";
+                }
+                None => {
+                    return None;
+                }
+            }
 
-            return code;
+            match transpile_expression(&c.node.expression.node, state) {
+                Some(expr) => {
+                    code += expr.as_str();
+                    code += ")";
+                }
+                None => {
+                    return None;
+                }
+            }
+
+            return Some(code);
         }
         lang_c::ast::Expression::BinaryOperator(b) => {
-            return transpile_binary_operator(
-                &b.node.operator.node,
-                transpile_expression(&b.node.lhs.node, state),
-                transpile_expression(&b.node.rhs.node, state),
-            );
+            match transpile_expression(&b.node.lhs.node, state) {
+                Some(lhs_expr) => match transpile_expression(&b.node.rhs.node, state) {
+                    Some(rhs_expr) => {
+                        return Some(transpile_binary_operator(
+                            &b.node.operator.node,
+                            lhs_expr,
+                            rhs_expr,
+                        ));
+                    }
+                    None => {
+                        return None;
+                    }
+                },
+                None => {
+                    return None;
+                }
+            }
         }
         lang_c::ast::Expression::Conditional(_) => {
             // [TODO] Implement.
+            eprintln!("!! ternaries not supported: {:?}", node);
+            return None;
         }
         lang_c::ast::Expression::Comma(_) => {
             // [Ignored] Not supported.
+            eprintln!("!! comma statements not supported: {:?}", node);
+            return None;
         }
         lang_c::ast::Expression::OffsetOf(_) => {
             // [Ignored] Not supported.
+            eprintln!("!! offsetof keyword not supported: {:?}", node);
+            return None;
         }
         lang_c::ast::Expression::VaArg(_) => {
             // [Ignored] Not supported.
+            eprintln!("!! variadic arguments not supported: {:?}", node);
+            return None;
         }
         lang_c::ast::Expression::Statement(s) => {
             return transpile_statement(&s.node, state);
         }
     }
-
-    return String::new();
 }
 
-fn transpile_if_statement(node: &lang_c::ast::IfStatement, state: &mut State) -> String {
+fn transpile_if_statement(node: &lang_c::ast::IfStatement, state: &mut State) -> Option<String> {
     let mut code = String::new();
 
     code += "if (";
-    code += transpile_expression(&node.condition.node, state).as_str();
+    match transpile_expression(&node.condition.node, state) {
+        Some(expr) => {
+            code += expr.as_str();
+        }
+        None => {
+            return None;
+        }
+    }
     code += ") {\n";
-    code += transpile_statement(&node.then_statement.node, state).as_str();
+    match transpile_statement(&node.then_statement.node, state) {
+        Some(stmt) => {
+            code += stmt.as_str();
+        }
+        None => {
+            return None;
+        }
+    }
     code += "}\n";
 
     match &node.else_statement {
         Some(else_stmt) => {
             code += "else {\n";
-            code += transpile_statement(&else_stmt.node, state).as_str();
+            match transpile_statement(&else_stmt.node, state) {
+                Some(stmt) => {
+                    code += stmt.as_str();
+                }
+                None => {
+                    return None;
+                }
+            }
             code += "}\n";
         }
         None => {
@@ -783,10 +974,13 @@ fn transpile_if_statement(node: &lang_c::ast::IfStatement, state: &mut State) ->
         }
     }
 
-    return code;
+    return Some(code);
 }
 
-fn transpile_switch_statement(node: &lang_c::ast::SwitchStatement, state: &mut State) -> String {
+fn transpile_switch_statement(
+    node: &lang_c::ast::SwitchStatement,
+    state: &mut State,
+) -> Option<String> {
     let mut code = String::new();
     let mut cases: Vec<(&lang_c::ast::Expression, Vec<&lang_c::ast::Statement>)> = Vec::new();
     let mut default_statement: Option<&lang_c::ast::Statement> = None;
@@ -815,7 +1009,7 @@ fn transpile_switch_statement(node: &lang_c::ast::SwitchStatement, state: &mut S
                                         default_statement = Some(&labeled.node.statement.node);
                                     }
                                     _ => {
-                                        eprintln!("Unknown label: {:?}", labeled.node.label.node);
+                                        eprintln!("!! Unknown label: {:?}", labeled.node.label.node);
                                     }
                                 }
 
@@ -841,7 +1035,7 @@ fn transpile_switch_statement(node: &lang_c::ast::SwitchStatement, state: &mut S
                             }
                             None => {
                                 eprintln!(
-                                        "Unknown switch statement (dangling statement with no label before it): {:?}",
+                                        "!! Unknown switch statement (dangling statement with no label before it): {:?}",
                                         stmt.node
                                     );
                             }
@@ -852,7 +1046,7 @@ fn transpile_switch_statement(node: &lang_c::ast::SwitchStatement, state: &mut S
         }
         _ => {
             eprintln!(
-                "Unknown switch statement (not compound): {:?}",
+                "!! Unknown switch statement (not compound): {:?}",
                 node.statement.node
             );
         }
@@ -863,12 +1057,33 @@ fn transpile_switch_statement(node: &lang_c::ast::SwitchStatement, state: &mut S
             code += "else ";
         }
         code += "if (";
-        code += transpile_expression(&node.expression.node, state).as_str();
+        match transpile_expression(&node.expression.node, state) {
+            Some(expr) => {
+                code += expr.as_str();
+            }
+            None => {
+                return None;
+            }
+        }
         code += " == ";
-        code += transpile_expression(&c.0, state).as_str();
+        match transpile_expression(&c.0, state) {
+            Some(expr) => {
+                code += expr.as_str();
+            }
+            None => {
+                return None;
+            }
+        }
         code += ") {\n";
         for s in c.1.iter() {
-            code += transpile_statement(s, state).as_str();
+            match transpile_statement(s, state) {
+                Some(stmt) => {
+                    code += stmt.as_str();
+                }
+                None => {
+                    // Ignore.
+                }
+            }
         }
         code += "}\n";
     }
@@ -878,7 +1093,14 @@ fn transpile_switch_statement(node: &lang_c::ast::SwitchStatement, state: &mut S
             if cases.len() > 0 {
                 code += "else {\n";
             }
-            code += transpile_statement(stmt, state).as_str();
+            match transpile_statement(stmt, state) {
+                Some(stmt) => {
+                    code += stmt.as_str();
+                }
+                None => {
+                    return None;
+                }
+            }
             if cases.len() > 0 {
                 code += "}\n";
             }
@@ -888,104 +1110,182 @@ fn transpile_switch_statement(node: &lang_c::ast::SwitchStatement, state: &mut S
         }
     }
 
-    return code;
+    return Some(code);
 }
 
-fn transpile_while_statement(node: &lang_c::ast::WhileStatement, state: &mut State) -> String {
+fn transpile_while_statement(
+    node: &lang_c::ast::WhileStatement,
+    state: &mut State,
+) -> Option<String> {
     let mut code = String::new();
 
     code += "while (";
-    code += transpile_expression(&node.expression.node, state).as_str();
-    code += ") {\n";
-    code += transpile_statement(&node.statement.node, state).as_str();
-    code += "}\n";
-
-    return code;
-}
-
-fn transpile_do_while_statement(node: &lang_c::ast::DoWhileStatement, state: &mut State) -> String {
-    let statement = transpile_statement(&node.statement.node, state);
-
-    let mut code = String::new();
-
-    code += statement.as_str();
-    code += "while (";
-    code += transpile_expression(&node.expression.node, state).as_str();
-    code += ") {\n";
-    code += statement.as_str();
-    code += "}\n";
-
-    return code;
-}
-
-fn transpile_for_initializer(node: &lang_c::ast::ForInitializer, state: &mut State) -> String {
-    match node {
-        lang_c::ast::ForInitializer::Expression(e) => {
-            return transpile_expression(&e.node, state) + ";";
+    match transpile_expression(&node.expression.node, state) {
+        Some(expr) => {
+            code += expr.as_str();
         }
+        None => {
+            return None;
+        }
+    }
+    code += ") {\n";
+    match transpile_statement(&node.statement.node, state) {
+        Some(stmt) => {
+            code += stmt.as_str();
+        }
+        None => {
+            return None;
+        }
+    }
+    code += "}\n";
+
+    return Some(code);
+}
+
+fn transpile_do_while_statement(
+    node: &lang_c::ast::DoWhileStatement,
+    state: &mut State,
+) -> Option<String> {
+    match transpile_statement(&node.statement.node, state) {
+        Some(stmt) => {
+            let mut code = String::new();
+
+            code += stmt.as_str();
+            code += "while (";
+            match transpile_expression(&node.expression.node, state) {
+                Some(expr) => {
+                    code += expr.as_str();
+                }
+                None => {
+                    return None;
+                }
+            }
+            code += ") {\n";
+            code += stmt.as_str();
+            code += "}\n";
+
+            return Some(code);
+        }
+        None => {
+            return None;
+        }
+    }
+}
+
+fn transpile_for_initializer(
+    node: &lang_c::ast::ForInitializer,
+    state: &mut State,
+) -> Option<String> {
+    match node {
+        lang_c::ast::ForInitializer::Expression(e) => match transpile_expression(&e.node, state) {
+            Some(expr) => {
+                return Some(expr + ";");
+            }
+            None => {
+                return None;
+            }
+        },
         lang_c::ast::ForInitializer::Declaration(d) => {
             return transpile_declaration(&d.node, state);
         }
         lang_c::ast::ForInitializer::Empty => {
             // Empty.
+            return Some(String::new());
         }
         lang_c::ast::ForInitializer::StaticAssert(_) => {
             // [Ignored] Fine.
+            return Some(String::new());
         }
     }
-
-    return String::new();
 }
 
-fn transpile_for_statement(node: &lang_c::ast::ForStatement, state: &mut State) -> String {
+fn transpile_for_statement(node: &lang_c::ast::ForStatement, state: &mut State) -> Option<String> {
     let mut code = String::new();
 
     code += "for (";
-    code += transpile_for_initializer(&node.initializer.node, state).as_str();
-    match &node.condition {
-        Some(c) => {
-            code += transpile_expression(&c.node, state).as_str();
+    match transpile_for_initializer(&node.initializer.node, state) {
+        Some(for_init) => {
+            code += for_init.as_str();
         }
+        None => {
+            return None;
+        }
+    }
+    match &node.condition {
+        Some(c) => match transpile_expression(&c.node, state) {
+            Some(expr) => {
+                code += expr.as_str();
+            }
+            None => {
+                return None;
+            }
+        },
         None => {
             code += "";
         }
     }
     code += "; ";
     match &node.step {
-        Some(s) => {
-            code += transpile_expression(&s.node, state).as_str();
-        }
+        Some(s) => match transpile_expression(&s.node, state) {
+            Some(expr) => {
+                code += expr.as_str();
+            }
+            None => {
+                return None;
+            }
+        },
         None => {
             code += "";
         }
     }
     code += ") {\n";
-    code += transpile_statement(&node.statement.node, state).as_str();
+    match transpile_statement(&node.statement.node, state) {
+        Some(stmt) => {
+            code += stmt.as_str();
+        }
+        None => {
+            return None;
+        }
+    }
     code += "}\n";
 
-    return code;
+    return Some(code);
 }
 
-fn transpile_statement(node: &lang_c::ast::Statement, state: &mut State) -> String {
+fn transpile_statement(node: &lang_c::ast::Statement, state: &mut State) -> Option<String> {
     match node {
         lang_c::ast::Statement::Labeled(_) => {
-            // [Ignored] Not supported.
+            // [Ignored] Fine.
+            return Some(String::new());
         }
         lang_c::ast::Statement::Compound(compound) => {
             let mut code = String::new();
 
             for item in compound.iter() {
-                code += transpile_block_item(&item.node, state).as_str();
+                match transpile_block_item(&item.node, state) {
+                    Some(blck_itm) => {
+                        code += blck_itm.as_str();
+                    }
+                    None => {
+                        return None;
+                    }
+                }
             }
 
-            return code;
+            return Some(code);
         }
         lang_c::ast::Statement::Expression(e) => match e {
-            Some(expr) => {
-                return transpile_expression(&expr.node, state) + ";\n";
-            }
+            Some(expr) => match transpile_expression(&expr.node, state) {
+                Some(expr) => {
+                    return Some(expr + ";\n");
+                }
+                None => {
+                    return None;
+                }
+            },
             None => {
                 // Empty expression.
+                return Some(String::new());
             }
         },
         lang_c::ast::Statement::If(i) => {
@@ -1004,53 +1304,79 @@ fn transpile_statement(node: &lang_c::ast::Statement, state: &mut State) -> Stri
             return transpile_for_statement(&f.node, state);
         }
         lang_c::ast::Statement::Goto(_) => {
-            // [Ignored] Not supported.
+            // [Ignored] Fine.
+            return Some(String::new());
         }
         lang_c::ast::Statement::Continue => {
-            return "continue;\n".to_string();
+            return Some("continue;\n".to_string());
         }
         lang_c::ast::Statement::Break => {
-            return "break;\n".to_string();
+            return Some("break;\n".to_string());
         }
         lang_c::ast::Statement::Return(r) => match r {
-            Some(expr) => {
-                return format!("return {};\n", transpile_expression(&expr.node, state));
-            }
+            Some(expr) => match transpile_expression(&expr.node, state) {
+                Some(expr) => {
+                    return Some(format!("return {};\n", expr));
+                }
+                None => {
+                    return None;
+                }
+            },
             None => {
-                return "return;\n".to_string();
+                return Some("return;\n".to_string());
             }
         },
         lang_c::ast::Statement::Asm(_) => {
-            // [Ignored] Not supported.
+            // [Ignored] Fine.
+            return Some(String::new());
         }
     }
-
-    return String::new();
 }
 
 fn transpile_function_definition(
     node: &lang_c::ast::FunctionDefinition,
     state: &mut State,
-) -> String {
+) -> Option<String> {
     let mut code = String::new();
 
     let mut spec = String::new();
-    node.specifiers.iter().for_each(|specifier| {
-        spec += transpile_declaration_specifier(&specifier.node, state).as_str();
-        spec += " ";
-    });
+    for specifier in node.specifiers.iter() {
+        match transpile_declaration_specifier(&specifier.node, state) {
+            Some(decl_spec) => {
+                spec += decl_spec.as_str();
+                spec += " ";
+            }
+            None => {
+                return None;
+            }
+        }
+    }
     spec = shrink_spec(spec);
 
-    code += transpile_declarator(&node.declarator.node, &spec, state).as_str();
+    match transpile_declarator(&node.declarator.node, &spec, state) {
+        Some(decl) => {
+            code += decl.as_str();
+        }
+        None => {
+            return None;
+        }
+    }
     code += "\n";
     code += "{\n";
 
-    code += transpile_statement(&node.statement.node, state).as_str();
+    match transpile_statement(&node.statement.node, state) {
+        Some(stmt) => {
+            code += stmt.as_str();
+        }
+        None => {
+            return None;
+        }
+    }
 
     code += "}\n";
     code += "\n";
 
-    return code;
+    return Some(code);
 }
 
 fn get_name(node: &lang_c::ast::InitDeclarator) -> Option<String> {
@@ -1088,43 +1414,48 @@ fn is_struct_or_enum(node: &lang_c::ast::DeclarationSpecifier) -> Option<(String
     }
 }
 
-fn transpile_declaration(node: &lang_c::ast::Declaration, state: &mut State) -> String {
+fn transpile_declaration(node: &lang_c::ast::Declaration, state: &mut State) -> Option<String> {
     let mut spec = String::new();
     let mut is_typedef = false;
     let mut typedef_struct_or_enum_name: String = String::new();
     let mut typedef_struct_or_enum_has_body = false;
     let mut is_extern = false;
 
-    node.specifiers.iter().for_each(|specifier| {
+    for specifier in node.specifiers.iter() {
         let res = is_struct_or_enum(&specifier.node);
         if is_typedef && res.is_some() {
             (typedef_struct_or_enum_name, typedef_struct_or_enum_has_body) = res.unwrap();
         }
 
-        let sp = transpile_declaration_specifier(&specifier.node, state);
-
-        if sp == "\\typedef" {
-            is_typedef = true;
-        } else if sp == "\\extern" {
-            is_extern = true;
-        } else {
-            spec += sp.as_str();
-            spec += " ";
+        match transpile_declaration_specifier(&specifier.node, state) {
+            Some(sp) => {
+                if sp == "\\typedef" {
+                    is_typedef = true;
+                } else if sp == "\\extern" {
+                    is_extern = true;
+                } else {
+                    spec += sp.as_str();
+                    spec += " ";
+                }
+            }
+            None => {
+                return None;
+            }
         }
-    });
+    }
 
     spec = shrink_spec(spec);
 
     if node.declarators.is_empty() {
         if is_typedef {
-            eprintln!("Typedef without declarators: {}", spec);
+            eprintln!("!! Typedef without declarators: {}", spec);
         }
-        return spec + ";\n";
+        return Some(spec + ";\n");
     }
 
     let mut code = String::new();
 
-    node.declarators.iter().for_each(|decl| {
+    for decl in node.declarators.iter() {
         let name = get_name(&decl.node);
 
         match &name {
@@ -1151,7 +1482,7 @@ fn transpile_declaration(node: &lang_c::ast::Declaration, state: &mut State) -> 
                         state.typedefs.insert(n.to_string(), spec.clone());
                     }
 
-                    return;
+                    continue;
                 }
             }
             None => {
@@ -1175,20 +1506,34 @@ fn transpile_declaration(node: &lang_c::ast::Declaration, state: &mut State) -> 
                 if is_extern {
                     code += &spec;
                     code += " ";
-                    code += transpile_init_declarator(&decl.node, state).as_str();
+                    match transpile_init_declarator(&decl.node, state) {
+                        Some(init_decl) => {
+                            code += init_decl.as_str();
+                        }
+                        None => {
+                            return None;
+                        }
+                    }
                     code += "{}\n";
                 }
             }
             false => {
                 code += &spec;
                 code += " ";
-                code += transpile_init_declarator(&decl.node, state).as_str();
+                match transpile_init_declarator(&decl.node, state) {
+                    Some(init_decl) => {
+                        code += init_decl.as_str();
+                    }
+                    None => {
+                        return None;
+                    }
+                }
                 code += ";\n";
             }
         }
-    });
+    }
 
-    return code;
+    return Some(code);
 }
 
 fn transpile(parse: lang_c::driver::Parse, state: &mut State) -> String {
@@ -1197,13 +1542,27 @@ fn transpile(parse: lang_c::driver::Parse, state: &mut State) -> String {
     for item in parse.unit.0 {
         match item.node {
             lang_c::ast::ExternalDeclaration::Declaration(d) => {
-                code += transpile_declaration(&d.node, state).as_str();
+                match transpile_declaration(&d.node, state) {
+                    Some(decl) => {
+                        code += decl.as_str();
+                    }
+                    None => {
+                        // Ignore declarations that could not be transpiled.
+                    }
+                }
             }
             lang_c::ast::ExternalDeclaration::StaticAssert(_) => {
                 // [Ignored] Fine.
             }
             lang_c::ast::ExternalDeclaration::FunctionDefinition(f) => {
-                code += transpile_function_definition(&f.node, state).as_str();
+                match transpile_function_definition(&f.node, state) {
+                    Some(func_def) => {
+                        code += func_def.as_str();
+                    }
+                    None => {
+                        // Ignore function definitions that could not be transpiled.
+                    }
+                }
             }
         }
     }
@@ -1222,14 +1581,14 @@ fn main() {
 
     match parse_res {
         Ok(parse) => {
-            println!("{:#?}", parse);
+            // println!("{:#?}", parse);
             let mut state = State {
                 typedefs: std::collections::HashMap::new(),
             };
             println!("{}", transpile(parse, &mut state));
         }
         Err(err) => {
-            eprintln!("Error: {}", err);
+            eprintln!("!! Error: {}", err);
         }
     }
 }
