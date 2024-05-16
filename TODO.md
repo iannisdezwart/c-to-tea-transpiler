@@ -6,4 +6,4 @@ Yet to be implemented features for transpiler:
 - [x] Unnamed parameters
 - [x] Enums
 - [x] Switches
-- [ ] Fix switch break & fall through
+- [x] Fix switch break

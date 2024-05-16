@@ -1,19 +1,21 @@
-struct Foo
-{
-    long long (*bar)(int, char);
-};
+typedef struct EmptyStructTy EmptyStructTy;
 
-long long baz(int a, char b)
-{
-    return a + b;
-}
+// struct Foo
+// {
+//     long long (*bar)(int, char);
+// };
 
-void foo()
-{
-    struct Foo f;
-    f.bar = &baz;
-    f.bar(1, 'a');
-}
+// long long baz(int a, char b)
+// {
+//     return a + b;
+// }
+
+// void foo()
+// {
+//     struct Foo f;
+//     f.bar = &baz;
+//     f.bar(1, 'a');
+// }
 
 // int decl(int, int);
 
@@ -21,15 +23,21 @@ void foo()
 
 // int test(int n)
 // {
+//     int ret_val;
+
 //     switch (n)
 //     {
 //     case 3:
 //     case 4:
-//         return 1;
+//         ret_val = 1;
+//         break;
 //     case 5:
 //     default:
-//         return 0;
+//         ret_val = 0;
+//         break;
 //     }
+
+//     return ret_val;
 // }
 
 // typedef enum EnumTy
