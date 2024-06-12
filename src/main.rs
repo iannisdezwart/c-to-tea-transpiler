@@ -6,6 +6,7 @@ struct State {
     struct_decl_depth: i32,
     nested_struct_decls: String,
     def_struct_decls: std::collections::HashSet<String>,
+    is_in_top_level_struct_decl: bool,
 }
 
 fn rand_str() -> String {
@@ -182,7 +183,7 @@ fn transpile_struct(node: &mut lang_c::ast::StructType, state: &mut State) -> Op
 
     match &mut node.declarations {
         None => {
-            if !state.def_struct_decls.contains(&name) {
+            if state.is_in_top_level_struct_decl && !state.def_struct_decls.contains(&name) {
                 state.def_struct_decls.insert(name.clone());
                 let code = "class ".to_string() + &name + " {}";
                 if is_nested_struct_decl {
@@ -599,7 +600,7 @@ fn transpile_declarator(
 fn transpile_block_item(node: &mut lang_c::ast::BlockItem, state: &mut State) -> Option<String> {
     match node {
         lang_c::ast::BlockItem::Declaration(decl) => {
-            return transpile_declaration(&mut decl.node, state);
+            return transpile_declaration(&mut decl.node, state, false);
         }
         lang_c::ast::BlockItem::StaticAssert(_) => {
             // [Ignored] Fine.
@@ -1294,7 +1295,7 @@ fn transpile_for_initializer(
             }
         }
         lang_c::ast::ForInitializer::Declaration(d) => {
-            return transpile_declaration(&mut d.node, state);
+            return transpile_declaration(&mut d.node, state, false);
         }
         lang_c::ast::ForInitializer::Empty => {
             // Empty.
@@ -1536,7 +1537,11 @@ fn is_struct_or_enum(node: &mut lang_c::ast::DeclarationSpecifier) -> Option<(St
     }
 }
 
-fn transpile_declaration(node: &mut lang_c::ast::Declaration, state: &mut State) -> Option<String> {
+fn transpile_declaration(
+    node: &mut lang_c::ast::Declaration,
+    state: &mut State,
+    is_top_level: bool,
+) -> Option<String> {
     let mut spec = String::new();
     let mut is_typedef = false;
     let mut typedef_struct_or_enum_name: String = String::new();
@@ -1545,6 +1550,31 @@ fn transpile_declaration(node: &mut lang_c::ast::Declaration, state: &mut State)
 
     for specifier in node.specifiers.iter_mut() {
         let res = is_struct_or_enum(&mut specifier.node);
+        let is_fn_def = match &node.declarators.iter().any(|d| {
+            match &d
+                .node
+                .declarator
+                .node
+                .derived
+                .iter()
+                .any(|e| match &e.node {
+                    lang_c::ast::DerivedDeclarator::Function(_) => true,
+                    lang_c::ast::DerivedDeclarator::KRFunction(_) => true,
+                    _ => false,
+                }) {
+                true => true,
+                false => false,
+            }
+        }) {
+            true => true,
+            false => false,
+        };
+
+        let mut this_set_is_in_top_level_struct_decl = false;
+        if is_top_level && !is_fn_def && res.is_some() {
+            this_set_is_in_top_level_struct_decl = true;
+            state.is_in_top_level_struct_decl = true;
+        }
 
         if is_typedef && res.is_some() {
             (typedef_struct_or_enum_name, typedef_struct_or_enum_has_body) = res.unwrap();
@@ -1562,8 +1592,15 @@ fn transpile_declaration(node: &mut lang_c::ast::Declaration, state: &mut State)
                 }
             }
             None => {
+                if this_set_is_in_top_level_struct_decl {
+                    state.is_in_top_level_struct_decl = false;
+                }
                 return None;
             }
+        }
+
+        if this_set_is_in_top_level_struct_decl {
+            state.is_in_top_level_struct_decl = false;
         }
     }
 
@@ -1672,7 +1709,7 @@ fn transpile(parse: &mut lang_c::driver::Parse, state: &mut State) -> String {
     for item in parse.unit.0.iter_mut() {
         match &mut item.node {
             lang_c::ast::ExternalDeclaration::Declaration(d) => {
-                match transpile_declaration(&mut d.node, state) {
+                match transpile_declaration(&mut d.node, state, true) {
                     Some(decl) => {
                         if decl.starts_with("class") {
                             class_decls += decl.as_str();
@@ -1735,6 +1772,7 @@ fn main() {
                 struct_decl_depth: 0,
                 nested_struct_decls: String::new(),
                 def_struct_decls: std::collections::HashSet::new(),
+                is_in_top_level_struct_decl: false,
             };
             let mut transpiled = transpile(parse, &mut state);
 

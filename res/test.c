@@ -1,4 +1,47 @@
-typedef struct EmptyStructTy EmptyStructTy;
+// struct Test
+// {
+//     int bar;
+// };
+
+// void foo(struct Test *t)
+// {
+// }
+
+// struct Test
+// {
+//     void (*f)(int);
+// };
+
+typedef struct {
+    struct T {} t;
+    int y;
+} StructTy;
+
+typedef struct SomeStruct TypedefName;
+
+void g(TypedefName *t, struct SomeStruct *s)
+{
+}
+
+// struct SomeStruct
+// {
+//     int x;
+// };
+
+// void f(StructTy t)
+// {
+// }
+
+// struct foo
+// {
+//     struct
+//     {
+//         int a;
+//         int b;
+//     } bar;
+// };
+
+// typedef struct EmptyStructTy EmptyStructTy;
 
 // struct Foo
 // {
