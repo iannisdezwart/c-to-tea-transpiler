@@ -189,10 +189,13 @@ fn transpile_struct(node: &mut lang_c::ast::StructType, state: &mut State) -> Op
                 if is_nested_struct_decl {
                     state.nested_struct_decls += &code;
                     state.nested_struct_decls += ";\n";
+                    state.struct_decl_depth -= 1;
                     return Some(name);
                 }
+                state.struct_decl_depth -= 1;
                 return Some(code);
             }
+            state.struct_decl_depth -= 1;
             return Some(name);
         }
         Some(d) => {
