@@ -1,3 +1,51 @@
+void foo(__builtin_va_list yo)
+{
+
+}
+
+// struct s;
+// typedef struct s al1;
+// struct s;
+
+// struct s
+// {
+//     int _flags;
+// };
+
+// void test(al1 *a, struct s *c)
+// {
+// }
+
+// struct k;
+// struct k foo(int);
+// struct k {int l;};
+// struct k foo(int a)
+// {
+//     struct k b;
+//     b.l = a;
+//     return b;
+// }
+
+// struct lol {
+//     int lol;
+// };
+
+// typedef struct lol kek;
+
+// void test(kek *lol)
+// {
+// }
+
+// struct Struct
+// {
+//     int x;
+// } no;
+
+// struct Test
+// {
+//     int x;
+// };
+
 // struct Test
 // {
 //     int bar;
@@ -12,16 +60,16 @@
 //     void (*f)(int);
 // };
 
-typedef struct {
-    struct T {} t;
-    int y;
-} StructTy;
+// typedef struct {
+//     struct T {} t;
+//     int y;
+// } StructTy;
 
-typedef struct SomeStruct TypedefName;
+// typedef struct SomeStruct TypedefName;
 
-void g(TypedefName *t, struct SomeStruct *s)
-{
-}
+// void g(TypedefName *t, struct SomeStruct *s)
+// {
+// }
 
 // struct SomeStruct
 // {

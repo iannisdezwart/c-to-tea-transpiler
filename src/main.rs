@@ -5,8 +5,8 @@ struct State {
     undef_fn_decls: std::collections::HashSet<String>,
     struct_decl_depth: i32,
     nested_struct_decls: String,
-    def_struct_decls: std::collections::HashSet<String>,
-    is_in_top_level_struct_decl: bool,
+    empty_struct_decls: std::collections::HashSet<String>,
+    non_empty_struct_decls: std::collections::HashSet<String>,
 }
 
 fn rand_str() -> String {
@@ -159,7 +159,11 @@ fn transpile_struct_decl(
     }
 }
 
-fn transpile_struct(node: &mut lang_c::ast::StructType, state: &mut State) -> Option<String> {
+fn transpile_struct(
+    node: &mut lang_c::ast::StructType,
+    state: &mut State,
+    is_decl: bool,
+) -> Option<String> {
     let is_nested_struct_decl = state.struct_decl_depth > 0;
     state.struct_decl_depth += 1;
 
@@ -183,23 +187,21 @@ fn transpile_struct(node: &mut lang_c::ast::StructType, state: &mut State) -> Op
 
     match &mut node.declarations {
         None => {
-            if state.is_in_top_level_struct_decl && !state.def_struct_decls.contains(&name) {
-                state.def_struct_decls.insert(name.clone());
-                let code = "class ".to_string() + &name + " {}";
-                if is_nested_struct_decl {
-                    state.nested_struct_decls += &code;
-                    state.nested_struct_decls += ";\n";
-                    state.struct_decl_depth -= 1;
-                    return Some(name);
-                }
+            if !state.non_empty_struct_decls.contains(&name)
+                && !state.empty_struct_decls.contains(&name)
+            {
+                state.empty_struct_decls.insert(name.clone());
+            }
+            if is_decl {
                 state.struct_decl_depth -= 1;
-                return Some(code);
+                return None;
             }
             state.struct_decl_depth -= 1;
             return Some(name);
         }
         Some(d) => {
             let mut code = "class ".to_string() + name.as_str();
+            state.non_empty_struct_decls.insert(name.clone());
 
             code += " {\n";
 
@@ -233,6 +235,7 @@ fn transpile_struct(node: &mut lang_c::ast::StructType, state: &mut State) -> Op
 fn transpile_type_specifier(
     node: &mut lang_c::ast::TypeSpecifier,
     state: &mut State,
+    is_decl: bool,
 ) -> Option<String> {
     match node {
         lang_c::ast::TypeSpecifier::Void => {
@@ -276,7 +279,7 @@ fn transpile_type_specifier(
             return None;
         }
         lang_c::ast::TypeSpecifier::Struct(s) => {
-            return transpile_struct(&mut s.node, state);
+            return transpile_struct(&mut s.node, state, is_decl);
         }
         lang_c::ast::TypeSpecifier::Enum(e) => {
             let mut code = String::new();
@@ -351,13 +354,14 @@ fn transpile_type_qualifier(node: &lang_c::ast::TypeQualifier) -> String {
 fn transpile_declaration_specifier(
     node: &mut lang_c::ast::DeclarationSpecifier,
     state: &mut State,
+    is_decl: bool,
 ) -> Option<String> {
     match node {
         lang_c::ast::DeclarationSpecifier::StorageClass(n) => {
             return transpile_storage_class_specifier(&n.node);
         }
         lang_c::ast::DeclarationSpecifier::TypeSpecifier(n) => {
-            return transpile_type_specifier(&mut n.node, state);
+            return transpile_type_specifier(&mut n.node, state, is_decl);
         }
         lang_c::ast::DeclarationSpecifier::TypeQualifier(n) => {
             return Some(transpile_type_qualifier(&n.node));
@@ -438,7 +442,7 @@ fn transpile_parameter_declaration(
 
     let mut spec = String::new();
     for specifier in node.specifiers.iter_mut() {
-        match transpile_declaration_specifier(&mut specifier.node, state) {
+        match transpile_declaration_specifier(&mut specifier.node, state, false) {
             Some(decl_spec) => {
                 spec += decl_spec.as_str();
                 spec += " ";
@@ -576,6 +580,9 @@ fn transpile_declarator(
                 after_id_code += ")";
             }
             lang_c::ast::DerivedDeclarator::KRFunction(i) => {
+                if !i.is_empty() {
+                    eprintln!("!! YO FOUND KR FUNC {}", id_code);
+                }
                 after_id_code += "(";
 
                 for id in i.iter() {
@@ -656,7 +663,7 @@ fn transpile_specifier_qualifier(
 ) -> Option<String> {
     match node {
         lang_c::ast::SpecifierQualifier::TypeSpecifier(t) => {
-            return transpile_type_specifier(&mut t.node, state);
+            return transpile_type_specifier(&mut t.node, state, false);
         }
         lang_c::ast::SpecifierQualifier::TypeQualifier(t) => {
             return Some(transpile_type_qualifier(&t.node));
@@ -829,7 +836,21 @@ fn transpile_expression_no_parens(
             }
             lang_c::ast::Constant::Integer(i) => {
                 let mut number = i.number.to_string().clone();
-                number.retain(|c| c.is_numeric()); // Cut off trailing 'L' and 'U.
+                match i.base {
+                    lang_c::ast::IntegerBase::Decimal => {
+                        // Do nothing.
+                    }
+                    lang_c::ast::IntegerBase::Octal => {
+                        number = i64::from_str_radix(&number, 8).unwrap().to_string();
+                    }
+                    lang_c::ast::IntegerBase::Hexadecimal => {
+                        number = i64::from_str_radix(&number, 16).unwrap().to_string();
+                    }
+                    lang_c::ast::IntegerBase::Binary => {
+                        number = i64::from_str_radix(&number, 2).unwrap().to_string();
+                    }
+                }
+                number.retain(|c| c.is_numeric());
                 return Some(number);
             }
             lang_c::ast::Constant::Float(f) => {
@@ -932,14 +953,12 @@ fn transpile_expression_no_parens(
             return None;
         }
         lang_c::ast::Expression::SizeOfTy(_) => {
-            // [Ignored] Not supported.
-            eprintln!("!! sizeof (type) keyword not supported: {:?}", node);
-            return None;
+            // [Hack] Not supported, so just return 0.
+            return Some("0".to_string());
         }
         lang_c::ast::Expression::SizeOfVal(_) => {
-            // [Ignored] Not supported.
-            eprintln!("!! sizeof (val) keyword not supported: {:?}", node);
-            return None;
+            // [Hack] Not supported, so just return 0.
+            return Some("0".to_string());
         }
         lang_c::ast::Expression::AlignOf(_) => {
             // [Ignored] Not supported.
@@ -1456,7 +1475,7 @@ fn transpile_function_definition(
 
     let mut spec = String::new();
     for specifier in node.specifiers.iter_mut() {
-        match transpile_declaration_specifier(&mut specifier.node, state) {
+        match transpile_declaration_specifier(&mut specifier.node, state, false) {
             Some(decl_spec) => {
                 spec += decl_spec.as_str();
                 spec += " ";
@@ -1553,8 +1572,8 @@ fn transpile_declaration(
 
     for specifier in node.specifiers.iter_mut() {
         let res = is_struct_or_enum(&mut specifier.node);
-        let is_fn_def = match &node.declarators.iter().any(|d| {
-            match &d
+        let is_fn_def = match &node.declarators.iter().any(
+            |d: &lang_c::span::Node<lang_c::ast::InitDeclarator>| match &d
                 .node
                 .declarator
                 .node
@@ -1567,23 +1586,21 @@ fn transpile_declaration(
                 }) {
                 true => true,
                 false => false,
-            }
-        }) {
+            },
+        ) {
             true => true,
             false => false,
         };
-
-        let mut this_set_is_in_top_level_struct_decl = false;
-        if is_top_level && !is_fn_def && res.is_some() {
-            this_set_is_in_top_level_struct_decl = true;
-            state.is_in_top_level_struct_decl = true;
-        }
 
         if is_typedef && res.is_some() {
             (typedef_struct_or_enum_name, typedef_struct_or_enum_has_body) = res.unwrap();
         }
 
-        match transpile_declaration_specifier(&mut specifier.node, state) {
+        match transpile_declaration_specifier(
+            &mut specifier.node,
+            state,
+            !is_fn_def && !is_typedef && is_top_level,
+        ) {
             Some(sp) => {
                 if sp == "\\typedef" {
                     is_typedef = true;
@@ -1595,15 +1612,8 @@ fn transpile_declaration(
                 }
             }
             None => {
-                if this_set_is_in_top_level_struct_decl {
-                    state.is_in_top_level_struct_decl = false;
-                }
                 return None;
             }
-        }
-
-        if this_set_is_in_top_level_struct_decl {
-            state.is_in_top_level_struct_decl = false;
         }
     }
 
@@ -1754,7 +1764,22 @@ fn transpile(parse: &mut lang_c::driver::Parse, state: &mut State) -> String {
         }
     }
 
-    return state.nested_struct_decls.to_string() + "\n" + &class_decls + "\n" + &other_code;
+    let mut empty_struct_decls = String::new();
+    for name in state.empty_struct_decls.iter() {
+        if state.non_empty_struct_decls.contains(name) {
+            continue;
+        }
+        empty_struct_decls += &format!("class {} {{}};\n", name);
+    }
+
+    return "// hoisted nested struct decls:\n".to_string()
+        + &state.nested_struct_decls.to_string()
+        + "\n// hoisted empty struct decls:\n"
+        + empty_struct_decls.as_str()
+        + "\n// non-empty struct decls:\n"
+        + &class_decls
+        + "\n// other code:\n"
+        + &other_code;
 }
 
 fn main() {
@@ -1770,12 +1795,19 @@ fn main() {
         Ok(parse) => {
             // println!("{:#?}", parse);
             let mut state = State {
-                typedefs: std::collections::HashMap::new(),
+                typedefs: [
+                    ("$T___builtin_va_list".to_string(), "v0*".to_string()),
+                    ("$T___sighandler_t".to_string(), "v0*".to_string()),
+                    ("$T___compar_fn_t".to_string(), "v0*".to_string()),
+                ]
+                .iter()
+                .cloned()
+                .collect(),
                 undef_fn_decls: std::collections::HashSet::new(),
                 struct_decl_depth: 0,
                 nested_struct_decls: String::new(),
-                def_struct_decls: std::collections::HashSet::new(),
-                is_in_top_level_struct_decl: false,
+                empty_struct_decls: std::collections::HashSet::new(),
+                non_empty_struct_decls: std::collections::HashSet::new(),
             };
             let mut transpiled = transpile(parse, &mut state);
 
@@ -1809,6 +1841,7 @@ fn main() {
             }
 
             println!("{}", transpiled);
+            eprintln!("typedefs: {:?}", state.typedefs);
         }
         Err(err) => {
             eprintln!("!! Error: {}", err);
