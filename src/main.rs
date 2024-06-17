@@ -2,11 +2,13 @@ use rand::Rng;
 
 struct State {
     typedefs: std::collections::HashMap<String, String>,
-    undef_fn_decls: std::collections::HashSet<String>,
+    def_fns: std::collections::HashSet<String>,
     struct_decl_depth: i32,
     nested_struct_decls: String,
     empty_struct_decls: std::collections::HashSet<String>,
     non_empty_struct_decls: std::collections::HashSet<String>,
+    top_level_fn_decls: std::collections::HashMap<String, String>,
+    top_level_var_decls: std::collections::HashMap<String, (String, usize)>,
 }
 
 fn rand_str() -> String {
@@ -100,7 +102,8 @@ fn transpile_struct_declarator(
 ) -> Option<String> {
     match &mut node.declarator {
         Some(decl) => {
-            return transpile_declarator(&mut decl.node, spec, state, &String::new());
+            return transpile_declarator(&mut decl.node, spec, state, &String::new())
+                .map(|(code, _)| code);
         }
         None => {
             // Anonymous struct.
@@ -398,8 +401,9 @@ fn transpile_initializer(node: &mut lang_c::ast::Initializer, state: &mut State)
 fn transpile_init_declarator(
     node: &mut lang_c::ast::InitDeclarator,
     state: &mut State,
-) -> Option<String> {
-    let mut code = String::new();
+) -> Option<(String, String)> {
+    let mut code: String = String::new();
+    let id: String;
 
     match transpile_declarator(
         &mut node.declarator.node,
@@ -408,7 +412,8 @@ fn transpile_init_declarator(
         &String::new(),
     ) {
         Some(decl) => {
-            code += decl.as_str();
+            id = decl.1;
+            code += decl.0.as_str();
         }
         None => {
             return None;
@@ -430,7 +435,7 @@ fn transpile_init_declarator(
         }
     }
 
-    return Some(code);
+    return Some((code, id));
 }
 
 fn transpile_parameter_declaration(
@@ -458,7 +463,7 @@ fn transpile_parameter_declaration(
     match &mut node.declarator {
         Some(declarator) => {
             match transpile_declarator(&mut declarator.node, &spec, state, &default_arg_name) {
-                Some(decl) => {
+                Some((decl, _)) => {
                     code += decl.as_str();
                 }
                 None => {
@@ -499,7 +504,7 @@ fn transpile_declarator(
     spec: &String,
     state: &mut State,
     default_id_name: &String,
-) -> Option<String> {
+) -> Option<(String, String)> {
     let mut id_code = String::new();
 
     match &node.kind.node {
@@ -581,7 +586,7 @@ fn transpile_declarator(
             }
             lang_c::ast::DerivedDeclarator::KRFunction(i) => {
                 if !i.is_empty() {
-                    eprintln!("!! YO FOUND KR FUNC {}", id_code);
+                    eprintln!("!! FOUND KR FUNC {}", id_code);
                 }
                 after_id_code += "(";
 
@@ -604,7 +609,7 @@ fn transpile_declarator(
     code += id_code.as_str();
     code += after_id_code.as_str();
 
-    return Some(code);
+    return Some((code, id_code.clone()));
 }
 
 fn transpile_block_item(node: &mut lang_c::ast::BlockItem, state: &mut State) -> Option<String> {
@@ -695,7 +700,7 @@ fn transpile_type_name(node: &mut lang_c::ast::TypeName, state: &mut State) -> O
     match &mut node.declarator {
         Some(declarator) => {
             match transpile_declarator(&mut declarator.node, &spec, state, &String::new()) {
-                Some(decl) => {
+                Some((decl, _)) => {
                     code += decl.as_str();
                 }
                 None => {
@@ -1279,7 +1284,6 @@ fn transpile_do_while_statement(
         Some(stmt) => {
             let mut code = String::new();
 
-            code += stmt.as_str();
             code += "while (";
             match transpile_expression(&mut node.expression.node, state) {
                 Some(expr) => {
@@ -1401,7 +1405,7 @@ fn transpile_statement(node: &mut lang_c::ast::Statement, state: &mut State) -> 
                         code += blck_itm.as_str();
                     }
                     None => {
-                        return None;
+                        // Ignore.
                     }
                 }
             }
@@ -1488,7 +1492,7 @@ fn transpile_function_definition(
     spec = shrink_spec(spec);
 
     match transpile_declarator(&mut node.declarator.node, &spec, state, &String::new()) {
-        Some(decl) => {
+        Some((decl, _)) => {
             code += decl.as_str();
         }
         None => {
@@ -1498,11 +1502,16 @@ fn transpile_function_definition(
     code += "\n";
     code += "{\n";
 
+    if code.contains("I_deflate") {
+        code += "   ";
+    }
+
     match transpile_statement(&mut node.statement.node, state) {
         Some(stmt) => {
             code += stmt.as_str();
         }
         None => {
+            code += "WTF";
             // Empty definition.
         }
     }
@@ -1568,7 +1577,7 @@ fn transpile_declaration(
     let mut is_typedef = false;
     let mut typedef_struct_or_enum_name: String = String::new();
     let mut typedef_struct_or_enum_has_body = false;
-    let mut is_extern = false;
+    // let mut is_extern = false;
 
     for specifier in node.specifiers.iter_mut() {
         let res = is_struct_or_enum(&mut specifier.node);
@@ -1599,13 +1608,13 @@ fn transpile_declaration(
         match transpile_declaration_specifier(
             &mut specifier.node,
             state,
-            !is_fn_def && !is_typedef && is_top_level,
+            !is_fn_def && !is_typedef && is_top_level && node.declarators.is_empty(),
         ) {
             Some(sp) => {
                 if sp == "\\typedef" {
                     is_typedef = true;
                 } else if sp == "\\extern" {
-                    is_extern = true;
+                    // is_extern = true;
                 } else {
                     spec += sp.as_str();
                     spec += " ";
@@ -1676,38 +1685,58 @@ fn transpile_declaration(
                 if name.is_none() {
                     continue;
                 }
-                let prefixed_name = "$I_".to_string() + &name.unwrap();
-                if !is_extern {
-                    code += &format!("\\begin_fn_decl {}\n", prefixed_name.to_string());
-                    state.undef_fn_decls.insert(prefixed_name.to_string());
-                }
-                code += &spec;
-                code += " ";
+                // let prefixed_name = "$I_".to_string() + &name.unwrap();
+                let mut fn_decl_code = String::new();
+                // if !is_extern {
+                //     fn_decl_code += &format!("\\begin_fn_decl {}\n", prefixed_name.to_string());
+                // }
+                fn_decl_code += &spec;
+                fn_decl_code += " ";
+                let id: String;
                 match transpile_init_declarator(&mut decl.node, state) {
-                    Some(init_decl) => {
-                        code += init_decl.as_str();
+                    Some((init_decl, idyay)) => {
+                        fn_decl_code += init_decl.as_str();
+                        id = idyay;
                     }
                     None => {
                         return None;
                     }
                 }
-                code += "{}\n";
-                if !is_extern {
-                    code += &format!("\\end_fn_decl {}\n", prefixed_name.to_string());
+                fn_decl_code += "{}\n";
+                // if !is_extern {
+                //     fn_decl_code += &format!("\\end_fn_decl {}\n", prefixed_name.to_string());
+                // }
+
+                if is_top_level {
+                    state.top_level_fn_decls.insert(id, fn_decl_code);
+                } else {
+                    code += &fn_decl_code;
                 }
             }
             false => {
-                code += &spec;
-                code += " ";
+                // Variable declaration.
+                let mut var_decl_code = String::new();
+                var_decl_code += &spec;
+                var_decl_code += " ";
+                let id: String;
                 match transpile_init_declarator(&mut decl.node, state) {
-                    Some(init_decl) => {
-                        code += init_decl.as_str();
+                    Some((init_decl, idyay)) => {
+                        var_decl_code += init_decl.as_str();
+                        id = idyay;
                     }
                     None => {
                         return None;
                     }
                 }
-                code += ";\n";
+                var_decl_code += ";\n";
+
+                if is_top_level {
+                    state
+                        .top_level_var_decls
+                        .insert(id, (var_decl_code, decl.span.start));
+                } else {
+                    code += &var_decl_code;
+                }
             }
         }
     }
@@ -1744,9 +1773,7 @@ fn transpile(parse: &mut lang_c::driver::Parse, state: &mut State) -> String {
                         other_code += func_def.as_str();
                         match &mut f.node.declarator.node.kind.node {
                             lang_c::ast::DeclaratorKind::Identifier(ident) => {
-                                state
-                                    .undef_fn_decls
-                                    .remove(&("$I_".to_string() + &ident.node.name));
+                                state.def_fns.insert("$I_".to_string() + &ident.node.name);
                             }
                             _ => {
                                 eprintln!(
@@ -1772,12 +1799,38 @@ fn transpile(parse: &mut lang_c::driver::Parse, state: &mut State) -> String {
         empty_struct_decls += &format!("class {} {{}};\n", name);
     }
 
+    let mut top_level_var_decl_vec = state
+        .top_level_var_decls
+        .iter()
+        .map(|(k, (v, _))| (k.clone(), v.clone()))
+        .collect::<Vec<(String, String)>>();
+    top_level_var_decl_vec.sort_by(|a, b| a.1.cmp(&b.1));
+
     return "// hoisted nested struct decls:\n".to_string()
         + &state.nested_struct_decls.to_string()
         + "\n// hoisted empty struct decls:\n"
         + empty_struct_decls.as_str()
         + "\n// non-empty struct decls:\n"
         + &class_decls
+        + "\n// top-level fn decls:\n"
+        + &state
+            .top_level_fn_decls
+            .iter()
+            // .map(|(k, v)| {
+            //     if state.def_fns.contains(k.as_str()) {
+            //         v.clone()
+            //     } else {
+            //         "// not contained\n".to_string() + &v
+            //     }
+            // })
+            .filter(|(k, _)| !state.def_fns.contains(k.as_str()))
+            .map(|(_, v)| v.clone())
+            .collect::<String>()
+        + "\n// top-level var decls:\n"
+        + &top_level_var_decl_vec
+            .iter()
+            .map(|(_, v)| v.clone())
+            .collect::<String>()
         + "\n// other code:\n"
         + &other_code;
 }
@@ -1803,44 +1856,47 @@ fn main() {
                 .iter()
                 .cloned()
                 .collect(),
-                undef_fn_decls: std::collections::HashSet::new(),
+                def_fns: std::collections::HashSet::new(),
                 struct_decl_depth: 0,
                 nested_struct_decls: String::new(),
                 empty_struct_decls: std::collections::HashSet::new(),
                 non_empty_struct_decls: std::collections::HashSet::new(),
+                top_level_fn_decls: std::collections::HashMap::new(),
+                top_level_var_decls: std::collections::HashMap::new(),
             };
-            let mut transpiled = transpile(parse, &mut state);
+            // let mut transpiled = transpile(parse, &mut state);
 
             // Handle undefined function declarations.
             // Find `begin_fn_decl <name>` and see if it exists in state.undef_fn_decls.
             // If it does, remove it from state.undef_fn_decls and remove the
             // `begin_fn_decl <name>` and `end_fn_decl <name>` lines.
             // Otherwise, scrap the function definition entirely.
-            while let Some(begin_fn_decl_begin) = transpiled.find("\\begin_fn_decl ") {
-                let name = &transpiled[begin_fn_decl_begin + "\\begin_fn_decl ".len()..]
-                    .split('\n')
-                    .next()
-                    .unwrap();
+            // while let Some(begin_fn_decl_begin) = transpiled.find("\\begin_fn_decl ") {
+            //     let name = &transpiled[begin_fn_decl_begin + "\\begin_fn_decl ".len()..]
+            //         .split('\n')
+            //         .next()
+            //         .unwrap();
 
-                let end_fn_decl_begin = transpiled
-                    .find(&format!("\\end_fn_decl {}", name.to_string()))
-                    .unwrap();
-                let end_fn_decl_end =
-                    end_fn_decl_begin + transpiled[end_fn_decl_begin..].find('\n').unwrap();
-                let begin_fn_decl_end =
-                    begin_fn_decl_begin + transpiled[begin_fn_decl_begin..].find('\n').unwrap();
+            //     let end_fn_decl_begin = transpiled
+            //         .find(&format!("\\end_fn_decl {}", name.to_string()))
+            //         .unwrap();
+            //     let end_fn_decl_end =
+            //         end_fn_decl_begin + transpiled[end_fn_decl_begin..].find('\n').unwrap();
+            //     let begin_fn_decl_end =
+            //         begin_fn_decl_begin + transpiled[begin_fn_decl_begin..].find('\n').unwrap();
 
-                if state.undef_fn_decls.contains(*name) {
-                    // Remove the `begin_fn_decl` and `end_fn_decl` lines.
-                    transpiled.replace_range(end_fn_decl_begin..(end_fn_decl_end), "");
-                    transpiled.replace_range(begin_fn_decl_begin..(begin_fn_decl_end), "");
-                } else {
-                    // Remove the entire function definition.
-                    transpiled.replace_range(begin_fn_decl_begin..(end_fn_decl_end), "");
-                }
-            }
+            //     if state.undef_fn_decls.contains(*name) {
+            //         // Remove the `begin_fn_decl` and `end_fn_decl` lines.
+            //         transpiled.replace_range(end_fn_decl_begin..(end_fn_decl_end), "");
+            //         transpiled.replace_range(begin_fn_decl_begin..(begin_fn_decl_end), "");
+            //     } else {
+            //         // Remove the entire function definition.
+            //         transpiled.replace_range(begin_fn_decl_begin..(end_fn_decl_end), "");
+            //     }
+            // }
 
-            println!("{}", transpiled);
+            // println!("{}", transpiled);
+            println!("{}", transpile(parse, &mut state));
             eprintln!("typedefs: {:?}", state.typedefs);
         }
         Err(err) => {
