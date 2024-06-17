@@ -1,7 +1,26 @@
-void foo(__builtin_va_list yo)
-{
+struct Foo {
+    int yo;
+};
 
+struct Foo lol[1] = {{ 1 }};
+
+void test()
+{
+    lol[0].yo = 2;
 }
+
+// int test;
+// int test;
+
+// void foo()
+// {
+//     test = 1;
+// }
+
+// void foo(__builtin_va_list yo)
+// {
+
+// }
 
 // struct s;
 // typedef struct s al1;

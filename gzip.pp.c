@@ -303,12 +303,12 @@ extern int dirfd(DIR *__dirp) __attribute__((__nothrow__, __leaf__)) __attribute
 typedef long unsigned int size_t;
 # 246 "/usr/include/dirent.h" 2 3 4
 # 255 "/usr/include/dirent.h" 3 4
-extern int scandir(const char *__restrict __dir,
-                   struct dirent ***__restrict __namelist,
-                   int (*__selector)(const struct dirent *),
-                   int (*__cmp)(const struct dirent **,
-                                const struct dirent **))
-    __attribute__((__nonnull__(1, 2)));
+// extern int scandir(const char *__restrict __dir,
+//                    struct dirent ***__restrict __namelist,
+//                    int (*__selector)(const struct dirent *),
+//                    int (*__cmp)(const struct dirent **,
+//                                 const struct dirent **))
+    // __attribute__((__nonnull__(1, 2)));
 # 325 "/usr/include/dirent.h" 3 4
 extern int alphasort(const struct dirent **__e1,
                      const struct dirent **__e2)
@@ -839,7 +839,7 @@ __attribute__((__alloc_size__(1)));
 
 extern void *pvalloc(size_t __size) __attribute__((__nothrow__, __leaf__)) __attribute__((__malloc__));
 
-extern void *(*__morecore)(ptrdiff_t __size);
+// extern void *(*__morecore)(ptrdiff_t __size);
 
 extern void *__default_morecore(ptrdiff_t __size)
     __attribute__((__nothrow__, __leaf__)) __attribute__((__malloc__));
@@ -870,21 +870,21 @@ extern void malloc_stats(void) __attribute__((__nothrow__, __leaf__));
 
 extern int malloc_info(int __options, FILE *__fp) __attribute__((__nothrow__, __leaf__));
 
-extern void (*volatile __free_hook)(void *__ptr,
-                                    const void *)
-    __attribute__((__deprecated__));
-extern void *(*volatile __malloc_hook)(size_t __size,
-                                       const void *)
-    __attribute__((__deprecated__));
-extern void *(*volatile __realloc_hook)(void *__ptr,
-                                        size_t __size,
-                                        const void *)
-    __attribute__((__deprecated__));
-extern void *(*volatile __memalign_hook)(size_t __alignment,
-                                         size_t __size,
-                                         const void *)
-    __attribute__((__deprecated__));
-extern void (*volatile __after_morecore_hook)(void);
+// extern void (*volatile __free_hook)(void *__ptr,
+//                                     const void *)
+//     __attribute__((__deprecated__));
+// extern void *(*volatile __malloc_hook)(size_t __size,
+//                                        const void *)
+//     __attribute__((__deprecated__));
+// extern void *(*volatile __realloc_hook)(void *__ptr,
+//                                         size_t __size,
+//                                         const void *)
+//     __attribute__((__deprecated__));
+// extern void *(*volatile __memalign_hook)(size_t __alignment,
+//                                          size_t __size,
+//                                          const void *)
+//     __attribute__((__deprecated__));
+// extern void (*volatile __after_morecore_hook)(void);
 
 # 7 "gzip.c" 2
 # 1 "/usr/include/memory.h" 1 3 4
@@ -1343,7 +1343,7 @@ typedef struct sigevent
 
     struct
     {
-      void (*_function)(__sigval_t);
+      // void (*_function)(__sigval_t);
       pthread_attr_t *_attribute;
     } _sigev_thread;
   } _sigev_un;
@@ -1364,7 +1364,7 @@ enum
 };
 # 68 "/usr/include/signal.h" 2 3 4
 
-typedef void (*__sighandler_t)(int);
+typedef void *__sighandler_t;
 
 extern __sighandler_t __sysv_signal(int __sig, __sighandler_t __handler)
     __attribute__((__nothrow__, __leaf__));
@@ -1415,14 +1415,14 @@ struct sigaction
 
     __sighandler_t sa_handler;
 
-    void (*sa_sigaction)(int, siginfo_t *, void *);
+    // void (*sa_sigaction)(int, siginfo_t *, void *);
   } __sigaction_handler;
 
   __sigset_t sa_mask;
 
   int sa_flags;
 
-  void (*sa_restorer)(void);
+  // void (*sa_restorer)(void);
 };
 # 227 "/usr/include/signal.h" 2 3 4
 
@@ -2010,21 +2010,21 @@ static __inline __uint16_t
 __bswap_16(__uint16_t __bsx)
 {
 
-  return __builtin_bswap16(__bsx);
+  return __bsx;
 }
 
 static __inline __uint32_t
 __bswap_32(__uint32_t __bsx)
 {
 
-  return __builtin_bswap32(__bsx);
+  return __bsx;
 }
 # 69 "/usr/include/x86_64-linux-gnu/bits/byteswap.h" 3 4
 __extension__ static __inline __uint64_t
 __bswap_64(__uint64_t __bsx)
 {
 
-  return __builtin_bswap64(__bsx);
+  return __bsx;
 }
 # 36 "/usr/include/endian.h" 2 3 4
 # 1 "/usr/include/x86_64-linux-gnu/bits/uintn-identity.h" 1 3 4
@@ -2239,11 +2239,11 @@ extern void *aligned_alloc(size_t __alignment, size_t __size)
 
 extern void abort(void) __attribute__((__nothrow__, __leaf__)) __attribute__((__noreturn__));
 
-extern int atexit(void (*__func)(void)) __attribute__((__nothrow__, __leaf__)) __attribute__((__nonnull__(1)));
+extern int atexit(void *__func) __attribute__((__nothrow__, __leaf__)) __attribute__((__nonnull__(1)));
 
-extern int at_quick_exit(void (*__func)(void)) __attribute__((__nothrow__, __leaf__)) __attribute__((__nonnull__(1)));
+extern int at_quick_exit(void *__func) __attribute__((__nothrow__, __leaf__)) __attribute__((__nonnull__(1)));
 
-extern int on_exit(void (*__func)(int __status, void *__arg), void *__arg)
+extern int on_exit(void *__func, void *__arg)
     __attribute__((__nothrow__, __leaf__)) __attribute__((__nonnull__(1)));
 
 extern void exit(int __status) __attribute__((__nothrow__, __leaf__)) __attribute__((__noreturn__));
@@ -2276,14 +2276,14 @@ extern int system(const char *__command);
 extern char *realpath(const char *__restrict __name,
                       char *__restrict __resolved) __attribute__((__nothrow__, __leaf__));
 
-typedef int (*__compar_fn_t)(const void *, const void *);
+// typedef int (*__compar_fn_t)(const void *, const void *);
 # 820 "/usr/include/stdlib.h" 3 4
 extern void *bsearch(const void *__key, const void *__base,
-                     size_t __nmemb, size_t __size, __compar_fn_t __compar)
+                     size_t __nmemb, size_t __size, void *__compar)
     __attribute__((__nonnull__(1, 2, 5)));
 
 extern void qsort(void *__base, size_t __nmemb, size_t __size,
-                  __compar_fn_t __compar) __attribute__((__nonnull__(1, 4)));
+                  void *__compar) __attribute__((__nonnull__(1, 4)));
 # 840 "/usr/include/stdlib.h" 3 4
 extern int abs(int __x) __attribute__((__nothrow__, __leaf__)) __attribute__((__const__));
 extern long int labs(long int __x) __attribute__((__nothrow__, __leaf__)) __attribute__((__const__));
@@ -3630,7 +3630,7 @@ void send_bits(int value, int length);
 unsigned bi_reverse(unsigned value, int length);
 void bi_windup(void);
 void copy_block(char *buf, unsigned len, int header);
-extern int (*read_buf)(char *buf, unsigned size);
+// extern int (*read_buf)(char *buf, unsigned size);
 
 extern int copy(int in, int out);
 extern ulg updcrc(uch *s, unsigned n);
@@ -3662,7 +3662,7 @@ static unsigned short bi_buf;
 # 703 "gzip.c"
 static int bi_valid;
 
-int (*read_buf)(char *buf, unsigned size);
+// int (*read_buf)(char *buf, unsigned size);
 # 718 "gzip.c"
 void bi_init(file_t zipfile)
 {
@@ -3672,7 +3672,7 @@ void bi_init(file_t zipfile)
 
   if (zfile != (-1))
   {
-    read_buf = file_read;
+    // read_buf = file_read;
   }
 }
 
@@ -3912,8 +3912,8 @@ void lm_init(int pack_level, ush *flags)
   strstart = 0;
   block_start = 0L;
 
-  lookahead = read_buf((char *)window,
-                       sizeof(int) <= 2 ? (unsigned)0x8000 : 2 * 0x8000);
+  // lookahead = read_buf((char *)window,
+  //                      sizeof(int) <= 2 ? (unsigned)0x8000 : 2 * 0x8000);
 
   if (lookahead == 0 || lookahead == (unsigned)
 # 1208 "gzip.c" 3 4
@@ -4033,7 +4033,7 @@ static void fill_window()
 
   if (!eofile)
   {
-    n = read_buf((char *)window + strstart + lookahead, more);
+    // n = read_buf((char *)window + strstart + lookahead, more);
     if (n == 0 || n == (unsigned)
 # 1441 "gzip.c" 3 4
                            (-1)
@@ -4352,11 +4352,12 @@ int opterr = 1;
 
 int optopt = '?';
 # 2003 "gzip.c"
-static enum {
+static enum ordering {
   REQUIRE_ORDER,
   PERMUTE,
   RETURN_IN_ORDER
-} ordering;
+};
+enum ordering ordering;
 
 static char *posixly_correct;
 
@@ -5005,7 +5006,7 @@ static char *license_msg[] = {
     "For more information about these matters, see the file named COPYING.",
     0};
 # 2925 "gzip.c"
-typedef void (*sig_type)(int);
+typedef void *sig_type;
 # 2973 "gzip.c"
 uch inbuf[0x8000 + 64];
 uch outbuf[16384 + 2048];
@@ -5259,8 +5260,9 @@ int main(int argc,
 # 3238 "gzip.c" 3 4
         2
 # 3238 "gzip.c"
-        ,
-        (sig_type)abort_gzip_signal);
+        // ,
+        // (sig_type)abort_gzip_signal
+        );
   }
 
   if (signal(
@@ -5281,8 +5283,9 @@ int main(int argc,
 # 3242 "gzip.c" 3 4
         15
 # 3242 "gzip.c"
-        ,
-        (sig_type)abort_gzip_signal);
+        // ,
+        // (sig_type)abort_gzip_signal
+        );
   }
 
   if (signal(
@@ -5303,8 +5306,9 @@ int main(int argc,
 # 3247 "gzip.c" 3 4
         1
 # 3247 "gzip.c"
-        ,
-        (sig_type)abort_gzip_signal);
+        // ,
+        // (sig_type)abort_gzip_signal
+        );
   }
 # 3259 "gzip.c"
   if (strncmp(progname, "un", 2) == 0 || strncmp(progname, "gun", 3) == 0)
@@ -5454,8 +5458,9 @@ int main(int argc,
 # 3357 "gzip.c" 3 4
         13
 # 3357 "gzip.c"
-        ,
-        (sig_type)abort_gzip_signal);
+        // ,
+        // (sig_type)abort_gzip_signal
+        );
 
   if (no_time < 0)
     no_time = decompress;
@@ -5486,8 +5491,8 @@ int main(int argc,
         progname, z_suffix);
     do_exit(1);
   }
-  if (do_lzw && !decompress)
-    work = lzw;
+  // if (do_lzw && !decompress)
+  //   work = lzw;
 
   ;
   ;
@@ -6323,7 +6328,7 @@ static int get_method(int in)
       exit_code = 1;
       return -1;
     }
-    work = unzip;
+    // work = unzip;
     flags = (uch)(inptr < insize ? inbuf[inptr++] : fill_inbuf(0));
 
     if ((flags & 0x20) != 0)
@@ -6460,7 +6465,7 @@ static int get_method(int in)
   {
 
     inptr = 0;
-    work = unzip;
+    // work = unzip;
     if (check_zipfile(in) != 0)
       return -1;
 
@@ -6468,25 +6473,25 @@ static int get_method(int in)
   }
   else if (memcmp(magic, "\037\036", 2) == 0)
   {
-    work = unpack;
+    // work = unpack;
     method = 2;
   }
   else if (memcmp(magic, "\037\235", 2) == 0)
   {
-    work = unlzw;
+    // work = unlzw;
     method = 1;
     last_member = 1;
   }
   else if (memcmp(magic, "\037\240", 2) == 0)
   {
-    work = unlzh;
+    // work = unlzh;
     method = 3;
     last_member = 1;
   }
   else if (force && to_stdout && !list)
   {
     method = 0;
-    work = copy;
+    // work = copy;
     inptr = 0;
     last_member = 1;
   }
