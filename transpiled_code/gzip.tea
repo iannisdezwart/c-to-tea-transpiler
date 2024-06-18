@@ -1,1204 +1,4 @@
-// hoisted nested struct decls:
-class $T_anon_SMdvEz {
-u32 $I___wch;
-i8 [4]$I___wchb;
-};
-class $T_anon_tSdIGv {
-i32  $I_si_pid;
-u32  $I_si_uid;
-};
-class $T_anon_9TiTtR {
-i32 $I_si_tid;
-i32 $I_si_overrun;
-$T_sigval $I_si_sigval;
-};
-class $T_anon_naJmaz {
-i32  $I_si_pid;
-u32  $I_si_uid;
-$T_sigval $I_si_sigval;
-};
-class $T_anon_tLS4ax {
-i32  $I_si_pid;
-u32  $I_si_uid;
-i32 $I_si_status;
-i32  $I_si_utime;
-i32  $I_si_stime;
-};
-class $T_anon_6ZaVIS {
-v0 *$I__lower;
-v0 *$I__upper;
-};
-class $T_anon_SlDiBe {
-$T_anon_6ZaVIS $I__addr_bnd;
-u32  $I__pkey;
-};
-class $T_anon_JMBEFs {
-v0 *$I_si_addr;
-i16 $I_si_addr_lsb;
-$T_anon_SlDiBe $I__bounds;
-};
-class $T_anon_sKSd9U {
-i32 $I_si_band;
-i32 $I_si_fd;
-};
-class $T_anon_gfbDul {
-v0 *$I__call_addr;
-i32 $I__syscall;
-u32 $I__arch;
-};
-class $T_anon_TxlGha {
-i32 [0]$I__pad;
-$T_anon_tSdIGv $I__kill;
-$T_anon_9TiTtR $I__timer;
-$T_anon_naJmaz $I__rt;
-$T_anon_tLS4ax $I__sigchld;
-$T_anon_JMBEFs $I__sigfault;
-$T_anon_sKSd9U $I__sigpoll;
-$T_anon_gfbDul $I__sigsys;
-};
-class $T_anon_yQFUAk {
-$T_pthread_attr_t *$I__attribute;
-};
-class $T_anon_vQw44n {
-i32 [0]$I__pad;
-i32  $I__tid;
-$T_anon_yQFUAk $I__sigev_thread;
-};
-class $T_anon_slJq8C {
-v0  $I_sa_handler;
-};
-class $T_anon_ZR4KI1 {
-$T__fpstate *$I_fpstate;
-u32  $I___fpstate_word;
-};
-class $T_anon_K5gOvJ {
-u32 $I___low;
-u32 $I___high;
-};
-class $T_anon_M0c1C7 {
-u64 $I___wseq;
-$T_anon_K5gOvJ $I___wseq32;
-};
-class $T_anon_zJBPZT {
-u32 $I___low;
-u32 $I___high;
-};
-class $T_anon_gdo0Jy {
-u64 $I___g1_start;
-$T_anon_zJBPZT $I___g1_start32;
-};
-class $T_anon_JOKRTS {
-u16  $I_n;
-$T_huft *$I_t;
-};
-class $T_anon_ur4mfd {
-u16  $I_freq;
-u16  $I_code;
-};
-class $T_anon_0O2Kys {
-u16  $I_dad;
-u16  $I_len;
-};
-class $T_anon_8R55sr {
-i32 $I_dummy;
-};
-
-// hoisted empty struct decls:
-class $T__IO_marker {};
-class $T__IO_wide_data {};
-class $T__IO_codecvt {};
-class $T___dirstream {};
-class $T___locale_data {};
-
-// non-empty struct decls:
-class $T_anon_CTYn9v {
-i32 [2]$I___val;
-} ;
-class $T___locale_struct {
-$T___locale_data *[13]$I___locales;
- u16 *$I___ctype_b;
- i32 *$I___ctype_tolower;
- i32 *$I___ctype_toupper;
- i8 *[13]$I___names;
-} ;
-class $T_dirent {
-u32  $I_d_ino;
-i32  $I_d_off;
-u16 $I_d_reclen;
-u8 $I_d_type;
-i8 [256]$I_d_name;
-} ;
-class $T_flock {
-i16 $I_l_type;
-i16 $I_l_whence;
-i32  $I_l_start;
-i32  $I_l_len;
-i32  $I_l_pid;
-} ;
-class $T_timespec {
-i32  $I_tv_sec;
-i32  $I_tv_nsec;
-} ;
-class $T_stat {
-u32  $I_st_dev;
-u32  $I_st_ino;
-u32  $I_st_nlink;
-u32  $I_st_mode;
-u32  $I_st_uid;
-u32  $I_st_gid;
-i32 $I___pad0;
-u32  $I_st_rdev;
-i32  $I_st_size;
-i32  $I_st_blksize;
-i32  $I_st_blocks;
-$T_timespec $I_st_atim;
-$T_timespec $I_st_mtim;
-$T_timespec $I_st_ctim;
-i32  [3]$I___glibc_reserved;
-} ;
-class $T_anon_FZh8Vp {
-i64 $I___max_align_ll;
-f64 $I___max_align_ld;
-} ;
-class $T_anon_O1UKSs {
-i32 $I___count;
-$T_anon_SMdvEz $I___value;
-} ;
-class $T__G_fpos_t {
-i32  $I___pos;
-$T_anon_O1UKSs $I___state;
-} ;
-class $T__G_fpos64_t {
-i32  $I___pos;
-$T_anon_O1UKSs $I___state;
-} ;
-class $T__IO_FILE {
-i32 $I__flags;
-i8 *$I__IO_read_ptr;
-i8 *$I__IO_read_end;
-i8 *$I__IO_read_base;
-i8 *$I__IO_write_base;
-i8 *$I__IO_write_ptr;
-i8 *$I__IO_write_end;
-i8 *$I__IO_buf_base;
-i8 *$I__IO_buf_end;
-i8 *$I__IO_save_base;
-i8 *$I__IO_backup_base;
-i8 *$I__IO_save_end;
-$T__IO_marker *$I__markers;
-$T__IO_FILE *$I__chain;
-i32 $I__fileno;
-i32 $I__flags2;
-i32  $I__old_offset;
-u16 $I__cur_column;
-i8 $I__vtable_offset;
-i8 [1]$I__shortbuf;
-v0  *$I__lock;
-i32  $I__offset;
-$T__IO_codecvt *$I__codecvt;
-$T__IO_wide_data *$I__wide_data;
-$T__IO_FILE *$I__freeres_list;
-v0 *$I__freeres_buf;
-u32  $I___pad5;
-i32 $I__mode;
-i8 [0]$I__unused2;
-} ;
-class $T_mallinfo {
-i32 $I_arena;
-i32 $I_ordblks;
-i32 $I_smblks;
-i32 $I_hblks;
-i32 $I_hblkhd;
-i32 $I_usmblks;
-i32 $I_fsmblks;
-i32 $I_uordblks;
-i32 $I_fordblks;
-i32 $I_keepcost;
-} ;
-class $T_anon_nZ9vLy {
-u32 [0]$I___val;
-} ;
-class $T_sigval {
-i32 $I_sival_int;
-v0 *$I_sival_ptr;
-} ;
-class $T_anon_nYXNGO {
-i32 $I_si_signo;
-i32 $I_si_errno;
-i32 $I_si_code;
-i32 $I___pad0;
-$T_anon_TxlGha $I__sifields;
-} ;
-class $T_sigevent {
-$T_sigval $I_sigev_value;
-i32 $I_sigev_signo;
-i32 $I_sigev_notify;
-$T_anon_vQw44n $I__sigev_un;
-} ;
-class $T_sigaction {
-$T_anon_slJq8C $I___sigaction_handler;
-$T_anon_nZ9vLy $I_sa_mask;
-i32 $I_sa_flags;
-} ;
-class $T__fpx_sw_bytes {
-u32  $I_magic1;
-u32  $I_extended_size;
-u32  $I_xstate_bv;
-u32  $I_xstate_size;
-u32  [7]$I___glibc_reserved1;
-} ;
-class $T__fpreg {
-u16 [4]$I_significand;
-u16 $I_exponent;
-} ;
-class $T__fpxreg {
-u16 [4]$I_significand;
-u16 $I_exponent;
-u16 [3]$I___glibc_reserved1;
-} ;
-class $T__xmmreg {
-u32  [4]$I_element;
-} ;
-class $T__fpstate {
-u16  $I_cwd;
-u16  $I_swd;
-u16  $I_ftw;
-u16  $I_fop;
-u32  $I_rip;
-u32  $I_rdp;
-u32  $I_mxcsr;
-u32  $I_mxcr_mask;
-$T__fpxreg [8]$I__st;
-$T__xmmreg [16]$I__xmm;
-u32  [24]$I___glibc_reserved1;
-} ;
-class $T_sigcontext {
-u32  $I_r8;
-u32  $I_r9;
-u32  $I_r10;
-u32  $I_r11;
-u32  $I_r12;
-u32  $I_r13;
-u32  $I_r14;
-u32  $I_r15;
-u32  $I_rdi;
-u32  $I_rsi;
-u32  $I_rbp;
-u32  $I_rbx;
-u32  $I_rdx;
-u32  $I_rax;
-u32  $I_rcx;
-u32  $I_rsp;
-u32  $I_rip;
-u32  $I_eflags;
-u16 $I_cs;
-u16 $I_gs;
-u16 $I_fs;
-u16 $I___pad0;
-u32  $I_err;
-u32  $I_trapno;
-u32  $I_oldmask;
-u32  $I_cr2;
-u32  [8]$I___reserved1;
-} ;
-class $T__xsave_hdr {
-u32  $I_xstate_bv;
-u32  [2]$I___glibc_reserved1;
-u32  [5]$I___glibc_reserved2;
-} ;
-class $T__ymmh_state {
-u32  [64]$I_ymmh_space;
-} ;
-class $T__xstate {
-$T__fpstate $I_fpstate;
-$T__xsave_hdr $I_xstate_hdr;
-$T__ymmh_state $I_ymmh;
-} ;
-class $T_anon_TkEo09 {
-v0 *$I_ss_sp;
-i32 $I_ss_flags;
-u32  $I_ss_size;
-} ;
-class $T__libc_fpxreg {
-u16 [4]$I_significand;
-u16 $I_exponent;
-u16 [3]$I___glibc_reserved1;
-} ;
-class $T__libc_xmmreg {
-u32  [4]$I_element;
-} ;
-class $T__libc_fpstate {
-u16  $I_cwd;
-u16  $I_swd;
-u16  $I_ftw;
-u16  $I_fop;
-u32  $I_rip;
-u32  $I_rdp;
-u32  $I_mxcsr;
-u32  $I_mxcr_mask;
-$T__libc_fpxreg [8]$I__st;
-$T__libc_xmmreg [16]$I__xmm;
-u32  [24]$I___glibc_reserved1;
-} ;
-class $T_anon_oDZKZA {
-i64   $I_gregs;
-$T__libc_fpstate $I_fpregs;
-u64 [8]$I___reserved1;
-} ;
-class $T_ucontext_t {
-u32 $I_uc_flags;
-$T_ucontext_t *$I_uc_link;
-$T_anon_TkEo09 $I_uc_stack;
-$T_anon_oDZKZA $I_uc_mcontext;
-$T_anon_nZ9vLy  $I_uc_sigmask;
-$T__libc_fpstate $I___fpregs_mem;
-u64 [4]$I___ssp;
-} ;
-class $T_sigstack {
-v0 *$I_ss_sp;
-i32 $I_ss_onstack;
-} ;
-class $T___pthread_internal_list {
-$T___pthread_internal_list *$I___prev;
-$T___pthread_internal_list *$I___next;
-} ;
-class $T___pthread_internal_slist {
-$T___pthread_internal_slist *$I___next;
-} ;
-class $T___pthread_mutex_s {
-i32 $I___lock;
-u32 $I___count;
-i32 $I___owner;
-u32 $I___nusers;
-i32 $I___kind;
-i16 $I___spins;
-i16 $I___elision;
-$T___pthread_internal_list $I___list;
-} ;
-class $T___pthread_rwlock_arch_t {
-u32 $I___readers;
-u32 $I___writers;
-u32 $I___wrphase_futex;
-u32 $I___writers_futex;
-u32 $I___pad3;
-u32 $I___pad4;
-i32 $I___cur_writer;
-i32 $I___shared;
-i8 $I___rwelision;
-u8 [7]$I___pad1;
-u32 $I___pad2;
-u32 $I___flags;
-} ;
-class $T___pthread_cond_s {
-u32 [2]$I___g_refs;
-u32 [2]$I___g_size;
-u32 $I___g1_orig_size;
-u32 $I___wrefs;
-u32 [2]$I___g_signals;
-} ;
-class $T_anon_RIGxz3 {
-i8 [4]$I___size;
-i32 $I___align;
-} ;
-class $T_anon_WICXtK {
-i8 [4]$I___size;
-i32 $I___align;
-} ;
-class $T_pthread_attr_t {
-i8 [56]$I___size;
-i32 $I___align;
-} ;
-class $T_anon_RzVB4X {
-$T___pthread_mutex_s $I___data;
-i8 [40]$I___size;
-i32 $I___align;
-} ;
-class $T_anon_oRkKIE {
-$T___pthread_cond_s $I___data;
-i8 [48]$I___size;
-i64 $I___align;
-} ;
-class $T_anon_ScE3BK {
-$T___pthread_rwlock_arch_t $I___data;
-i8 [56]$I___size;
-i32 $I___align;
-} ;
-class $T_anon_0f0Oyx {
-i8 [8]$I___size;
-i32 $I___align;
-} ;
-class $T_anon_KuPxdz {
-i8 [32]$I___size;
-i32 $I___align;
-} ;
-class $T_anon_MHcw6J {
-i8 [4]$I___size;
-i32 $I___align;
-} ;
-class $T_anon_O4KJ7e {
-i32 $I_quot;
-i32 $I_rem;
-} ;
-class $T_anon_ccJcXB {
-i32 $I_quot;
-i32 $I_rem;
-} ;
-class $T_anon_yROtAq {
-i64 $I_quot;
-i64 $I_rem;
-} ;
-class $T_timeval {
-i32  $I_tv_sec;
-i32  $I_tv_usec;
-} ;
-class $T_anon_5OAJFe {
-i32  [0]$I___fds_bits;
-} ;
-class $T_random_data {
-i32   *$I_fptr;
-i32   *$I_rptr;
-i32   *$I_state;
-i32 $I_rand_type;
-i32 $I_rand_deg;
-i32 $I_rand_sep;
-i32   *$I_end_ptr;
-} ;
-class $T_drand48_data {
-u16 [3]$I___x;
-u16 [3]$I___old_x;
-u16 $I___c;
-u16 $I___init;
-u64 $I___a;
-} ;
-class $T_timezone {
-i32 $I_tz_minuteswest;
-i32 $I_tz_dsttime;
-} ;
-class $T_itimerval {
-$T_timeval $I_it_interval;
-$T_timeval $I_it_value;
-} ;
-class $T_tm {
-i32 $I_tm_sec;
-i32 $I_tm_min;
-i32 $I_tm_hour;
-i32 $I_tm_mday;
-i32 $I_tm_mon;
-i32 $I_tm_year;
-i32 $I_tm_wday;
-i32 $I_tm_yday;
-i32 $I_tm_isdst;
-i32 $I_tm_gmtoff;
- i8 *$I_tm_zone;
-} ;
-class $T_itimerspec {
-$T_timespec $I_it_interval;
-$T_timespec $I_it_value;
-} ;
-class $T_utimbuf {
-i32  $I_actime;
-i32  $I_modtime;
-} ;
-class $T_config {
-u16  $I_good_length;
-u16  $I_max_lazy;
-u16  $I_nice_length;
-u16  $I_max_chain;
-} ;
-class $T_option {
- i8 *$I_name;
-i32 $I_has_arg;
-i32 *$I_flag;
-i32 $I_val;
-} ;
-class $T_huft {
-u8  $I_e;
-u8  $I_b;
-$T_anon_JOKRTS $I_v;
-} ;
-class $T_ct_data {
-$T_anon_ur4mfd $I_fc;
-$T_anon_0O2Kys $I_dl;
-} ;
-class $T_tree_desc {
-$T_ct_data *$I_dyn_tree;
-$T_ct_data *$I_static_tree;
-i32 *$I_extra_bits;
-i32 $I_extra_base;
-i32 $I_elems;
-i32 $I_max_length;
-i32 $I_max_code;
-} ;
-class $T_bytes {
-i32 $I_word;
-$T_anon_8R55sr $I_bytes;
-} ;
-
-// top-level fn decls:
-i8  *$I_initstate(u32 $I___seed, i8 *$I___statebuf, u32  $I___statelen){}
-$T_anon_O4KJ7e  $I_div(i32 $I___numer, i32 $I___denom){}
-$T__IO_FILE  *$I_fdopen(i32 $I___fd,  i8 *$I___modes){}
-i32  $I_mknodat(i32 $I___fd,  i8 *$I___path, u32  $I___mode, u32  $I___dev){}
-i32  $I_timer_create(i32   $I___clock_id, $T_sigevent *$I___evp, v0   *$I___timerid){}
-i32  $I_ffsll(i64 $I___ll){}
-i32  $I_timer_getoverrun(v0   $I___timerid){}
-i32   $I_setsid(v0 $A_0){}
-i32  $I_unlink( i8 *$I___name){}
-u32   $I_confstr(i32 $I___name, i8 *$I___buf, u32  $I___len){}
-i32  $I_sigwaitinfo( $T_anon_nZ9vLy  *$I___set, $T_anon_nYXNGO *$I___info){}
-i32  $I___xmknodat(i32 $I___ver, i32 $I___fd,  i8 *$I___path, u32  $I___mode, u32  *$I___dev){}
-u64  $I_strtouq( i8 *$I___nptr, i8 **$I___endptr, i32 $I___base){}
-v0  $I_setbuffer($T__IO_FILE *$I___stream, i8 *$I___buf, u32  $I___size){}
-i32   $I_ftello($T__IO_FILE *$I___stream){}
-u32   $I___ctype_get_mb_cur_max(v0 $A_0){}
-i32  $I_random_r($T_random_data *$I___buf, i32   *$I___result){}
-i8  *$I_strerror(i32 $I___errnum){}
-i32  $I_unlinkat(i32 $I___fd,  i8 *$I___name, i32 $I___flag){}
-i8  *$I_asctime( $T_tm *$I___tp){}
-i32  $I_iscntrl(i32 $A_0){}
-v0  *$I_memccpy(v0 *$I___dest,  v0 *$I___src, i32 $I___c, u32  $I___n){}
-i32  $I_labs(i32 $I___x){}
-v0  *$I_realloc(v0 *$I___ptr, u32  $I___size){}
-u32   $I_fread_unlocked(v0 *$I___ptr, u32  $I___size, u32  $I___n, $T__IO_FILE *$I___stream){}
-v0  $I_qsort(v0 *$I___base, u32  $I___nmemb, u32  $I___size, v0 *$I___compar){}
-i32  $I___libc_current_sigrtmin(v0 $A_0){}
-i8  *$I_getlogin(v0 $A_0){}
-i32  $I_fchownat(i32 $I___fd,  i8 *$I___file, u32  $I___owner, u32  $I___group, i32 $I___flag){}
-i32  $I_fexecve(i32 $I___fd, i8 **$I___argv, i8 **$I___envp){}
-i8  *$I_realpath( i8 *$I___name, i8 *$I___resolved){}
-i32  $I_mkdir( i8 *$I___path, u32  $I___mode){}
-i32  $I_islower(i32 $A_0){}
-i32  $I_getdtablesize(v0 $A_0){}
-i32  $I_clock_gettime(i32   $I___clock_id, $T_timespec *$I___tp){}
-i8  *$I_ecvt(f64 $I___value, i32 $I___ndigit, i32 *$I___decpt, i32 *$I___sign){}
-i32  $I_vsnprintf(i8 *$I___s, u32  $I___maxlen,  i8 *$I___format, v0*  $I___arg){}
-i32  $I_chdir( i8 *$I___path){}
-i32  $I_tolower(i32 $I___c){}
-i32  $I_dprintf(i32 $I___fd,  i8 *$I___fmt){}
-i8  *$I_rindex( i8 *$I___s, i32 $I___c){}
-u32   $I_mbstowcs(i32  *$I___pwcs,  i8 *$I___s, u32  $I___n){}
-i8  *$I_strtok_r(i8 *$I___s,  i8 *$I___delim, i8 **$I___save_ptr){}
-i32  $I_dirfd($T___dirstream *$I___dirp){}
-v0  *$I___default_morecore(i32  $I___size){}
-i32  $I_fstatat(i32 $I___fd,  i8 *$I___file, $T_stat *$I___buf, i32 $I___flag){}
-i32  $I_setpgrp(v0 $A_0){}
-i32  $I_isdigit(i32 $A_0){}
-i32  $I_ungetc(i32 $I___c, $T__IO_FILE *$I___stream){}
-i32  $I__toupper(i32 $A_0){}
-i32  $I_fclose($T__IO_FILE *$I___stream){}
-i32  $I_ftell($T__IO_FILE *$I___stream){}
-v0  $I_free(v0 *$I___ptr){}
-i64  $I_llabs(i64 $I___x){}
-i8  *$I_setstate(i8 *$I___statebuf){}
-i32  $I_atol( i8 *$I___nptr){}
-i32  $I_utime( i8 *$I___file,  $T_utimbuf *$I___file_times){}
-i32    $I_timegm($T_tm *$I___tp){}
-i32   $I_getdirentries(i32 $I___fd, i8 *$I___buf, u32  $I___nbytes, i32  *$I___basep){}
-i32  $I_link( i8 *$I___from,  i8 *$I___to){}
-i32  $I_setgid(u32  $I___gid){}
-v0  $I_tzset(v0 $A_0){}
-i32  $I_isatty(i32 $I___fd){}
-i8  *$I_tmpnam_r(i8 *$I___s){}
-i32  $I_killpg(i32  $I___pgrp, i32 $I___sig){}
-i32  $I_dup2(i32 $I___fd, i32 $I___fd2){}
-i32    $I_clock(v0 $A_0){}
-$T___dirstream  *$I_fdopendir(i32 $I___fd){}
-v0  $I_seekdir($T___dirstream *$I___dirp, i32 $I___pos){}
-i32  $I_clearenv(v0 $A_0){}
-i8  *$I_strncat(i8 *$I___dest,  i8 *$I___src, u32  $I___n){}
-i32  $I_mallopt(i32 $I___param, i32 $I___val){}
-i8  *$I_qgcvt(f64 $I___value, i32 $I___ndigit, i8 *$I___buf){}
-i8  *$I_strrchr( i8 *$I___s, i32 $I___c){}
-i32  $I_getsubopt(i8 **$I___optionp, i8 **$I___tokens, i8 **$I___valuep){}
-i32  $I_putc_unlocked(i32 $I___c, $T__IO_FILE *$I___stream){}
-i32  $I_fsync(i32 $I___fd){}
-i8  *$I_getenv(){}
-i32  $I_fchmodat(i32 $I___fd,  i8 *$I___file, u32  $I___mode, i32 $I___flag){}
-i32  $I_putenv(i8 *$I___string){}
-v0  $I_perror( i8 *$I___s){}
-i32  $I_sethostid(i32 $I___id){}
-i32   $I_getpid(v0 $A_0){}
-i32  $I_chmod( i8 *$I___file, u32  $I___mode){}
-u32   $I_strftime(i8 *$I___s, u32  $I___maxsize,  i8 *$I___format,  $T_tm *$I___tp){}
-i32  $I_lcong48_r(u16 [7]$I___param, $T_drand48_data *$I___buffer){}
-i8  *$I_strstr( i8 *$I___haystack,  i8 *$I___needle){}
-i8  *$I_ttyname(i32 $I___fd){}
-i32  $I_alphasort( $T_dirent **$I___e1,  $T_dirent **$I___e2){}
-i32  $I_isspace(i32 $A_0){}
-v0  $I__Exit(i32 $I___status){}
-i32  $I_erand48_r(u16 [3]$I___xsubi, $T_drand48_data *$I___buffer, f64 *$I___result){}
-i32  $I_clock_nanosleep(i32   $I___clock_id, i32 $I___flags,  $T_timespec *$I___req, $T_timespec *$I___rem){}
-$T_anon_ccJcXB  $I_ldiv(i32 $I___numer, i32 $I___denom){}
-i32  $I_sigismember( $T_anon_nZ9vLy  *$I___set, i32 $I___signo){}
-v0  $I__exit(i32 $I___status){}
-i32  $I_fputs( i8 *$I___s, $T__IO_FILE *$I___stream){}
-i32  $I_posix_fadvise(i32 $I___fd, i32   $I___offset, i32   $I___len, i32 $I___advise){}
-i32  $I_sigdelset($T_anon_nZ9vLy  *$I___set, i32 $I___signo){}
-i32  $I_sigaddset($T_anon_nZ9vLy  *$I___set, i32 $I___signo){}
-i8  *$I_stpcpy(i8 *$I___dest,  i8 *$I___src){}
-$T_tm  *$I_localtime( i32   *$I___timer){}
-v0  *$I_calloc(u32  $I___nmemb, u32  $I___size){}
-i32  $I_isupper_l(i32 $A_0, $T___locale_struct  $A_1){}
-i32  $I_nanosleep( $T_timespec *$I___requested_time, $T_timespec *$I___remaining){}
-u32   $I_ualarm(u32  $I___value, u32  $I___interval){}
-i32  $I_srand48_r(i32 $I___seedval, $T_drand48_data *$I___buffer){}
-i32  $I_rmdir( i8 *$I___path){}
-i32  $I_setenv( i8 *$I___name,  i8 *$I___value, i32 $I___replace){}
-i32  $I_execve( i8 *$I___path, i8 **$I___argv, i8 **$I___envp){}
-i32    $I_time(i32   *$I___timer){}
-i32  $I_faccessat(i32 $I___fd,  i8 *$I___file, i32 $I___type, i32 $I___flag){}
-i32  $I_strcoll_l( i8 *$I___s1,  i8 *$I___s2, $T___locale_struct  $I___l){}
-i64  $I_strtoll( i8 *$I___nptr, i8 **$I___endptr, i32 $I___base){}
-i32  $I_symlinkat( i8 *$I___from, i32 $I___tofd,  i8 *$I___to){}
-i32  $I_getchar(v0 $A_0){}
-i32  $I_ftrylockfile($T__IO_FILE *$I___stream){}
-i32  $I___fxstat(i32 $I___ver, i32 $I___fildes, $T_stat *$I___stat_buf){}
-i32  $I_vprintf( i8 *$I___format, v0*  $I___arg){}
-i32  $I_setitimer(i32  $I___which,  $T_itimerval *$I___new, $T_itimerval *$I___old){}
-i32  $I_getloadavg(f64 *$I___loadavg, i32 $I___nelem){}
-v0  $I_clearerr_unlocked($T__IO_FILE *$I___stream){}
-i32  $I_chown( i8 *$I___file, u32  $I___owner, u32  $I___group){}
-i32  $I_gethostname(i8 *$I___name, u32  $I___len){}
-i32  $I_getpagesize(v0 $A_0){}
-i32  $I_brk(v0 *$I___addr){}
-i32  $I_dysize(i32 $I___year){}
-i32  $I_fileno_unlocked($T__IO_FILE *$I___stream){}
-i32  $I_seed48_r(u16 [3]$I___seed16v, $T_drand48_data *$I___buffer){}
-i32  $I_toupper(i32 $I___c){}
-i32  $I_isgraph_l(i32 $A_0, $T___locale_struct  $A_1){}
-v0  $I_funlockfile($T__IO_FILE *$I___stream){}
-i32  $I_fcvt_r(f64 $I___value, i32 $I___ndigit, i32 *$I___decpt, i32 *$I___sign, i8 *$I___buf, u32  $I___len){}
-i32  $I___tolower_l(i32 $I___c, $T___locale_struct  $I___l){}
-i32  $I_pause(v0 $A_0){}
-i32  $I_sigpending($T_anon_nZ9vLy  *$I___set){}
-i32  $I_qecvt_r(f64 $I___value, i32 $I___ndigit, i32 *$I___decpt, i32 *$I___sign, i8 *$I___buf, u32  $I___len){}
-i32    $I_timelocal($T_tm *$I___tp){}
-i32  $I_execle( i8 *$I___path,  i8 *$I___arg){}
-i32  $I_kill(i32  $I___pid, i32 $I___sig){}
-u32   $I_strcspn( i8 *$I___s,  i8 *$I___reject){}
-i32  $I_flock(i32 $I___fd, i32 $I___operation){}
-i32  $I_acct( i8 *$I___name){}
-i8  *$I_crypt( i8 *$I___key,  i8 *$I___salt){}
-i32  $I_srandom_r(u32 $I___seed, $T_random_data *$I___buf){}
-i8  *$I_ctermid(i8 *$I___s){}
-i32  $I_vsprintf(i8 *$I___s,  i8 *$I___format, v0*  $I___arg){}
-i8  *$I_getwd(i8 *$I___buf){}
-i32  $I_posix_memalign(v0 **$I___memptr, u32  $I___alignment, u32  $I___size){}
-i32  $I_sigfillset($T_anon_nZ9vLy  *$I___set){}
-i32  $I_timer_delete(v0   $I___timerid){}
-i32  $I_vfscanf($T__IO_FILE *$I___s,  i8 *$I___format, v0*  $I___arg){}
-u32  $I_strtoul( i8 *$I___nptr, i8 **$I___endptr, i32 $I___base){}
-i32  $I_adjtime( $T_timeval *$I___delta, $T_timeval *$I___olddelta){}
-i8  *$I___stpcpy(i8 *$I___dest,  i8 *$I___src){}
- i32   **$I___ctype_tolower_loc(v0 $A_0){}
-i32  $I_sigemptyset($T_anon_nZ9vLy  *$I___set){}
-i32    $I_write(i32 $I___fd,  v0 *$I___buf, u32  $I___n){}
-i32  $I_sethostname( i8 *$I___name, u32  $I___len){}
-i32  $I_fgetc_unlocked($T__IO_FILE *$I___stream){}
-i32  $I_mkfifoat(i32 $I___fd,  i8 *$I___path, u32  $I___mode){}
-i32  $I_mbtowc(i32  *$I___pwc,  i8 *$I___s, u32  $I___n){}
-i32  $I_fchmod(i32 $I___fd, u32  $I___mode){}
-i32  $I_nrand48(u16 [3]$I___xsubi){}
-i32    $I_pwrite(i32 $I___fd,  v0 *$I___buf, u32  $I___n, i32  $I___offset){}
-v0  $I_psignal(i32 $I___sig,  i8 *$I___s){}
-i32  $I_gethostid(v0 $A_0){}
-i8  *$I_mktemp(i8 *$I___template){}
-i32  $I_iscntrl_l(i32 $A_0, $T___locale_struct  $A_1){}
-i8  *$I_strndup( i8 *$I___string, u32  $I___n){}
-i32  $I_clock_settime(i32   $I___clock_id,  $T_timespec *$I___tp){}
-i32  $I_profil(u16 *$I___sample_buffer, u32  $I___size, u32  $I___offset, u32 $I___scale){}
-u32   $I_fwrite( v0 *$I___ptr, u32  $I___size, u32  $I___n, $T__IO_FILE *$I___s){}
-i32  $I_remove( i8 *$I___filename){}
-i32  $I_nrand48_r(u16 [3]$I___xsubi, $T_drand48_data *$I___buffer, i32 *$I___result){}
-i32    $I_mktime($T_tm *$I___tp){}
-i32  $I_getw($T__IO_FILE *$I___stream){}
-i32  $I_islower_l(i32 $A_0, $T___locale_struct  $A_1){}
-i8  *$I_qfcvt(f64 $I___value, i32 $I___ndigit, i32 *$I___decpt, i32 *$I___sign){}
-i32  $I_usleep(u32  $I___useconds){}
-i32  $I_sysconf(i32 $I___name){}
-u16  *$I_seed48(u16 [3]$I___seed16v){}
-i32  $I_isupper(i32 $A_0){}
-i32  $I_execl( i8 *$I___path,  i8 *$I___arg){}
-i8  *$I_fgets(i8 *$I___s, i32 $I___n, $T__IO_FILE *$I___stream){}
-i32   $I___getdelim(i8 **$I___lineptr, u32  *$I___n, i32 $I___delimiter, $T__IO_FILE *$I___stream){}
-i32  $I_pselect(i32 $I___nfds, $T_anon_5OAJFe *$I___readfds, $T_anon_5OAJFe *$I___writefds, $T_anon_5OAJFe *$I___exceptfds,  $T_timespec *$I___timeout,  $T_anon_nZ9vLy *$I___sigmask){}
-v0  $I_malloc_stats(v0 $A_0){}
-i32   $I_tcgetpgrp(i32 $I___fd){}
-v0  $I_endusershell(v0 $A_0){}
-i32  $I_isalpha(i32 $A_0){}
-i32  $I___toupper_l(i32 $I___c, $T___locale_struct  $I___l){}
-i32  $I_telldir($T___dirstream *$I___dirp){}
-i8  *$I___stpncpy(i8 *$I___dest,  i8 *$I___src, u32  $I___n){}
-i8  *$I_qecvt(f64 $I___value, i32 $I___ndigit, i32 *$I___decpt, i32 *$I___sign){}
-$T_dirent  *$I_readdir($T___dirstream *$I___dirp){}
-i32   $I_getpgrp(v0 $A_0){}
-i32  $I_isgraph(i32 $A_0){}
-i32  $I_creat( i8 *$I___file, u32   $I___mode){}
-i32   $I_fork(v0 $A_0){}
-v0  *$I_reallocarray(v0 *$I___ptr, u32  $I___nmemb, u32  $I___size){}
-u32   $I_strlen( i8 *$I___s){}
-i32  $I_isalnum(i32 $A_0){}
-v0  $I_setlinebuf($T__IO_FILE *$I___stream){}
-i32    $I_readlink( i8 *$I___path, i8 *$I___buf, u32  $I___len){}
-i32  $I_mkstemp(i8 *$I___template){}
-i32  $I_setlogin( i8 *$I___name){}
-i8  *$I_strncpy(i8 *$I___dest,  i8 *$I___src, u32  $I___n){}
-i32  $I_utimensat(i32 $I___fd,  i8 *$I___path,  $T_timespec [2]$I___times, i32 $I___flags){}
-v0  $I_bzero(v0 *$I___s, u32  $I___n){}
-u32   $I_strnlen( i8 *$I___string, u32  $I___maxlen){}
-i32  $I_strcasecmp_l( i8 *$I___s1,  i8 *$I___s2, $T___locale_struct  $I___loc){}
-i32  $I_select(i32 $I___nfds, $T_anon_5OAJFe *$I___readfds, $T_anon_5OAJFe *$I___writefds, $T_anon_5OAJFe *$I___exceptfds, $T_timeval *$I___timeout){}
-i32  $I_strncasecmp_l( i8 *$I___s1,  i8 *$I___s2, u32  $I___n, $T___locale_struct  $I___loc){}
-i32   $I_getpgid(i32  $I___pid){}
-i32  $I_ftruncate(i32 $I___fd, i32  $I___length){}
-i32  $I_pthread_sigmask(i32 $I___how,  $T_anon_nZ9vLy *$I___newmask, $T_anon_nZ9vLy *$I___oldmask){}
-f32  $I_strtof( i8 *$I___nptr, i8 **$I___endptr){}
-i32  $I_initstate_r(u32 $I___seed, i8 *$I___statebuf, u32  $I___statelen, $T_random_data *$I___buf){}
-i32  $I_tolower_l(i32 $I___c, $T___locale_struct  $I___l){}
-$T_anon_yROtAq  $I_lldiv(i64 $I___numer, i64 $I___denom){}
-i64  $I_strtoq( i8 *$I___nptr, i8 **$I___endptr, i32 $I___base){}
-i32  $I_mblen( i8 *$I___s, u32  $I___n){}
-f64  $I_erand48(u16 [3]$I___xsubi){}
-i32  $I_abs(i32 $I___x){}
-i32  $I_vscanf( i8 *$I___format, v0*  $I___arg){}
-i32  $I___xstat(i32 $I___ver,  i8 *$I___filename, $T_stat *$I___stat_buf){}
-i8  *$I_strcpy(i8 *$I___dest,  i8 *$I___src){}
-f64  $I_atof( i8 *$I___nptr){}
-i8  *$I_ctime_r( i32   *$I___timer, i8 *$I___buf){}
-i32  $I_fcntl(i32 $I___fd, i32 $I___cmd){}
-i32  $I_lrand48_r($T_drand48_data *$I___buffer, i32 *$I___result){}
-i32  $I_closedir($T___dirstream *$I___dirp){}
-i32  $I_ttyname_r(i32 $I___fd, i8 *$I___buf, u32  $I___buflen){}
-i32  $I_memcmp( v0 *$I___s1,  v0 *$I___s2, u32  $I___n){}
-i32  $I_timer_settime(v0   $I___timerid, i32 $I___flags,  $T_itimerspec *$I___value, $T_itimerspec *$I___ovalue){}
-i32  $I_ispunct_l(i32 $A_0, $T___locale_struct  $A_1){}
-i32  $I_isprint_l(i32 $A_0, $T___locale_struct  $A_1){}
-i32  $I_lchmod( i8 *$I___file, u32  $I___mode){}
-v0  $I_srandom(u32 $I___seed){}
-i32  $I_getc_unlocked($T__IO_FILE *$I___stream){}
-u32  $I_sleep(u32 $I___seconds){}
-i32  $I_fprintf($T__IO_FILE *$I___stream,  i8 *$I___format){}
-i32  $I_execvp( i8 *$I___file, i8 **$I___argv){}
-i32  $I_putchar_unlocked(i32 $I___c){}
-i32  $I_pclose($T__IO_FILE *$I___stream){}
-i32  $I_fchdir(i32 $I___fd){}
-i32  $I_fgetpos($T__IO_FILE *$I___stream, $T__G_fpos_t  *$I___pos){}
-i32  $I_syscall(i32 $I___sysno){}
-$T__IO_FILE  *$I_fopen( i8 *$I___filename,  i8 *$I___modes){}
-i32  $I_posix_fallocate(i32 $I___fd, i32   $I___offset, i32   $I___len){}
-f64  $I_drand48(v0 $A_0){}
-i32  $I_at_quick_exit(v0 *$I___func){}
-u32   $I_umask(u32  $I___mask){}
-i32  $I_fstat(i32 $I___fd, $T_stat *$I___buf){}
-u32  $I_alarm(u32 $I___seconds){}
-i32  $I_execlp( i8 *$I___file,  i8 *$I___arg){}
-v0  $I_bcopy( v0 *$I___src, v0 *$I___dest, u32  $I___n){}
-v0  $I_rewind($T__IO_FILE *$I___stream){}
-i32  $I_strtol( i8 *$I___nptr, i8 **$I___endptr, i32 $I___base){}
-i32  $I_getgroups(i32 $I___size, u32  *$I___list){}
-i8  *$I_strpbrk( i8 *$I___s,  i8 *$I___accept){}
-i32  $I_chroot( i8 *$I___path){}
-i32   $I___getpgid(i32  $I___pid){}
-i32  $I_pthread_kill(u32  $I___threadid, i32 $I___signo){}
-u32   $I_wcstombs(i8 *$I___s,  i32  *$I___pwcs, u32  $I___n){}
-i32  $I_sprintf(i8 *$I___s,  i8 *$I___format){}
-v0  $I_setbuf($T__IO_FILE *$I___stream, i8 *$I___buf){}
-i8  *$I_stpncpy(i8 *$I___dest,  i8 *$I___src, u32  $I___n){}
-i32  $I_random(v0 $A_0){}
-i32  $I_clock_getcpuclockid(i32   $I___pid, i32   *$I___clock_id){}
-v0  *$I_aligned_alloc(u32  $I___alignment, u32  $I___size){}
-i32  $I_getdomainname(i8 *$I___name, u32  $I___len){}
-i32  $I_openat(i32 $I___fd,  i8 *$I___file, i32 $I___oflag){}
-i32  $I_ferror_unlocked($T__IO_FILE *$I___stream){}
-i32  $I_strcoll( i8 *$I___s1,  i8 *$I___s2){}
-i32  $I___xmknod(i32 $I___ver,  i8 *$I___path, u32  $I___mode, u32  *$I___dev){}
-i32   $I_lseek(i32 $I___fd, i32  $I___offset, i32 $I___whence){}
-i32  $I_lchown( i8 *$I___file, u32  $I___owner, u32  $I___group){}
-v0  *$I_sbrk(i32   $I___delta){}
-i32  $I_settimeofday( $T_timeval *$I___tv,  $T_timezone *$I___tz){}
-v0  *$I_memalign(u32  $I___alignment, u32  $I___size){}
-i32  $I_qfcvt_r(f64 $I___value, i32 $I___ndigit, i32 *$I___decpt, i32 *$I___sign, i8 *$I___buf, u32  $I___len){}
-i32  $I_on_exit(v0 *$I___func, v0 *$I___arg){}
-$T_tm  *$I_gmtime( i32   *$I___timer){}
-i32  $I_clock_getres(i32   $I___clock_id, $T_timespec *$I___res){}
- i32   **$I___ctype_toupper_loc(v0 $A_0){}
-$T__IO_FILE  *$I_popen( i8 *$I___command,  i8 *$I___modes){}
-i8  *$I_strerror_l(i32 $I___errnum, $T___locale_struct  $I___l){}
-v0  $I_srand48(i32 $I___seedval){}
-i32  $I_isxdigit_l(i32 $A_0, $T___locale_struct  $A_1){}
-i32  $I_unsetenv( i8 *$I___name){}
-i32  $I_fputc_unlocked(i32 $I___c, $T__IO_FILE *$I___stream){}
-$T___dirstream  *$I_opendir( i8 *$I___name){}
-i32  $I_pipe(i32 [2]$I___pipedes){}
-i32  $I_linkat(i32 $I___fromfd,  i8 *$I___from, i32 $I___tofd,  i8 *$I___to, i32 $I___flags){}
-i32  $I_utimes( i8 *$I___file,  $T_timeval [2]$I___tvp){}
-i32  $I_mrand48(v0 $A_0){}
-i32  $I_sigreturn($T_sigcontext *$I___scp){}
-i64  $I_atoll( i8 *$I___nptr){}
-i32  $I_setdomainname( i8 *$I___name, u32  $I___len){}
-i32  $I_atoi( i8 *$I___nptr){}
-i8  *$I_ctime( i32   *$I___timer){}
-i32  $I_renameat(i32 $I___oldfd,  i8 *$I___old, i32 $I___newfd,  i8 *$I___new){}
-i8  *$I_strdup( i8 *$I___s){}
-v0   $I_ssignal(i32 $I___sig, v0  $I___handler){}
-i32  $I_sigqueue(i32  $I___pid, i32 $I___sig,  $T_sigval $I___val){}
-i32  $I_vhangup(v0 $A_0){}
-u32   $I_fread(v0 *$I___ptr, u32  $I___size, u32  $I___n, $T__IO_FILE *$I___stream){}
-i8  *$I_getpass( i8 *$I___prompt){}
-i32  $I_drand48_r($T_drand48_data *$I___buffer, f64 *$I___result){}
-i32   $I_getsid(i32  $I___pid){}
-i32  $I_setregid(u32  $I___rgid, u32  $I___egid){}
-i32  $I_feof($T__IO_FILE *$I___stream){}
-i32  $I_ffsl(i32 $I___l){}
-u32   $I_strxfrm_l(i8 *$I___dest,  i8 *$I___src, u32  $I___n, $T___locale_struct  $I___l){}
-i32  $I_dup(i32 $I___fd){}
-u32   $I_strspn( i8 *$I___s,  i8 *$I___accept){}
-i32  $I_snprintf(i8 *$I___s, u32  $I___maxlen,  i8 *$I___format){}
-i32  $I___uflow($T__IO_FILE *$A_0){}
-i32  $I_bcmp( v0 *$I___s1,  v0 *$I___s2, u32  $I___n){}
-v0  *$I_bsearch( v0 *$I___key,  v0 *$I___base, u32  $I___nmemb, u32  $I___size, v0 *$I___compar){}
-i32  $I_tcsetpgrp(i32 $I___fd, i32  $I___pgrp_id){}
-i32  $I_fileno($T__IO_FILE *$I___stream){}
-i32  $I_futimens(i32 $I___fd,  $T_timespec [2]$I___times){}
-i32  $I_sigprocmask(i32 $I___how,  $T_anon_nZ9vLy  *$I___set, $T_anon_nZ9vLy  *$I___oset){}
-$T__IO_FILE  *$I_freopen( i8 *$I___filename,  i8 *$I___modes, $T__IO_FILE *$I___stream){}
-i32  *$I___errno_location(v0 $A_0){}
-i32  $I_toascii(i32 $I___c){}
-i32  $I_ferror($T__IO_FILE *$I___stream){}
-v0  $I_quick_exit(i32 $I___status){}
-i32  $I_system( i8 *$I___command){}
-i32  $I_setvbuf($T__IO_FILE *$I___stream, i8 *$I___buf, i32 $I___modes, u32  $I___n){}
-i32  $I_malloc_trim(u32  $I___pad){}
-v0   $I_signal(i32 $I___sig, v0  $I___handler){}
-i32  $I_putc(i32 $I___c, $T__IO_FILE *$I___stream){}
-i8  *$I___strtok_r(i8 *$I___s,  i8 *$I___delim, i8 **$I___save_ptr){}
-f64  $I_strtod( i8 *$I___nptr, i8 **$I___endptr){}
-v0  $I_lcong48(u16 [7]$I___param){}
-i32  $I_symlink( i8 *$I___from,  i8 *$I___to){}
-i32  $I___fxstatat(i32 $I___ver, i32 $I___fildes,  i8 *$I___filename, $T_stat *$I___stat_buf, i32 $I___flag){}
-i8  *$I_l64a(i32 $I___n){}
-i32  $I_mkdirat(i32 $I___fd,  i8 *$I___path, u32  $I___mode){}
-i32  $I_revoke( i8 *$I___file){}
-i32  $I_fputc(i32 $I___c, $T__IO_FILE *$I___stream){}
-i32  $I_daemon(i32 $I___nochdir, i32 $I___noclose){}
-i32  $I_setstate_r(i8 *$I___statebuf, $T_random_data *$I___buf){}
- u16  **$I___ctype_b_loc(v0 $A_0){}
-i32  $I_futimes(i32 $I___fd,  $T_timeval [2]$I___tvp){}
-u32   $I_fwrite_unlocked( v0 *$I___ptr, u32  $I___size, u32  $I___n, $T__IO_FILE *$I___stream){}
-i32  $I_getchar_unlocked(v0 $A_0){}
-i32  $I_vfprintf($T__IO_FILE *$I___s,  i8 *$I___format, v0*  $I___arg){}
-i32  $I_lutimes( i8 *$I___file,  $T_timeval [2]$I___tvp){}
-i32    $I_pread(i32 $I___fd, v0 *$I___buf, u32  $I___nbytes, i32  $I___offset){}
-i32  $I_isblank_l(i32 $A_0, $T___locale_struct  $A_1){}
-i32  $I_siggetmask(v0 $A_0){}
-i32  $I_ffs(i32 $I___i){}
-v0  $I_rewinddir($T___dirstream *$I___dirp){}
-i32  $I_close(i32 $I___fd){}
-i32  $I_mknod( i8 *$I___path, u32  $I___mode, u32  $I___dev){}
-i8  *$I_getcwd(i8 *$I___buf, u32  $I___size){}
-i32  $I_isascii(i32 $I___c){}
-i32  $I_lstat( i8 *$I___file, $T_stat *$I___buf){}
-v0  $I_sync(v0 $A_0){}
-f64  $I_difftime(i32   $I___time1, i32   $I___time0){}
-i8  *$I_tempnam( i8 *$I___dir,  i8 *$I___pfx){}
-i32  $I_sscanf( i8 *$I___s,  i8 *$I___format){}
-u32   $I_getgid(v0 $A_0){}
-i32  $I_mkstemps(i8 *$I___template, i32 $I___suffixlen){}
-i32  $I_puts( i8 *$I___s){}
-v0  *$I_memchr( v0 *$I___s, i32 $I___c, u32  $I___n){}
-i8  *$I_tmpnam(i8 *$I___s){}
-i32  $I___overflow($T__IO_FILE *$A_0, i32 $A_1){}
-i32  $I_gsignal(i32 $I___sig){}
-i8  *$I_fcvt(f64 $I___value, i32 $I___ndigit, i32 *$I___decpt, i32 *$I___sign){}
-i32  $I_strerror_r(i32 $I___errnum, i8 *$I___buf, u32  $I___buflen){}
-u32   $I_strxfrm(i8 *$I___dest,  i8 *$I___src, u32  $I___n){}
-i32  $I_access( i8 *$I___name, i32 $I___type){}
-u32   $I_getegid(v0 $A_0){}
-i8  *$I_mkdtemp(i8 *$I___template){}
-i32  $I_ecvt_r(f64 $I___value, i32 $I___ndigit, i32 *$I___decpt, i32 *$I___sign, i8 *$I___buf, u32  $I___len){}
-i32  $I_open( i8 *$I___file, i32 $I___oflag){}
-i32  $I_getitimer(i32  $I___which, $T_itimerval *$I___value){}
-i32  $I_setpgid(i32  $I___pid, i32  $I___pgid){}
-v0  *$I_memmove(v0 *$I___dest,  v0 *$I___src, u32  $I___n){}
-i32  $I_nice(i32 $I___inc){}
-i32  $I_seteuid(u32  $I___uid){}
-i32  $I_lrand48(v0 $A_0){}
-i32  $I_truncate( i8 *$I___file, i32  $I___length){}
-i32  $I_fchown(i32 $I___fd, u32  $I___owner, u32  $I___group){}
-i32  $I_mrand48_r($T_drand48_data *$I___buffer, i32 *$I___result){}
-i32  $I_fdatasync(i32 $I___fildes){}
-$T__IO_FILE  *$I_tmpfile(v0 $A_0){}
-i32  $I_vdprintf(i32 $I___fd,  i8 *$I___fmt, v0*  $I___arg){}
-v0  $I_exit(i32 $I___status){}
-$T_mallinfo  $I_mallinfo(v0 $A_0){}
-i32  $I_a64l( i8 *$I___s){}
-i32  $I_jrand48(u16 [3]$I___xsubi){}
-v0  $I_psiginfo( $T_anon_nYXNGO *$I___pinfo,  i8 *$I___s){}
-i32  $I_stat( i8 *$I___file, $T_stat *$I___buf){}
-i32  $I_gettimeofday($T_timeval *$I___tv, v0 *$I___tz){}
-i32  $I_isdigit_l(i32 $A_0, $T___locale_struct  $A_1){}
-i32  $I___libc_current_sigrtmax(v0 $A_0){}
-i32  $I_rand(v0 $A_0){}
-u64  $I_strtoull( i8 *$I___nptr, i8 **$I___endptr, i32 $I___base){}
-i32  $I_sigaction(i32 $I___sig,  $T_sigaction *$I___act, $T_sigaction *$I___oact){}
-i8  *$I_getusershell(v0 $A_0){}
-i32  $I_malloc_info(i32 $I___options, $T__IO_FILE *$I___fp){}
-i32  $I_scanf( i8 *$I___format){}
-i32  $I_rename( i8 *$I___old,  i8 *$I___new){}
-v0   $I___sysv_signal(i32 $I___sig, v0  $I___handler){}
-v0  *$I_memset(v0 *$I___s, i32 $I___c, u32  $I___n){}
-i32  $I_setuid(u32  $I___uid){}
-i32  $I_getc($T__IO_FILE *$I___stream){}
-i32  $I_feof_unlocked($T__IO_FILE *$I___stream){}
-i32  $I_fflush_unlocked($T__IO_FILE *$I___stream){}
-i32  $I_readdir_r($T___dirstream *$I___dirp, $T_dirent *$I___entry, $T_dirent **$I___result){}
-i32  $I_fgetc($T__IO_FILE *$I___stream){}
-i32  $I_fseeko($T__IO_FILE *$I___stream, i32  $I___off, i32 $I___whence){}
-i32  $I_getlogin_r(i8 *$I___name, u32  $I___name_len){}
-i8  *$I_asctime_r( $T_tm *$I___tp, i8 *$I___buf){}
-i32  $I_getentropy(v0 *$I___buffer, u32  $I___length){}
-i8  *$I_strtok(i8 *$I___s,  i8 *$I___delim){}
-i32  $I_strncasecmp( i8 *$I___s1,  i8 *$I___s2, u32  $I___n){}
-i8  *$I_strsep(i8 **$I___stringp,  i8 *$I___delim){}
-v0  *$I_alloca(u32  $I___size){}
-i32  $I_isalpha_l(i32 $A_0, $T___locale_struct  $A_1){}
-i32  $I_fflush($T__IO_FILE *$I___stream){}
-i32  $I_timer_gettime(v0   $I___timerid, $T_itimerspec *$I___value){}
-i8  *$I_strsignal(i32 $I___sig){}
-i32  $I_ttyslot(v0 $A_0){}
-i32    $I_readlinkat(i32 $I___fd,  i8 *$I___path, i8 *$I___buf, u32  $I___len){}
-i32  $I_vsscanf( i8 *$I___s,  i8 *$I___format, v0*  $I___arg){}
-i32  $I_setegid(u32  $I___gid){}
-i32  $I_isblank(i32 $A_0){}
-i32   $I_getppid(v0 $A_0){}
-i32  $I_strcmp( i8 *$I___s1,  i8 *$I___s2){}
-i32   $I_vfork(v0 $A_0){}
-v0  *$I_malloc(u32  $I___size){}
-v0  $I_clearerr($T__IO_FILE *$I___stream){}
-i32  $I_strncmp( i8 *$I___s1,  i8 *$I___s2, u32  $I___n){}
-i32  $I_sigtimedwait( $T_anon_nZ9vLy  *$I___set, $T_anon_nYXNGO *$I___info,  $T_timespec *$I___timeout){}
-$T__IO_FILE  *$I_open_memstream(i8 **$I___bufloc, u32  *$I___sizeloc){}
-i32  $I_raise(i32 $I___sig){}
-v0  $I_abort(v0 $A_0){}
-v0  *$I_valloc(u32  $I___size){}
-i32  $I___lxstat(i32 $I___ver,  i8 *$I___filename, $T_stat *$I___stat_buf){}
-i32  $I_pathconf( i8 *$I___path, i32 $I___name){}
-i32   $I_getdelim(i8 **$I___lineptr, u32  *$I___n, i32 $I___delimiter, $T__IO_FILE *$I___stream){}
-i8  *$I_index( i8 *$I___s, i32 $I___c){}
-u32   $I_malloc_usable_size(v0 *$I___ptr){}
-i32  $I_isxdigit(i32 $A_0){}
-i32  $I_lockf(i32 $I___fd, i32 $I___cmd, i32   $I___len){}
-i32  $I_fseek($T__IO_FILE *$I___stream, i32 $I___off, i32 $I___whence){}
-i32  $I_siginterrupt(i32 $I___sig, i32 $I___interrupt){}
-i32  $I_putw(i32 $I___w, $T__IO_FILE *$I___stream){}
-i32  $I_ispunct(i32 $A_0){}
-u32   $I_strftime_l(i8 *$I___s, u32  $I___maxsize,  i8 *$I___format,  $T_tm *$I___tp, $T___locale_struct  $I___loc){}
-i32  $I_mkfifo( i8 *$I___path, u32  $I___mode){}
-i32  $I_sigstack($T_sigstack *$I___ss, $T_sigstack *$I___oss){}
-i32  $I_sigsuspend( $T_anon_nZ9vLy  *$I___set){}
-i8  *$I_gcvt(f64 $I___value, i32 $I___ndigit, i8 *$I___buf){}
-$T_tm  *$I_localtime_r( i32   *$I___timer, $T_tm *$I___tp){}
-i32  $I_execv( i8 *$I___path, i8 **$I___argv){}
-i32  $I_isspace_l(i32 $A_0, $T___locale_struct  $A_1){}
-f64  $I_strtold( i8 *$I___nptr, i8 **$I___endptr){}
-i32  $I_sigsetmask(i32 $I___mask){}
-v0  *$I_pvalloc(u32  $I___size){}
-i8  *$I_strcat(i8 *$I___dest,  i8 *$I___src){}
-i32    $I_read(i32 $I___fd, v0 *$I___buf, u32  $I___nbytes){}
-u32   $I_getuid(v0 $A_0){}
-v0  $I_explicit_bzero(v0 *$I___s, u32  $I___n){}
-i32  $I_sigaltstack( $T_anon_TkEo09 *$I___ss, $T_anon_TkEo09 *$I___oss){}
-i32  $I_atexit(v0 *$I___func){}
-v0  $I_setusershell(v0 $A_0){}
-i32  $I_jrand48_r(u16 [3]$I___xsubi, $T_drand48_data *$I___buffer, i32 *$I___result){}
-i32  $I_isalnum_l(i32 $A_0, $T___locale_struct  $A_1){}
-i32  $I_setreuid(u32  $I___ruid, u32  $I___euid){}
-v0  $I_flockfile($T__IO_FILE *$I___stream){}
-i32  $I_isprint(i32 $A_0){}
-i32  $I_sigblock(i32 $I___mask){}
-i32  $I_fscanf($T__IO_FILE *$I___stream,  i8 *$I___format){}
-i32  $I_fpathconf(i32 $I___fd, i32 $I___name){}
-i32  $I_putchar(i32 $I___c){}
-u32   $I_geteuid(v0 $A_0){}
-i32   $I_getline(i8 **$I___lineptr, u32  *$I___n, $T__IO_FILE *$I___stream){}
-i32  $I_rand_r(u32 *$I___seed){}
-i32  $I_wctomb(i8 *$I___s, i32  $I___wchar){}
-i32  $I__tolower(i32 $A_0){}
-$T__IO_FILE  *$I_fmemopen(v0 *$I___s, u32  $I___len,  i8 *$I___modes){}
-i32  $I_fsetpos($T__IO_FILE *$I___stream,  $T__G_fpos_t  *$I___pos){}
-i32  $I_strcasecmp( i8 *$I___s1,  i8 *$I___s2){}
-i32  $I_sigwait( $T_anon_nZ9vLy  *$I___set, i32 *$I___sig){}
-v0  $I_srand(u32 $I___seed){}
-i32  $I_toupper_l(i32 $I___c, $T___locale_struct  $I___l){}
-i32  $I_timespec_get($T_timespec *$I___ts, i32 $I___base){}
-v0  *$I_memcpy(v0 *$I___dest,  v0 *$I___src, u32  $I___n){}
-i32  $I_printf( i8 *$I___format){}
-$T_tm  *$I_gmtime_r( i32   *$I___timer, $T_tm *$I___tp){}
-
-// top-level var decls:
- u8   [19]$I_bl_order;
- i32    $I_compressed_len;
- i32  $I_j;
-i32  $I_method = (8);
-u8   [0]$I_window;
-i32  $I_quiet = (0);
-i32  $I_recursive = (0);
- $T_ct_data  [0]$I_static_ltree;
- i32  [30]$I_base_dist;
-u32  $I_hufts;
-i32  $I_save_orig_name;
- i8  *$I_posixly_correct;
- u16   *$I_cplext;
-u16   [32768]$I_d_buf;
-u16   [65536]$I_prev;
- u16   *$I_cpdist;
- u16   $I_io_bitbuf;
-i32  $I_ext_header = (0);
- i8  **$I_sys_errlist;
-i8  *[2]$I___tzname;
- $T_config  [10]$I_configuration_table;
-i8  *$I_optarg;
-i32    $I_time_stamp;
- u8   [0]$I_pt_len;
-i32  $I_no_name = (-(1));
- i32  $I_valid;
-i32  $I_dbits = (6);
-i8  [1024]$I_ifname;
-i32  $I_force = (0);
- u8   $I_flags;
- u32   $I_opt_len;
- i32  $I_last_nonopt;
- i32  $I_compr_level;
-i32  $I_rsync = (0);
-i32    $I_header_bytes;
- i8  *[0]$I_sys_siglist;
- i32  $I_max_len;
-i32  $I___getopt_initialized;
-u32  $I_prev_length;
- u16   *$I_cplens;
-i32  $I_pkzip = (0);
-u32   *$I_crc_32_tab;
-i32    $I_total_out;
- u16  $I_bi_buf;
- u32  $I_last_lit;
- $T_tree_desc  $I_d_desc;
- u8   [512]$I_dist_code;
-i8  *$I_key;
-i32  *$I_file_method;
-i8  [1024]$I_ofname;
-u32  $I_bk;
-u16   *$I_mask_bits;
- i32  [29]$I_extra_lbits;
- i32  $I_heap_len;
-u16   *$I_file_type;
-i32    $I_bytes_out;
-u32   $I_z_len;
-$T__IO_FILE  *$I_stderr;
-i32  $I_level = (6);
-i32  $I_sys_nerr;
- i32  [0]$I_heap;
- i32  $I_heap_max;
- u32  $I_ins_h;
- i32  $I_bitcount;
-u8   [0]$I_inbuf;
- i32    $I_input_len;
-i32  $I_nice_match;
- u32  *$I_border;
- u32  $I_lookahead;
- i32  $I_msg_done = (0);
- u32   $I_crc;
-i32  $I_verbose = (0);
-i8  *$I_z_suffix;
- i32  [0]$I_parents;
-i32  $I_opterr = (1);
- i32  $I_peek_bits;
- $T_tree_desc  $I_l_desc;
- u32   $I_static_len;
- $T_ct_data  [0]$I_dyn_dtree;
- i32  $I_eofile;
- i32  [30]$I_extra_dbits;
- u16   *$I_cpdext;
- u32  $I_last_flags;
- u32  $I_max_lazy_match;
- u8   [0]$I_length_code;
- u8   $I_flag_bit;
- u32   $I_orig_len;
-i32  $I_decompress = (0);
-i32  $I_last_member;
-i32  $I_do_lzw = (0);
- u32  $I_blocksize;
- i32  $I_done;
- u8   [256]$I_literal;
-i32  $I_ifd;
- i32  [0]$I_lit_base;
-i32  $I_ofd;
- u8   [0]$I_depth;
-i32  $I_part_nb;
-i8  *$I_progname;
-i32  $I_list = (0);
-i32  $I___daylight;
- u32   $I_rsync_chunk_end;
-$T__IO_FILE  *$I_stdin;
- u32   $I_rsync_sum;
- i32  $I_bi_valid;
-u32   $I_window_size = (([u32  ]((2)))*(32768));
-i32  $I_no_time = (-(1));
- u16   [256]$I_pt_table;
-$T__IO_FILE  *$I_stdout;
-i32    $I_ifile_size;
-u32  $I_max_chain_length;
-i8  *$I_env;
- i8  *$I_nextchar;
-i32  $I_ascii = (0);
-i8  **$I_args = ([v0 *]((0)));
- u16   [0]$I_bl_count;
-i32  $I_daylight;
-i32  $I_exit_code = (0);
-i32  $I_block_mode = (128);
-i32  $I_maxbits = (16);
-u32  $I_match_start;
- $T_ct_data  [0]$I_bl_tree;
- $T_tree_desc  $I_bl_desc;
- i32  [0]$I_leaves;
-i32  $I_timezone;
-u32  $I_outcnt;
- i8  *[0]$I__sys_siglist;
-u32  $I_insize;
-i32    $I_bytes_in;
-i32  $I_decrypt;
-i32  $I_to_stdout = (0);
- u32  $I_last_dist;
- i32  $I_first_nonopt;
-i32  $I_test = (0);
-$T_option  *$I_longopts;
-u32  $I_good_match;
- $T_ct_data  [30]$I_static_dtree;
-i32  $I_remove_ofname = (0);
-u32  $I_inptr;
-i32  $I___timezone;
-i32    $I_total_in;
-u32  $I_strstart;
-$T_stat  $I_istat;
-i32  $I_foreground;
-i32  $I_optopt = ('?');
- i32  [19]$I_extra_blbits;
-u8   [0]$I_outbuf;
-i32  $I_ordering;
- i8  **$I_license_msg;
-i8  **$I___environ;
- i32   $I_zfile;
-i32  $I_block_start;
- u32   $I_bitbuf;
- $T_ct_data  [0]$I_dyn_ltree;
-i32  $I_optind = (1);
- u8   [0]$I_flag_buf;
-i32  $I_lbits = (9);
-i8  *[2]$I_tzname;
-u32   $I_bb;
- u32  $I_subbitbuf;
- i32  [29]$I_base_length;
-
-// other code:
+// enum decls:
 i32 $I__ISupper = 0;
 i32 $I__ISlower = 1;
 i32 $I__ISalpha = 2;
@@ -1210,7 +10,7 @@ i32 $I__ISgraph = 7;
 i32 $I__ISblank = 8;
 i32 $I__IScntrl = 9;
 i32 $I__ISpunct = 10;
-i32 $I__ISalnum = 11 ;
+i32 $I__ISalnum = 11;
 i32 $I_DT_UNKNOWN = 0;
 i32 $I_DT_FIFO = 1;
 i32 $I_DT_CHR = 2;
@@ -1219,7 +19,7 @@ i32 $I_DT_BLK = 4;
 i32 $I_DT_REG = 5;
 i32 $I_DT_LNK = 6;
 i32 $I_DT_SOCK = 7;
-i32 $I_DT_WHT = 8 ;
+i32 $I_DT_WHT = 8;
 i32 $I_SI_ASYNCNL = 0;
 i32 $I_SI_DETHREAD = 1;
 i32 $I_SI_TKILL = 2;
@@ -1229,7 +29,7 @@ i32 $I_SI_MESGQ = 5;
 i32 $I_SI_TIMER = 6;
 i32 $I_SI_QUEUE = 7;
 i32 $I_SI_USER = 8;
-i32 $I_SI_KERNEL = 9 ;
+i32 $I_SI_KERNEL = 9;
 i32 $I_ILL_ILLOPC = 0;
 i32 $I_ILL_ILLOPN = 1;
 i32 $I_ILL_ILLADR = 2;
@@ -1238,7 +38,7 @@ i32 $I_ILL_PRVOPC = 4;
 i32 $I_ILL_PRVREG = 5;
 i32 $I_ILL_COPROC = 6;
 i32 $I_ILL_BADSTK = 7;
-i32 $I_ILL_BADIADDR = 8 ;
+i32 $I_ILL_BADIADDR = 8;
 i32 $I_FPE_INTDIV = 0;
 i32 $I_FPE_INTOVF = 1;
 i32 $I_FPE_FLTDIV = 2;
@@ -1248,73 +48,43 @@ i32 $I_FPE_FLTRES = 5;
 i32 $I_FPE_FLTINV = 6;
 i32 $I_FPE_FLTSUB = 7;
 i32 $I_FPE_FLTUNK = 8;
-i32 $I_FPE_CONDTRAP = 9 ;
+i32 $I_FPE_CONDTRAP = 9;
 i32 $I_SEGV_MAPERR = 0;
 i32 $I_SEGV_ACCERR = 1;
 i32 $I_SEGV_BNDERR = 2;
 i32 $I_SEGV_PKUERR = 3;
 i32 $I_SEGV_ACCADI = 4;
 i32 $I_SEGV_ADIDERR = 5;
-i32 $I_SEGV_ADIPERR = 6 ;
+i32 $I_SEGV_ADIPERR = 6;
 i32 $I_BUS_ADRALN = 0;
 i32 $I_BUS_ADRERR = 1;
 i32 $I_BUS_OBJERR = 2;
 i32 $I_BUS_MCEERR_AR = 3;
-i32 $I_BUS_MCEERR_AO = 4 ;
+i32 $I_BUS_MCEERR_AO = 4;
 i32 $I_CLD_EXITED = 0;
 i32 $I_CLD_KILLED = 1;
 i32 $I_CLD_DUMPED = 2;
 i32 $I_CLD_TRAPPED = 3;
 i32 $I_CLD_STOPPED = 4;
-i32 $I_CLD_CONTINUED = 5 ;
+i32 $I_CLD_CONTINUED = 5;
 i32 $I_POLL_IN = 0;
 i32 $I_POLL_OUT = 1;
 i32 $I_POLL_MSG = 2;
 i32 $I_POLL_ERR = 3;
 i32 $I_POLL_PRI = 4;
-i32 $I_POLL_HUP = 5 ;
+i32 $I_POLL_HUP = 5;
 i32 $I_SIGEV_SIGNAL = 0;
 i32 $I_SIGEV_NONE = 1;
 i32 $I_SIGEV_THREAD = 2;
-i32 $I_SIGEV_THREAD_ID = 3 ;
+i32 $I_SIGEV_THREAD_ID = 3;
 i32 $I_SS_ONSTACK = 0;
-i32 $I_SS_DISABLE = 1 ;
+i32 $I_SS_DISABLE = 1;
 i32 $I_P_ALL = 0;
 i32 $I_P_PID = 1;
-i32 $I_P_PGID = 2 ;
-  u16  $I___bswap_16(u16  $I___bsx)
-{
-return ($I___bsx);
-}
-
-  u32  $I___bswap_32(u32  $I___bsx)
-{
-return ($I___bsx);
-}
-
-  u32  $I___bswap_64(u32  $I___bsx)
-{
-return ($I___bsx);
-}
-
-  u16  $I___uint16_identity(u16  $I___x)
-{
-return ($I___x);
-}
-
-  u32  $I___uint32_identity(u32  $I___x)
-{
-return ($I___x);
-}
-
-  u32  $I___uint64_identity(u32  $I___x)
-{
-return ($I___x);
-}
-
+i32 $I_P_PGID = 2;
 i32 $I_ITIMER_REAL = 0;
 i32 $I_ITIMER_VIRTUAL = 1;
-i32 $I_ITIMER_PROF = 2 ;
+i32 $I_ITIMER_PROF = 2;
 i32 $I__PC_LINK_MAX = 0;
 i32 $I__PC_MAX_CANON = 1;
 i32 $I__PC_MAX_INPUT = 2;
@@ -1335,7 +105,7 @@ i32 $I__PC_REC_MIN_XFER_SIZE = 16;
 i32 $I__PC_REC_XFER_ALIGN = 17;
 i32 $I__PC_ALLOC_SIZE_MIN = 18;
 i32 $I__PC_SYMLINK_MAX = 19;
-i32 $I__PC_2_SYMLINKS = 20 ;
+i32 $I__PC_2_SYMLINKS = 20;
 i32 $I__SC_ARG_MAX = 0;
 i32 $I__SC_CHILD_MAX = 1;
 i32 $I__SC_CLK_TCK = 2;
@@ -1550,7 +320,7 @@ i32 $I__SC_TRACE_SYS_MAX = 210;
 i32 $I__SC_TRACE_USER_EVENT_MAX = 211;
 i32 $I__SC_XOPEN_STREAMS = 212;
 i32 $I__SC_THREAD_ROBUST_PRIO_INHERIT = 213;
-i32 $I__SC_THREAD_ROBUST_PRIO_PROTECT = 214 ;
+i32 $I__SC_THREAD_ROBUST_PRIO_PROTECT = 214;
 i32 $I__CS_PATH = 0;
 i32 $I__CS_V6_WIDTH_RESTRICTED_ENVS = 1;
 i32 $I__CS_GNU_LIBC_VERSION = 2;
@@ -1614,7 +384,1241 @@ i32 $I__CS_POSIX_V7_LPBIG_OFFBIG_LDFLAGS = 59;
 i32 $I__CS_POSIX_V7_LPBIG_OFFBIG_LIBS = 60;
 i32 $I__CS_POSIX_V7_LPBIG_OFFBIG_LINTFLAGS = 61;
 i32 $I__CS_V6_ENV = 62;
-i32 $I__CS_V7_ENV = 63 ;
+i32 $I__CS_V7_ENV = 63;
+i32 $I_REQUIRE_ORDER = 0;
+i32 $I_PERMUTE = 1;
+i32 $I_RETURN_IN_ORDER = 2;
+// hoisted nested struct decls:
+class $T_anon_ihWoUJ {
+u32 $I___wch;
+i8 [4]$I___wchb;
+};
+class $T_anon_ePTTu9 {
+i32  $I_si_pid;
+u32  $I_si_uid;
+};
+class $T_anon_xmZF1h {
+i32 $I_si_tid;
+i32 $I_si_overrun;
+$T_sigval $I_si_sigval;
+};
+class $T_anon_XGEq41 {
+i32  $I_si_pid;
+u32  $I_si_uid;
+$T_sigval $I_si_sigval;
+};
+class $T_anon_Pvxcc7 {
+i32  $I_si_pid;
+u32  $I_si_uid;
+i32 $I_si_status;
+i32  $I_si_utime;
+i32  $I_si_stime;
+};
+class $T_anon_4RY7kN {
+v0 *$I__lower;
+v0 *$I__upper;
+};
+class $T_anon_n5I1GY {
+$T_anon_4RY7kN $I__addr_bnd;
+u32  $I__pkey;
+};
+class $T_anon_ata5iq {
+v0 *$I_si_addr;
+i16 $I_si_addr_lsb;
+$T_anon_n5I1GY $I__bounds;
+};
+class $T_anon_TeS0Tb {
+i32 $I_si_band;
+i32 $I_si_fd;
+};
+class $T_anon_KffioA {
+v0 *$I__call_addr;
+i32 $I__syscall;
+u32 $I__arch;
+};
+class $T_anon_EqFZiu {
+i32 [0]$I__pad;
+$T_anon_ePTTu9 $I__kill;
+$T_anon_xmZF1h $I__timer;
+$T_anon_XGEq41 $I__rt;
+$T_anon_Pvxcc7 $I__sigchld;
+$T_anon_ata5iq $I__sigfault;
+$T_anon_TeS0Tb $I__sigpoll;
+$T_anon_KffioA $I__sigsys;
+};
+class $T_anon_v2uSus {
+$T_pthread_attr_t *$I__attribute;
+};
+class $T_anon_mV09bx {
+i32 [0]$I__pad;
+i32  $I__tid;
+$T_anon_v2uSus $I__sigev_thread;
+};
+class $T_anon_tfJyRu {
+v0  $I_sa_handler;
+};
+class $T_anon_yrkSxg {
+$T__fpstate *$I_fpstate;
+u32  $I___fpstate_word;
+};
+class $T_anon_jbW0vA {
+u32 $I___low;
+u32 $I___high;
+};
+class $T_anon_VZUw8L {
+u64 $I___wseq;
+$T_anon_jbW0vA $I___wseq32;
+};
+class $T_anon_rcUlcJ {
+u32 $I___low;
+u32 $I___high;
+};
+class $T_anon_eo2AsY {
+u64 $I___g1_start;
+$T_anon_rcUlcJ $I___g1_start32;
+};
+class $T_anon_Z98nEM {
+u16  $I_n;
+$T_huft *$I_t;
+};
+class $T_anon_y4OwJ6 {
+u16  $I_freq;
+u16  $I_code;
+};
+class $T_anon_SHuB2J {
+u16  $I_dad;
+u16  $I_len;
+};
+class $T_anon_gJeQaa {
+i32 $I_dummy;
+};
+
+// hoisted empty struct decls:
+class $T___dirstream {};
+class $T___locale_data {};
+class $T__IO_wide_data {};
+class $T__IO_codecvt {};
+class $T__IO_marker {};
+
+// non-empty struct decls:
+class $T_anon_kyjIY8 {
+i32 [2]$I___val;
+} ;
+class $T___locale_struct {
+$T___locale_data *[13]$I___locales;
+ u16 *$I___ctype_b;
+ i32 *$I___ctype_tolower;
+ i32 *$I___ctype_toupper;
+ i8 *[13]$I___names;
+} ;
+class $T_dirent {
+u32  $I_d_ino;
+i32  $I_d_off;
+u16 $I_d_reclen;
+u8 $I_d_type;
+i8 [256]$I_d_name;
+} ;
+class $T_flock {
+i16 $I_l_type;
+i16 $I_l_whence;
+i32  $I_l_start;
+i32  $I_l_len;
+i32  $I_l_pid;
+} ;
+class $T_timespec {
+i32  $I_tv_sec;
+i32  $I_tv_nsec;
+} ;
+class $T_stat {
+u32  $I_st_dev;
+u32  $I_st_ino;
+u32  $I_st_nlink;
+u32  $I_st_mode;
+u32  $I_st_uid;
+u32  $I_st_gid;
+i32 $I___pad0;
+u32  $I_st_rdev;
+i32  $I_st_size;
+i32  $I_st_blksize;
+i32  $I_st_blocks;
+$T_timespec $I_st_atim;
+$T_timespec $I_st_mtim;
+$T_timespec $I_st_ctim;
+i32  [3]$I___glibc_reserved;
+} ;
+class $T_anon_YmgXcv {
+i64 $I___max_align_ll;
+f64 $I___max_align_ld;
+} ;
+class $T_anon_yGVdWc {
+i32 $I___count;
+$T_anon_ihWoUJ $I___value;
+} ;
+class $T__G_fpos_t {
+i32  $I___pos;
+$T_anon_yGVdWc $I___state;
+} ;
+class $T__G_fpos64_t {
+i32  $I___pos;
+$T_anon_yGVdWc $I___state;
+} ;
+class $T__IO_FILE {
+i32 $I__flags;
+i8 *$I__IO_read_ptr;
+i8 *$I__IO_read_end;
+i8 *$I__IO_read_base;
+i8 *$I__IO_write_base;
+i8 *$I__IO_write_ptr;
+i8 *$I__IO_write_end;
+i8 *$I__IO_buf_base;
+i8 *$I__IO_buf_end;
+i8 *$I__IO_save_base;
+i8 *$I__IO_backup_base;
+i8 *$I__IO_save_end;
+$T__IO_marker *$I__markers;
+$T__IO_FILE *$I__chain;
+i32 $I__fileno;
+i32 $I__flags2;
+i32  $I__old_offset;
+u16 $I__cur_column;
+i8 $I__vtable_offset;
+i8 [1]$I__shortbuf;
+v0  *$I__lock;
+i32  $I__offset;
+$T__IO_codecvt *$I__codecvt;
+$T__IO_wide_data *$I__wide_data;
+$T__IO_FILE *$I__freeres_list;
+v0 *$I__freeres_buf;
+u32  $I___pad5;
+i32 $I__mode;
+i8 [0]$I__unused2;
+} ;
+class $T_mallinfo {
+i32 $I_arena;
+i32 $I_ordblks;
+i32 $I_smblks;
+i32 $I_hblks;
+i32 $I_hblkhd;
+i32 $I_usmblks;
+i32 $I_fsmblks;
+i32 $I_uordblks;
+i32 $I_fordblks;
+i32 $I_keepcost;
+} ;
+class $T_anon_n1G0mm {
+u32 [0]$I___val;
+} ;
+class $T_sigval {
+i32 $I_sival_int;
+v0 *$I_sival_ptr;
+} ;
+class $T_anon_4ul1Rc {
+i32 $I_si_signo;
+i32 $I_si_errno;
+i32 $I_si_code;
+i32 $I___pad0;
+$T_anon_EqFZiu $I__sifields;
+} ;
+class $T_sigevent {
+$T_sigval $I_sigev_value;
+i32 $I_sigev_signo;
+i32 $I_sigev_notify;
+$T_anon_mV09bx $I__sigev_un;
+} ;
+class $T_sigaction {
+$T_anon_tfJyRu $I___sigaction_handler;
+$T_anon_n1G0mm $I_sa_mask;
+i32 $I_sa_flags;
+} ;
+class $T__fpx_sw_bytes {
+u32  $I_magic1;
+u32  $I_extended_size;
+u32  $I_xstate_bv;
+u32  $I_xstate_size;
+u32  [7]$I___glibc_reserved1;
+} ;
+class $T__fpreg {
+u16 [4]$I_significand;
+u16 $I_exponent;
+} ;
+class $T__fpxreg {
+u16 [4]$I_significand;
+u16 $I_exponent;
+u16 [3]$I___glibc_reserved1;
+} ;
+class $T__xmmreg {
+u32  [4]$I_element;
+} ;
+class $T__fpstate {
+u16  $I_cwd;
+u16  $I_swd;
+u16  $I_ftw;
+u16  $I_fop;
+u32  $I_rip;
+u32  $I_rdp;
+u32  $I_mxcsr;
+u32  $I_mxcr_mask;
+$T__fpxreg [8]$I__st;
+$T__xmmreg [16]$I__xmm;
+u32  [24]$I___glibc_reserved1;
+} ;
+class $T_sigcontext {
+u32  $I_r8;
+u32  $I_r9;
+u32  $I_r10;
+u32  $I_r11;
+u32  $I_r12;
+u32  $I_r13;
+u32  $I_r14;
+u32  $I_r15;
+u32  $I_rdi;
+u32  $I_rsi;
+u32  $I_rbp;
+u32  $I_rbx;
+u32  $I_rdx;
+u32  $I_rax;
+u32  $I_rcx;
+u32  $I_rsp;
+u32  $I_rip;
+u32  $I_eflags;
+u16 $I_cs;
+u16 $I_gs;
+u16 $I_fs;
+u16 $I___pad0;
+u32  $I_err;
+u32  $I_trapno;
+u32  $I_oldmask;
+u32  $I_cr2;
+u32  [8]$I___reserved1;
+} ;
+class $T__xsave_hdr {
+u32  $I_xstate_bv;
+u32  [2]$I___glibc_reserved1;
+u32  [5]$I___glibc_reserved2;
+} ;
+class $T__ymmh_state {
+u32  [64]$I_ymmh_space;
+} ;
+class $T__xstate {
+$T__fpstate $I_fpstate;
+$T__xsave_hdr $I_xstate_hdr;
+$T__ymmh_state $I_ymmh;
+} ;
+class $T_anon_Ye6e9c {
+v0 *$I_ss_sp;
+i32 $I_ss_flags;
+u32  $I_ss_size;
+} ;
+class $T__libc_fpxreg {
+u16 [4]$I_significand;
+u16 $I_exponent;
+u16 [3]$I___glibc_reserved1;
+} ;
+class $T__libc_xmmreg {
+u32  [4]$I_element;
+} ;
+class $T__libc_fpstate {
+u16  $I_cwd;
+u16  $I_swd;
+u16  $I_ftw;
+u16  $I_fop;
+u32  $I_rip;
+u32  $I_rdp;
+u32  $I_mxcsr;
+u32  $I_mxcr_mask;
+$T__libc_fpxreg [8]$I__st;
+$T__libc_xmmreg [16]$I__xmm;
+u32  [24]$I___glibc_reserved1;
+} ;
+class $T_anon_2sLcVV {
+i64   $I_gregs;
+$T__libc_fpstate $I_fpregs;
+u64 [8]$I___reserved1;
+} ;
+class $T_ucontext_t {
+u32 $I_uc_flags;
+$T_ucontext_t *$I_uc_link;
+$T_anon_Ye6e9c $I_uc_stack;
+$T_anon_2sLcVV $I_uc_mcontext;
+$T_anon_n1G0mm  $I_uc_sigmask;
+$T__libc_fpstate $I___fpregs_mem;
+u64 [4]$I___ssp;
+} ;
+class $T_sigstack {
+v0 *$I_ss_sp;
+i32 $I_ss_onstack;
+} ;
+class $T___pthread_internal_list {
+$T___pthread_internal_list *$I___prev;
+$T___pthread_internal_list *$I___next;
+} ;
+class $T___pthread_internal_slist {
+$T___pthread_internal_slist *$I___next;
+} ;
+class $T___pthread_mutex_s {
+i32 $I___lock;
+u32 $I___count;
+i32 $I___owner;
+u32 $I___nusers;
+i32 $I___kind;
+i16 $I___spins;
+i16 $I___elision;
+$T___pthread_internal_list $I___list;
+} ;
+class $T___pthread_rwlock_arch_t {
+u32 $I___readers;
+u32 $I___writers;
+u32 $I___wrphase_futex;
+u32 $I___writers_futex;
+u32 $I___pad3;
+u32 $I___pad4;
+i32 $I___cur_writer;
+i32 $I___shared;
+i8 $I___rwelision;
+u8 [7]$I___pad1;
+u32 $I___pad2;
+u32 $I___flags;
+} ;
+class $T___pthread_cond_s {
+u32 [2]$I___g_refs;
+u32 [2]$I___g_size;
+u32 $I___g1_orig_size;
+u32 $I___wrefs;
+u32 [2]$I___g_signals;
+} ;
+class $T_anon_DUpkUJ {
+i8 [4]$I___size;
+i32 $I___align;
+} ;
+class $T_anon_TMbXf4 {
+i8 [4]$I___size;
+i32 $I___align;
+} ;
+class $T_pthread_attr_t {
+i8 [56]$I___size;
+i32 $I___align;
+} ;
+class $T_anon_UlOVYR {
+$T___pthread_mutex_s $I___data;
+i8 [40]$I___size;
+i32 $I___align;
+} ;
+class $T_anon_geuc2v {
+$T___pthread_cond_s $I___data;
+i8 [48]$I___size;
+i64 $I___align;
+} ;
+class $T_anon_jUgqq1 {
+$T___pthread_rwlock_arch_t $I___data;
+i8 [56]$I___size;
+i32 $I___align;
+} ;
+class $T_anon_yBeV9V {
+i8 [8]$I___size;
+i32 $I___align;
+} ;
+class $T_anon_qWXiJL {
+i8 [32]$I___size;
+i32 $I___align;
+} ;
+class $T_anon_kl35JK {
+i8 [4]$I___size;
+i32 $I___align;
+} ;
+class $T_anon_KAIQej {
+i32 $I_quot;
+i32 $I_rem;
+} ;
+class $T_anon_hSLKea {
+i32 $I_quot;
+i32 $I_rem;
+} ;
+class $T_anon_EEsSE4 {
+i64 $I_quot;
+i64 $I_rem;
+} ;
+class $T_timeval {
+i32  $I_tv_sec;
+i32  $I_tv_usec;
+} ;
+class $T_anon_msreSD {
+i32  [0]$I___fds_bits;
+} ;
+class $T_random_data {
+i32   *$I_fptr;
+i32   *$I_rptr;
+i32   *$I_state;
+i32 $I_rand_type;
+i32 $I_rand_deg;
+i32 $I_rand_sep;
+i32   *$I_end_ptr;
+} ;
+class $T_drand48_data {
+u16 [3]$I___x;
+u16 [3]$I___old_x;
+u16 $I___c;
+u16 $I___init;
+u64 $I___a;
+} ;
+class $T_timezone {
+i32 $I_tz_minuteswest;
+i32 $I_tz_dsttime;
+} ;
+class $T_itimerval {
+$T_timeval $I_it_interval;
+$T_timeval $I_it_value;
+} ;
+class $T_tm {
+i32 $I_tm_sec;
+i32 $I_tm_min;
+i32 $I_tm_hour;
+i32 $I_tm_mday;
+i32 $I_tm_mon;
+i32 $I_tm_year;
+i32 $I_tm_wday;
+i32 $I_tm_yday;
+i32 $I_tm_isdst;
+i32 $I_tm_gmtoff;
+ i8 *$I_tm_zone;
+} ;
+class $T_itimerspec {
+$T_timespec $I_it_interval;
+$T_timespec $I_it_value;
+} ;
+class $T_utimbuf {
+i32  $I_actime;
+i32  $I_modtime;
+} ;
+class $T_config {
+u16  $I_good_length;
+u16  $I_max_lazy;
+u16  $I_nice_length;
+u16  $I_max_chain;
+} ;
+class $T_option {
+ i8 *$I_name;
+i32 $I_has_arg;
+i32 *$I_flag;
+i32 $I_val;
+} ;
+class $T_huft {
+u8  $I_e;
+u8  $I_b;
+$T_anon_Z98nEM $I_v;
+} ;
+class $T_ct_data {
+$T_anon_y4OwJ6 $I_fc;
+$T_anon_SHuB2J $I_dl;
+} ;
+class $T_tree_desc {
+$T_ct_data *$I_dyn_tree;
+$T_ct_data *$I_static_tree;
+i32 *$I_extra_bits;
+i32 $I_extra_base;
+i32 $I_elems;
+i32 $I_max_length;
+i32 $I_max_code;
+} ;
+class $T_bytes {
+i32 $I_word;
+$T_anon_gJeQaa $I_bytes;
+} ;
+
+// top-level fn decls:
+v0  $I_bzero(v0 *$I___s, u32  $I___n){}
+i32  $I_rmdir( i8 *$I___path){}
+$T__IO_FILE  *$I_tmpfile(v0 $A_0){}
+v0  $I_seekdir($T___dirstream *$I___dirp, i32 $I___pos){}
+i32  $I_fclose($T__IO_FILE *$I___stream){}
+i32  $I_execvp( i8 *$I___file, i8 **$I___argv){}
+u32   $I_strftime(i8 *$I___s, u32  $I___maxsize,  i8 *$I___format,  $T_tm *$I___tp){}
+i32  $I_setegid(u32  $I___gid){}
+i32  $I_isprint(i32 $A_0){}
+i32  $I_on_exit(v0 *$I___func, v0 *$I___arg){}
+i32  $I_utimes( i8 *$I___file,  $T_timeval [2]$I___tvp){}
+i32  $I_revoke( i8 *$I___file){}
+i32  $I_vsscanf( i8 *$I___s,  i8 *$I___format, v0*  $I___arg){}
+i32  $I_toupper_l(i32 $I___c, $T___locale_struct  $I___l){}
+i32  $I_mkstemps(i8 *$I___template, i32 $I___suffixlen){}
+i32  $I_qecvt_r(f64 $I___value, i32 $I___ndigit, i32 *$I___decpt, i32 *$I___sign, i8 *$I___buf, u32  $I___len){}
+f64  $I_erand48(u16 [3]$I___xsubi){}
+f64  $I_difftime(i32   $I___time1, i32   $I___time0){}
+v0  *$I_memset(v0 *$I___s, i32 $I___c, u32  $I___n){}
+i32  $I_setitimer(i32  $I___which,  $T_itimerval *$I___new, $T_itimerval *$I___old){}
+i32  $I_close(i32 $I___fd){}
+ u16  **$I___ctype_b_loc(v0 $A_0){}
+i32  $I_malloc_trim(u32  $I___pad){}
+i32  $I_fsync(i32 $I___fd){}
+i32  $I_fgetc($T__IO_FILE *$I___stream){}
+i32  $I_isgraph_l(i32 $A_0, $T___locale_struct  $A_1){}
+i32  $I_telldir($T___dirstream *$I___dirp){}
+v0  *$I_realloc(v0 *$I___ptr, u32  $I___size){}
+i8  *$I_tmpnam_r(i8 *$I___s){}
+v0  $I_lcong48(u16 [7]$I___param){}
+i32  $I_getitimer(i32  $I___which, $T_itimerval *$I___value){}
+i32  $I_execl( i8 *$I___path,  i8 *$I___arg){}
+i8  *$I___strtok_r(i8 *$I___s,  i8 *$I___delim, i8 **$I___save_ptr){}
+i8  *$I_fcvt(f64 $I___value, i32 $I___ndigit, i32 *$I___decpt, i32 *$I___sign){}
+i32  $I_ungetc(i32 $I___c, $T__IO_FILE *$I___stream){}
+v0  *$I_sbrk(i32   $I___delta){}
+i32  $I_vfprintf($T__IO_FILE *$I___s,  i8 *$I___format, v0*  $I___arg){}
+i32  $I_sigfillset($T_anon_n1G0mm  *$I___set){}
+i32  $I_readdir_r($T___dirstream *$I___dirp, $T_dirent *$I___entry, $T_dirent **$I___result){}
+v0  $I_srand(u32 $I___seed){}
+i32  $I_putchar_unlocked(i32 $I___c){}
+i32  $I_vdprintf(i32 $I___fd,  i8 *$I___fmt, v0*  $I___arg){}
+i32  $I_ttyslot(v0 $A_0){}
+i8  *$I_strerror(i32 $I___errnum){}
+i32  $I_fputc_unlocked(i32 $I___c, $T__IO_FILE *$I___stream){}
+i32  $I_execv( i8 *$I___path, i8 **$I___argv){}
+i32  $I_sigsuspend( $T_anon_n1G0mm  *$I___set){}
+i32  $I_memcmp( v0 *$I___s1,  v0 *$I___s2, u32  $I___n){}
+i32  $I_fchmodat(i32 $I___fd,  i8 *$I___file, u32  $I___mode, i32 $I___flag){}
+u32   $I_strcspn( i8 *$I___s,  i8 *$I___reject){}
+i32  $I_getw($T__IO_FILE *$I___stream){}
+i32  $I___libc_current_sigrtmin(v0 $A_0){}
+i32   $I_getdelim(i8 **$I___lineptr, u32  *$I___n, i32 $I___delimiter, $T__IO_FILE *$I___stream){}
+i32  $I_syscall(i32 $I___sysno){}
+i32  $I_tolower_l(i32 $I___c, $T___locale_struct  $I___l){}
+i32  $I_settimeofday( $T_timeval *$I___tv,  $T_timezone *$I___tz){}
+i32  $I_truncate( i8 *$I___file, i32  $I___length){}
+i32  $I_ferror_unlocked($T__IO_FILE *$I___stream){}
+i32  $I_drand48_r($T_drand48_data *$I___buffer, f64 *$I___result){}
+v0  $I_psiginfo( $T_anon_4ul1Rc *$I___pinfo,  i8 *$I___s){}
+i32  $I_getsubopt(i8 **$I___optionp, i8 **$I___tokens, i8 **$I___valuep){}
+i32  $I_fputc(i32 $I___c, $T__IO_FILE *$I___stream){}
+i32  $I_scanf( i8 *$I___format){}
+i8  *$I_strndup( i8 *$I___string, u32  $I___n){}
+v0  *$I_alloca(u32  $I___size){}
+v0  *$I_aligned_alloc(u32  $I___alignment, u32  $I___size){}
+i8  *$I_strncat(i8 *$I___dest,  i8 *$I___src, u32  $I___n){}
+i32  $I_lstat( i8 *$I___file, $T_stat *$I___buf){}
+i32  $I_setuid(u32  $I___uid){}
+i32  $I_srandom_r(u32 $I___seed, $T_random_data *$I___buf){}
+f64  $I_strtod( i8 *$I___nptr, i8 **$I___endptr){}
+i32  $I_strcasecmp( i8 *$I___s1,  i8 *$I___s2){}
+i32   $I_lseek(i32 $I___fd, i32  $I___offset, i32 $I___whence){}
+i32  $I_isatty(i32 $I___fd){}
+i32  $I_isblank(i32 $A_0){}
+i32  $I_fchdir(i32 $I___fd){}
+v0  $I_rewind($T__IO_FILE *$I___stream){}
+i32  $I_rename( i8 *$I___old,  i8 *$I___new){}
+i32  $I_fchownat(i32 $I___fd,  i8 *$I___file, u32  $I___owner, u32  $I___group, i32 $I___flag){}
+i32  $I_jrand48(u16 [3]$I___xsubi){}
+i32  $I_fexecve(i32 $I___fd, i8 **$I___argv, i8 **$I___envp){}
+v0  $I__exit(i32 $I___status){}
+i32  $I_initstate_r(u32 $I___seed, i8 *$I___statebuf, u32  $I___statelen, $T_random_data *$I___buf){}
+i32  $I__tolower(i32 $A_0){}
+i32  $I_ispunct_l(i32 $A_0, $T___locale_struct  $A_1){}
+u32   $I_getuid(v0 $A_0){}
+i8  *$I_ctermid(i8 *$I___s){}
+u32   $I_fwrite_unlocked( v0 *$I___ptr, u32  $I___size, u32  $I___n, $T__IO_FILE *$I___stream){}
+i8  *$I_strpbrk( i8 *$I___s,  i8 *$I___accept){}
+i32  $I_link( i8 *$I___from,  i8 *$I___to){}
+i32  $I_seteuid(u32  $I___uid){}
+i32  *$I___errno_location(v0 $A_0){}
+i8  *$I_stpcpy(i8 *$I___dest,  i8 *$I___src){}
+$T__IO_FILE  *$I_popen( i8 *$I___command,  i8 *$I___modes){}
+v0  $I_explicit_bzero(v0 *$I___s, u32  $I___n){}
+v0  *$I_reallocarray(v0 *$I___ptr, u32  $I___nmemb, u32  $I___size){}
+i32  $I_rand(v0 $A_0){}
+i32  $I_pathconf( i8 *$I___path, i32 $I___name){}
+i32  $I_isdigit(i32 $A_0){}
+f64  $I_atof( i8 *$I___nptr){}
+i32  $I_isblank_l(i32 $A_0, $T___locale_struct  $A_1){}
+i32  $I_isalpha(i32 $A_0){}
+u32   $I_strxfrm_l(i8 *$I___dest,  i8 *$I___src, u32  $I___n, $T___locale_struct  $I___l){}
+i32  $I_pause(v0 $A_0){}
+i32  $I_vsprintf(i8 *$I___s,  i8 *$I___format, v0*  $I___arg){}
+i32  $I_toupper(i32 $I___c){}
+i8  *$I_strcpy(i8 *$I___dest,  i8 *$I___src){}
+v0  $I_qsort(v0 *$I___base, u32  $I___nmemb, u32  $I___size, v0 *$I___compar){}
+i8  *$I_crypt( i8 *$I___key,  i8 *$I___salt){}
+i32  $I_dysize(i32 $I___year){}
+i32  $I_setpgid(i32  $I___pid, i32  $I___pgid){}
+i32  $I_sigsetmask(i32 $I___mask){}
+i32  $I_abs(i32 $I___x){}
+i32  $I_qfcvt_r(f64 $I___value, i32 $I___ndigit, i32 *$I___decpt, i32 *$I___sign, i8 *$I___buf, u32  $I___len){}
+i32  $I_putc(i32 $I___c, $T__IO_FILE *$I___stream){}
+i8  *$I_rindex( i8 *$I___s, i32 $I___c){}
+i32  $I_setenv( i8 *$I___name,  i8 *$I___value, i32 $I___replace){}
+i32   $I_getdirentries(i32 $I___fd, i8 *$I___buf, u32  $I___nbytes, i32  *$I___basep){}
+i32  $I_getentropy(v0 *$I___buffer, u32  $I___length){}
+i32  $I_fstatat(i32 $I___fd,  i8 *$I___file, $T_stat *$I___buf, i32 $I___flag){}
+i8  *$I_setstate(i8 *$I___statebuf){}
+i32  $I___lxstat(i32 $I___ver,  i8 *$I___filename, $T_stat *$I___stat_buf){}
+i32  $I_strcasecmp_l( i8 *$I___s1,  i8 *$I___s2, $T___locale_struct  $I___loc){}
+i32  $I_puts( i8 *$I___s){}
+i32  $I_access( i8 *$I___name, i32 $I___type){}
+i32  $I_fseek($T__IO_FILE *$I___stream, i32 $I___off, i32 $I___whence){}
+i32  $I_sprintf(i8 *$I___s,  i8 *$I___format){}
+v0  $I_perror( i8 *$I___s){}
+v0  *$I_memcpy(v0 *$I___dest,  v0 *$I___src, u32  $I___n){}
+v0  $I_funlockfile($T__IO_FILE *$I___stream){}
+v0  $I_setlinebuf($T__IO_FILE *$I___stream){}
+v0  *$I_bsearch( v0 *$I___key,  v0 *$I___base, u32  $I___nmemb, u32  $I___size, v0 *$I___compar){}
+i32  $I_siggetmask(v0 $A_0){}
+i32  $I_isspace_l(i32 $A_0, $T___locale_struct  $A_1){}
+i32  $I___tolower_l(i32 $I___c, $T___locale_struct  $I___l){}
+i32  $I_getchar(v0 $A_0){}
+i32  $I_clearenv(v0 $A_0){}
+i32  $I_ecvt_r(f64 $I___value, i32 $I___ndigit, i32 *$I___decpt, i32 *$I___sign, i8 *$I___buf, u32  $I___len){}
+i32  $I_sethostname( i8 *$I___name, u32  $I___len){}
+i32  $I_execve( i8 *$I___path, i8 **$I___argv, i8 **$I___envp){}
+i32  $I_fsetpos($T__IO_FILE *$I___stream,  $T__G_fpos_t  *$I___pos){}
+i32  $I_acct( i8 *$I___name){}
+i8  *$I_strerror_l(i32 $I___errnum, $T___locale_struct  $I___l){}
+v0  $I_sync(v0 $A_0){}
+u32   $I_getegid(v0 $A_0){}
+i8  *$I_strdup( i8 *$I___s){}
+i32  $I_siginterrupt(i32 $I___sig, i32 $I___interrupt){}
+i32  $I_nanosleep( $T_timespec *$I___requested_time, $T_timespec *$I___remaining){}
+i32  $I_putenv(i8 *$I___string){}
+i32  $I_setpgrp(v0 $A_0){}
+i32  $I_gethostid(v0 $A_0){}
+i32    $I_mktime($T_tm *$I___tp){}
+i32  $I_alphasort( $T_dirent **$I___e1,  $T_dirent **$I___e2){}
+i32  $I_isalnum(i32 $A_0){}
+i8  *$I___stpcpy(i8 *$I___dest,  i8 *$I___src){}
+i32  $I_getchar_unlocked(v0 $A_0){}
+i32  $I_sigaddset($T_anon_n1G0mm  *$I___set, i32 $I___signo){}
+i32  $I_open( i8 *$I___file, i32 $I___oflag){}
+i32  $I_fputs( i8 *$I___s, $T__IO_FILE *$I___stream){}
+i32  $I_isalpha_l(i32 $A_0, $T___locale_struct  $A_1){}
+i32  $I_clock_nanosleep(i32   $I___clock_id, i32 $I___flags,  $T_timespec *$I___req, $T_timespec *$I___rem){}
+i32  $I_fscanf($T__IO_FILE *$I___stream,  i8 *$I___format){}
+i32  $I_feof_unlocked($T__IO_FILE *$I___stream){}
+u32   $I_fwrite( v0 *$I___ptr, u32  $I___size, u32  $I___n, $T__IO_FILE *$I___s){}
+i32  $I_atoi( i8 *$I___nptr){}
+i32  $I_dup(i32 $I___fd){}
+v0  $I_malloc_stats(v0 $A_0){}
+i32  $I_getloadavg(f64 *$I___loadavg, i32 $I___nelem){}
+i32  $I_setvbuf($T__IO_FILE *$I___stream, i8 *$I___buf, i32 $I___modes, u32  $I___n){}
+i32  $I_lrand48(v0 $A_0){}
+i8  *$I_qfcvt(f64 $I___value, i32 $I___ndigit, i32 *$I___decpt, i32 *$I___sign){}
+i32  $I_sigaction(i32 $I___sig,  $T_sigaction *$I___act, $T_sigaction *$I___oact){}
+i32  $I_isxdigit_l(i32 $A_0, $T___locale_struct  $A_1){}
+i8  *$I_ttyname(i32 $I___fd){}
+i32  $I_chroot( i8 *$I___path){}
+i32  $I_vscanf( i8 *$I___format, v0*  $I___arg){}
+i8  *$I_getpass( i8 *$I___prompt){}
+i32  $I_strncmp( i8 *$I___s1,  i8 *$I___s2, u32  $I___n){}
+i32  $I___xmknod(i32 $I___ver,  i8 *$I___path, u32  $I___mode, u32  *$I___dev){}
+i32  $I_fcntl(i32 $I___fd, i32 $I___cmd){}
+i32  $I_atexit(v0 *$I___func){}
+i32  $I_random(v0 $A_0){}
+i8  *$I___stpncpy(i8 *$I___dest,  i8 *$I___src, u32  $I___n){}
+$T___dirstream  *$I_fdopendir(i32 $I___fd){}
+v0  $I__Exit(i32 $I___status){}
+i32  $I_wctomb(i8 *$I___s, i32  $I___wchar){}
+i32   $I_getsid(i32  $I___pid){}
+i32  $I_getgroups(i32 $I___size, u32  *$I___list){}
+i32  $I_timer_create(i32   $I___clock_id, $T_sigevent *$I___evp, v0   *$I___timerid){}
+i32  $I_random_r($T_random_data *$I___buf, i32   *$I___result){}
+i32  $I_unlinkat(i32 $I___fd,  i8 *$I___name, i32 $I___flag){}
+i32    $I_read(i32 $I___fd, v0 *$I___buf, u32  $I___nbytes){}
+i32  $I_ispunct(i32 $A_0){}
+i32  $I_mkfifoat(i32 $I___fd,  i8 *$I___path, u32  $I___mode){}
+i8  *$I_initstate(u32 $I___seed, i8 *$I___statebuf, u32  $I___statelen){}
+i64  $I_strtoq( i8 *$I___nptr, i8 **$I___endptr, i32 $I___base){}
+i32  $I_lchown( i8 *$I___file, u32  $I___owner, u32  $I___group){}
+u32   $I_getgid(v0 $A_0){}
+i32  $I_nrand48_r(u16 [3]$I___xsubi, $T_drand48_data *$I___buffer, i32 *$I___result){}
+i32  $I_clock_getcpuclockid(i32   $I___pid, i32   *$I___clock_id){}
+u32   $I_fread(v0 *$I___ptr, u32  $I___size, u32  $I___n, $T__IO_FILE *$I___stream){}
+i32  $I_stat( i8 *$I___file, $T_stat *$I___buf){}
+i8  *$I_getenv(){}
+i32  $I_pclose($T__IO_FILE *$I___stream){}
+$T__IO_FILE  *$I_freopen( i8 *$I___filename,  i8 *$I___modes, $T__IO_FILE *$I___stream){}
+i32  $I_mkstemp(i8 *$I___template){}
+i32  $I_sscanf( i8 *$I___s,  i8 *$I___format){}
+i32  $I_fseeko($T__IO_FILE *$I___stream, i32  $I___off, i32 $I___whence){}
+i32  $I_daemon(i32 $I___nochdir, i32 $I___noclose){}
+i32  $I_setgid(u32  $I___gid){}
+v0  *$I_valloc(u32  $I___size){}
+v0  *$I_memccpy(v0 *$I___dest,  v0 *$I___src, i32 $I___c, u32  $I___n){}
+i32  $I_timer_gettime(v0   $I___timerid, $T_itimerspec *$I___value){}
+u32  $I_sleep(u32 $I___seconds){}
+i8  *$I_getwd(i8 *$I___buf){}
+i32  $I_getdomainname(i8 *$I___name, u32  $I___len){}
+v0  $I_setbuf($T__IO_FILE *$I___stream, i8 *$I___buf){}
+$T__IO_FILE  *$I_fdopen(i32 $I___fd,  i8 *$I___modes){}
+u32   $I_strspn( i8 *$I___s,  i8 *$I___accept){}
+i32  $I_strcmp( i8 *$I___s1,  i8 *$I___s2){}
+i32  $I_strncasecmp_l( i8 *$I___s1,  i8 *$I___s2, u32  $I___n, $T___locale_struct  $I___loc){}
+i32  $I_dprintf(i32 $I___fd,  i8 *$I___fmt){}
+i8  *$I_index( i8 *$I___s, i32 $I___c){}
+v0  $I_abort(v0 $A_0){}
+v0  $I_clearerr($T__IO_FILE *$I___stream){}
+i8  *$I_ctime( i32   *$I___timer){}
+i8  *$I_l64a(i32 $I___n){}
+i32   $I_fork(v0 $A_0){}
+i32  $I_jrand48_r(u16 [3]$I___xsubi, $T_drand48_data *$I___buffer, i32 *$I___result){}
+i32  $I_ttyname_r(i32 $I___fd, i8 *$I___buf, u32  $I___buflen){}
+i32  $I_raise(i32 $I___sig){}
+i32  $I_feof($T__IO_FILE *$I___stream){}
+i32  $I_mkfifo( i8 *$I___path, u32  $I___mode){}
+i32  $I_tolower(i32 $I___c){}
+i32  $I_sigismember( $T_anon_n1G0mm  *$I___set, i32 $I___signo){}
+$T_anon_KAIQej  $I_div(i32 $I___numer, i32 $I___denom){}
+v0  $I_rewinddir($T___dirstream *$I___dirp){}
+i32  $I_putc_unlocked(i32 $I___c, $T__IO_FILE *$I___stream){}
+i32  $I_lcong48_r(u16 [7]$I___param, $T_drand48_data *$I___buffer){}
+i32  $I_labs(i32 $I___x){}
+v0  *$I_malloc(u32  $I___size){}
+i32  $I_fflush_unlocked($T__IO_FILE *$I___stream){}
+i32  $I_mallopt(i32 $I___param, i32 $I___val){}
+i32  $I_gettimeofday($T_timeval *$I___tv, v0 *$I___tz){}
+u32   $I_fread_unlocked(v0 *$I___ptr, u32  $I___size, u32  $I___n, $T__IO_FILE *$I___stream){}
+i32  $I_ferror($T__IO_FILE *$I___stream){}
+i32  $I_atol( i8 *$I___nptr){}
+u32   $I_malloc_usable_size(v0 *$I___ptr){}
+i32  $I_openat(i32 $I___fd,  i8 *$I___file, i32 $I___oflag){}
+i32  $I_symlink( i8 *$I___from,  i8 *$I___to){}
+i32  $I_ftell($T__IO_FILE *$I___stream){}
+i32   $I___getdelim(i8 **$I___lineptr, u32  *$I___n, i32 $I___delimiter, $T__IO_FILE *$I___stream){}
+i32  $I_mknodat(i32 $I___fd,  i8 *$I___path, u32  $I___mode, u32  $I___dev){}
+i32  $I_sigqueue(i32  $I___pid, i32 $I___sig,  $T_sigval $I___val){}
+i32  $I_system( i8 *$I___command){}
+i32  $I_seed48_r(u16 [3]$I___seed16v, $T_drand48_data *$I___buffer){}
+i32  $I_erand48_r(u16 [3]$I___xsubi, $T_drand48_data *$I___buffer, f64 *$I___result){}
+i32  $I___uflow($T__IO_FILE *$A_0){}
+i32  $I_strcoll_l( i8 *$I___s1,  i8 *$I___s2, $T___locale_struct  $I___l){}
+i8  *$I_strsignal(i32 $I___sig){}
+$T_tm  *$I_localtime_r( i32   *$I___timer, $T_tm *$I___tp){}
+i32  $I_sigtimedwait( $T_anon_n1G0mm  *$I___set, $T_anon_4ul1Rc *$I___info,  $T_timespec *$I___timeout){}
+i32   $I_getline(i8 **$I___lineptr, u32  *$I___n, $T__IO_FILE *$I___stream){}
+i8  *$I_mktemp(i8 *$I___template){}
+i32  $I_sigstack($T_sigstack *$I___ss, $T_sigstack *$I___oss){}
+i32  $I_clock_getres(i32   $I___clock_id, $T_timespec *$I___res){}
+i32  $I_fflush($T__IO_FILE *$I___stream){}
+$T_tm  *$I_gmtime( i32   *$I___timer){}
+i32  $I_kill(i32  $I___pid, i32 $I___sig){}
+v0  $I_setusershell(v0 $A_0){}
+i32  $I_setregid(u32  $I___rgid, u32  $I___egid){}
+i32  $I_creat( i8 *$I___file, u32   $I___mode){}
+v0  $I_bcopy( v0 *$I___src, v0 *$I___dest, u32  $I___n){}
+v0  $I_setbuffer($T__IO_FILE *$I___stream, i8 *$I___buf, u32  $I___size){}
+ i32   **$I___ctype_tolower_loc(v0 $A_0){}
+i32  $I_lchmod( i8 *$I___file, u32  $I___mode){}
+i8  *$I_ecvt(f64 $I___value, i32 $I___ndigit, i32 *$I___decpt, i32 *$I___sign){}
+i32  $I_strncasecmp( i8 *$I___s1,  i8 *$I___s2, u32  $I___n){}
+i32  $I_ffsl(i32 $I___l){}
+i32  $I_ffsll(i64 $I___ll){}
+v0  $I_clearerr_unlocked($T__IO_FILE *$I___stream){}
+v0  *$I_memchr( v0 *$I___s, i32 $I___c, u32  $I___n){}
+u32   $I_mbstowcs(i32  *$I___pwcs,  i8 *$I___s, u32  $I___n){}
+i32  $I_isxdigit(i32 $A_0){}
+v0   $I_ssignal(i32 $I___sig, v0  $I___handler){}
+i32  $I_getdtablesize(v0 $A_0){}
+i8  *$I_mkdtemp(i8 *$I___template){}
+u16  *$I_seed48(u16 [3]$I___seed16v){}
+i32  $I_setreuid(u32  $I___ruid, u32  $I___euid){}
+i32  $I_lrand48_r($T_drand48_data *$I___buffer, i32 *$I___result){}
+i8  *$I_strstr( i8 *$I___haystack,  i8 *$I___needle){}
+i32  $I___xmknodat(i32 $I___ver, i32 $I___fd,  i8 *$I___path, u32  $I___mode, u32  *$I___dev){}
+i8  *$I_getlogin(v0 $A_0){}
+i32  $I_lutimes( i8 *$I___file,  $T_timeval [2]$I___tvp){}
+i32   $I_getppid(v0 $A_0){}
+i32  $I_mrand48_r($T_drand48_data *$I___buffer, i32 *$I___result){}
+v0  $I_srandom(u32 $I___seed){}
+i32   $I_tcgetpgrp(i32 $I___fd){}
+i32  $I_strerror_r(i32 $I___errnum, i8 *$I___buf, u32  $I___buflen){}
+ i32   **$I___ctype_toupper_loc(v0 $A_0){}
+i32  $I_sigreturn($T_sigcontext *$I___scp){}
+i64  $I_atoll( i8 *$I___nptr){}
+i8  *$I_tempnam( i8 *$I___dir,  i8 *$I___pfx){}
+i32  $I_futimes(i32 $I___fd,  $T_timeval [2]$I___tvp){}
+i32  $I_sigwait( $T_anon_n1G0mm  *$I___set, i32 *$I___sig){}
+i32    $I_timelocal($T_tm *$I___tp){}
+v0  $I_tzset(v0 $A_0){}
+i32  $I_vfscanf($T__IO_FILE *$I___s,  i8 *$I___format, v0*  $I___arg){}
+i32  $I_sigblock(i32 $I___mask){}
+i32  $I_getc($T__IO_FILE *$I___stream){}
+i32  $I_fileno($T__IO_FILE *$I___stream){}
+i8  *$I_strsep(i8 **$I___stringp,  i8 *$I___delim){}
+i32  $I_getc_unlocked($T__IO_FILE *$I___stream){}
+i32  $I_fstat(i32 $I___fd, $T_stat *$I___buf){}
+i32   $I_getpgid(i32  $I___pid){}
+i32  $I_fgetc_unlocked($T__IO_FILE *$I___stream){}
+i32   $I_getpgrp(v0 $A_0){}
+i32  $I_clock_settime(i32   $I___clock_id,  $T_timespec *$I___tp){}
+i32  $I_sysconf(i32 $I___name){}
+i32  $I_killpg(i32  $I___pgrp, i32 $I___sig){}
+i32  $I_islower_l(i32 $A_0, $T___locale_struct  $A_1){}
+i32  $I_sigwaitinfo( $T_anon_n1G0mm  *$I___set, $T_anon_4ul1Rc *$I___info){}
+i32  $I_rand_r(u32 *$I___seed){}
+v0  $I_psignal(i32 $I___sig,  i8 *$I___s){}
+i8  *$I_qecvt(f64 $I___value, i32 $I___ndigit, i32 *$I___decpt, i32 *$I___sign){}
+i32  $I_isprint_l(i32 $A_0, $T___locale_struct  $A_1){}
+i32  $I_sethostid(i32 $I___id){}
+i32  $I_isalnum_l(i32 $A_0, $T___locale_struct  $A_1){}
+i32  $I___fxstatat(i32 $I___ver, i32 $I___fildes,  i8 *$I___filename, $T_stat *$I___stat_buf, i32 $I___flag){}
+i32  $I_unlink( i8 *$I___name){}
+i32  $I_isascii(i32 $I___c){}
+i32  $I_renameat(i32 $I___oldfd,  i8 *$I___old, i32 $I___newfd,  i8 *$I___new){}
+i32  $I_mkdirat(i32 $I___fd,  i8 *$I___path, u32  $I___mode){}
+i32  $I_islower(i32 $A_0){}
+i8  *$I_asctime_r( $T_tm *$I___tp, i8 *$I___buf){}
+f64  $I_drand48(v0 $A_0){}
+i32  $I_dup2(i32 $I___fd, i32 $I___fd2){}
+i32  $I_mbtowc(i32  *$I___pwc,  i8 *$I___s, u32  $I___n){}
+i32  $I_vhangup(v0 $A_0){}
+$T__IO_FILE  *$I_fopen( i8 *$I___filename,  i8 *$I___modes){}
+i32  $I_mrand48(v0 $A_0){}
+i32  $I_adjtime( $T_timeval *$I___delta, $T_timeval *$I___olddelta){}
+i32  $I_sigpending($T_anon_n1G0mm  *$I___set){}
+i32  $I_pthread_sigmask(i32 $I___how,  $T_anon_n1G0mm *$I___newmask, $T_anon_n1G0mm *$I___oldmask){}
+i32   $I_setsid(v0 $A_0){}
+i32  $I_sigemptyset($T_anon_n1G0mm  *$I___set){}
+i8  *$I_strncpy(i8 *$I___dest,  i8 *$I___src, u32  $I___n){}
+i32    $I_pread(i32 $I___fd, v0 *$I___buf, u32  $I___nbytes, i32  $I___offset){}
+i32    $I_write(i32 $I___fd,  v0 *$I___buf, u32  $I___n){}
+i32  $I_mblen( i8 *$I___s, u32  $I___n){}
+i32  $I_utimensat(i32 $I___fd,  i8 *$I___path,  $T_timespec [2]$I___times, i32 $I___flags){}
+v0  $I_exit(i32 $I___status){}
+i32  $I_fcvt_r(f64 $I___value, i32 $I___ndigit, i32 *$I___decpt, i32 *$I___sign, i8 *$I___buf, u32  $I___len){}
+i32  $I_sigprocmask(i32 $I___how,  $T_anon_n1G0mm  *$I___set, $T_anon_n1G0mm  *$I___oset){}
+i32  $I_iscntrl_l(i32 $A_0, $T___locale_struct  $A_1){}
+i32  $I_symlinkat( i8 *$I___from, i32 $I___tofd,  i8 *$I___to){}
+u32   $I_geteuid(v0 $A_0){}
+i32  $I_fprintf($T__IO_FILE *$I___stream,  i8 *$I___format){}
+i32  $I_timer_getoverrun(v0   $I___timerid){}
+i32  $I_strcoll( i8 *$I___s1,  i8 *$I___s2){}
+i32   $I_vfork(v0 $A_0){}
+i32    $I_pwrite(i32 $I___fd,  v0 *$I___buf, u32  $I___n, i32  $I___offset){}
+i32  $I_at_quick_exit(v0 *$I___func){}
+i32  $I_ffs(i32 $I___i){}
+i32  $I___fxstat(i32 $I___ver, i32 $I___fildes, $T_stat *$I___stat_buf){}
+i32  $I_getpagesize(v0 $A_0){}
+i32  $I_vsnprintf(i8 *$I___s, u32  $I___maxlen,  i8 *$I___format, v0*  $I___arg){}
+u64  $I_strtoull( i8 *$I___nptr, i8 **$I___endptr, i32 $I___base){}
+i32  $I_mknod( i8 *$I___path, u32  $I___mode, u32  $I___dev){}
+i32  $I_brk(v0 *$I___addr){}
+$T_tm  *$I_localtime( i32   *$I___timer){}
+i32  $I_tcsetpgrp(i32 $I___fd, i32  $I___pgrp_id){}
+i32  $I_toascii(i32 $I___c){}
+i32  $I_chmod( i8 *$I___file, u32  $I___mode){}
+u32   $I_umask(u32  $I___mask){}
+i8  *$I_strtok_r(i8 *$I___s,  i8 *$I___delim, i8 **$I___save_ptr){}
+i32  $I_gsignal(i32 $I___sig){}
+i32  $I_select(i32 $I___nfds, $T_anon_msreSD *$I___readfds, $T_anon_msreSD *$I___writefds, $T_anon_msreSD *$I___exceptfds, $T_timeval *$I___timeout){}
+i64  $I_strtoll( i8 *$I___nptr, i8 **$I___endptr, i32 $I___base){}
+i32  $I_isspace(i32 $A_0){}
+$T__IO_FILE  *$I_open_memstream(i8 **$I___bufloc, u32  *$I___sizeloc){}
+i8  *$I_strcat(i8 *$I___dest,  i8 *$I___src){}
+$T___dirstream  *$I_opendir( i8 *$I___name){}
+u32   $I_confstr(i32 $I___name, i8 *$I___buf, u32  $I___len){}
+i32  $I_fdatasync(i32 $I___fildes){}
+i32  $I_fileno_unlocked($T__IO_FILE *$I___stream){}
+i32  $I_isupper_l(i32 $A_0, $T___locale_struct  $A_1){}
+i32  $I_lockf(i32 $I___fd, i32 $I___cmd, i32   $I___len){}
+i32  $I___libc_current_sigrtmax(v0 $A_0){}
+i32  $I_strtol( i8 *$I___nptr, i8 **$I___endptr, i32 $I___base){}
+i32  $I_setlogin( i8 *$I___name){}
+i32  $I_pipe(i32 [2]$I___pipedes){}
+i8  *$I_getcwd(i8 *$I___buf, u32  $I___size){}
+v0  *$I_calloc(u32  $I___nmemb, u32  $I___size){}
+i32  $I_fchmod(i32 $I___fd, u32  $I___mode){}
+i32  $I_mkdir( i8 *$I___path, u32  $I___mode){}
+i32  $I_nice(i32 $I___inc){}
+v0   $I_signal(i32 $I___sig, v0  $I___handler){}
+v0  $I_free(v0 *$I___ptr){}
+i32  $I_setstate_r(i8 *$I___statebuf, $T_random_data *$I___buf){}
+i32  $I_fchown(i32 $I___fd, u32  $I___owner, u32  $I___group){}
+i8  *$I_tmpnam(i8 *$I___s){}
+i32  $I_bcmp( v0 *$I___s1,  v0 *$I___s2, u32  $I___n){}
+i32  $I_unsetenv( i8 *$I___name){}
+$T_anon_EEsSE4  $I_lldiv(i64 $I___numer, i64 $I___denom){}
+v0   $I___sysv_signal(i32 $I___sig, v0  $I___handler){}
+$T__IO_FILE  *$I_fmemopen(v0 *$I___s, u32  $I___len,  i8 *$I___modes){}
+i32  $I___overflow($T__IO_FILE *$A_0, i32 $A_1){}
+i32  $I_malloc_info(i32 $I___options, $T__IO_FILE *$I___fp){}
+f32  $I_strtof( i8 *$I___nptr, i8 **$I___endptr){}
+i32  $I_dirfd($T___dirstream *$I___dirp){}
+i32  $I_flock(i32 $I___fd, i32 $I___operation){}
+i32  $I_posix_fadvise(i32 $I___fd, i32   $I___offset, i32   $I___len, i32 $I___advise){}
+i8  *$I_fgets(i8 *$I___s, i32 $I___n, $T__IO_FILE *$I___stream){}
+u32  $I_alarm(u32 $I___seconds){}
+v0  *$I_pvalloc(u32  $I___size){}
+i32  $I_srand48_r(i32 $I___seedval, $T_drand48_data *$I___buffer){}
+i32  $I_chown( i8 *$I___file, u32  $I___owner, u32  $I___group){}
+i32  $I_sigaltstack( $T_anon_Ye6e9c *$I___ss, $T_anon_Ye6e9c *$I___oss){}
+v0  $I_srand48(i32 $I___seedval){}
+u32   $I_strftime_l(i8 *$I___s, u32  $I___maxsize,  i8 *$I___format,  $T_tm *$I___tp, $T___locale_struct  $I___loc){}
+i32   $I_getpid(v0 $A_0){}
+u32   $I_strxfrm(i8 *$I___dest,  i8 *$I___src, u32  $I___n){}
+i32  $I_fgetpos($T__IO_FILE *$I___stream, $T__G_fpos_t  *$I___pos){}
+i32  $I_clock_gettime(i32   $I___clock_id, $T_timespec *$I___tp){}
+i32  $I_profil(u16 *$I___sample_buffer, u32  $I___size, u32  $I___offset, u32 $I___scale){}
+u32   $I___ctype_get_mb_cur_max(v0 $A_0){}
+$T_mallinfo  $I_mallinfo(v0 $A_0){}
+i32  $I_pthread_kill(u32  $I___threadid, i32 $I___signo){}
+i32  $I_timer_delete(v0   $I___timerid){}
+v0  $I_endusershell(v0 $A_0){}
+u64  $I_strtouq( i8 *$I___nptr, i8 **$I___endptr, i32 $I___base){}
+i8  *$I_stpncpy(i8 *$I___dest,  i8 *$I___src, u32  $I___n){}
+i64  $I_llabs(i64 $I___x){}
+i32  $I_timer_settime(v0   $I___timerid, i32 $I___flags,  $T_itimerspec *$I___value, $T_itimerspec *$I___ovalue){}
+i32  $I_posix_memalign(v0 **$I___memptr, u32  $I___alignment, u32  $I___size){}
+i32  $I_gethostname(i8 *$I___name, u32  $I___len){}
+i32  $I_nrand48(u16 [3]$I___xsubi){}
+i32  $I_getlogin_r(i8 *$I___name, u32  $I___name_len){}
+i32  $I_setdomainname( i8 *$I___name, u32  $I___len){}
+i32  $I_execlp( i8 *$I___file,  i8 *$I___arg){}
+i32  $I_isgraph(i32 $A_0){}
+v0  $I_flockfile($T__IO_FILE *$I___stream){}
+i32  $I_fpathconf(i32 $I___fd, i32 $I___name){}
+i32  $I___xstat(i32 $I___ver,  i8 *$I___filename, $T_stat *$I___stat_buf){}
+$T_tm  *$I_gmtime_r( i32   *$I___timer, $T_tm *$I___tp){}
+i32  $I_timespec_get($T_timespec *$I___ts, i32 $I___base){}
+i32    $I_readlinkat(i32 $I___fd,  i8 *$I___path, i8 *$I___buf, u32  $I___len){}
+i32  $I_a64l( i8 *$I___s){}
+i32  $I_linkat(i32 $I___fromfd,  i8 *$I___from, i32 $I___tofd,  i8 *$I___to, i32 $I___flags){}
+f64  $I_strtold( i8 *$I___nptr, i8 **$I___endptr){}
+v0  *$I___default_morecore(i32  $I___size){}
+i8  *$I_strtok(i8 *$I___s,  i8 *$I___delim){}
+i8  *$I_asctime( $T_tm *$I___tp){}
+i8  *$I_gcvt(f64 $I___value, i32 $I___ndigit, i8 *$I___buf){}
+v0  *$I_memalign(u32  $I___alignment, u32  $I___size){}
+v0  $I_quick_exit(i32 $I___status){}
+u32  $I_strtoul( i8 *$I___nptr, i8 **$I___endptr, i32 $I___base){}
+i32  $I__toupper(i32 $A_0){}
+i8  *$I_getusershell(v0 $A_0){}
+$T_anon_hSLKea  $I_ldiv(i32 $I___numer, i32 $I___denom){}
+i32  $I_isdigit_l(i32 $A_0, $T___locale_struct  $A_1){}
+i32  $I_vprintf( i8 *$I___format, v0*  $I___arg){}
+i32  $I_posix_fallocate(i32 $I___fd, i32   $I___offset, i32   $I___len){}
+i32  $I_chdir( i8 *$I___path){}
+i8  *$I_ctime_r( i32   *$I___timer, i8 *$I___buf){}
+i32  $I_execle( i8 *$I___path,  i8 *$I___arg){}
+i32  $I_ftrylockfile($T__IO_FILE *$I___stream){}
+i32  $I_isupper(i32 $A_0){}
+i8  *$I_strrchr( i8 *$I___s, i32 $I___c){}
+u32   $I_strnlen( i8 *$I___string, u32  $I___maxlen){}
+i32  $I_faccessat(i32 $I___fd,  i8 *$I___file, i32 $I___type, i32 $I___flag){}
+i32  $I_iscntrl(i32 $A_0){}
+i32    $I_clock(v0 $A_0){}
+i32    $I_readlink( i8 *$I___path, i8 *$I___buf, u32  $I___len){}
+i32  $I_utime( i8 *$I___file,  $T_utimbuf *$I___file_times){}
+i32  $I_usleep(u32  $I___useconds){}
+i32   $I_ftello($T__IO_FILE *$I___stream){}
+i32  $I_snprintf(i8 *$I___s, u32  $I___maxlen,  i8 *$I___format){}
+u32   $I_wcstombs(i8 *$I___s,  i32  *$I___pwcs, u32  $I___n){}
+i32  $I_putw(i32 $I___w, $T__IO_FILE *$I___stream){}
+i32  $I_pselect(i32 $I___nfds, $T_anon_msreSD *$I___readfds, $T_anon_msreSD *$I___writefds, $T_anon_msreSD *$I___exceptfds,  $T_timespec *$I___timeout,  $T_anon_n1G0mm *$I___sigmask){}
+u32   $I_ualarm(u32  $I___value, u32  $I___interval){}
+i32  $I_ftruncate(i32 $I___fd, i32  $I___length){}
+i32  $I_putchar(i32 $I___c){}
+v0  *$I_memmove(v0 *$I___dest,  v0 *$I___src, u32  $I___n){}
+i32  $I_closedir($T___dirstream *$I___dirp){}
+i32  $I_futimens(i32 $I___fd,  $T_timespec [2]$I___times){}
+i32    $I_time(i32   *$I___timer){}
+i8  *$I_qgcvt(f64 $I___value, i32 $I___ndigit, i8 *$I___buf){}
+u32   $I_strlen( i8 *$I___s){}
+i32  $I_printf( i8 *$I___format){}
+i32    $I_timegm($T_tm *$I___tp){}
+i8  *$I_realpath( i8 *$I___name, i8 *$I___resolved){}
+i32  $I___toupper_l(i32 $I___c, $T___locale_struct  $I___l){}
+i32  $I_sigdelset($T_anon_n1G0mm  *$I___set, i32 $I___signo){}
+$T_dirent  *$I_readdir($T___dirstream *$I___dirp){}
+i32  $I_remove( i8 *$I___filename){}
+i32   $I___getpgid(i32  $I___pid){}
+
+// top-level var decls:
+ $T_config  [10]$I_configuration_table;
+ $T_ct_data  [0]$I_bl_tree;
+ $T_ct_data  [0]$I_dyn_dtree;
+ $T_ct_data  [0]$I_dyn_ltree;
+ $T_ct_data  [0]$I_static_ltree;
+ $T_ct_data  [30]$I_static_dtree;
+ $T_tree_desc  $I_bl_desc;
+ $T_tree_desc  $I_d_desc;
+ $T_tree_desc  $I_l_desc;
+ i32    $I_compressed_len;
+ i32    $I_input_len;
+ i32   $I_zfile;
+ i32  $I_bi_valid;
+ i32  $I_bitcount;
+ i32  $I_compr_level;
+ i32  $I_done;
+ i32  $I_eofile;
+ i32  $I_first_nonopt;
+ i32  $I_heap_len;
+ i32  $I_heap_max;
+ i32  $I_j;
+ i32  $I_last_nonopt;
+ i32  $I_max_len;
+ i32  $I_msg_done = (0);
+ i32  $I_peek_bits;
+ i32  $I_valid;
+ i32  [0]$I_heap;
+ i32  [0]$I_leaves;
+ i32  [0]$I_lit_base;
+ i32  [0]$I_parents;
+ i32  [19]$I_extra_blbits;
+ i32  [29]$I_base_length;
+ i32  [29]$I_extra_lbits;
+ i32  [30]$I_base_dist;
+ i32  [30]$I_extra_dbits;
+ i8  *$I_nextchar;
+ i8  *$I_posixly_correct;
+ i8  **$I_license_msg;
+ i8  **$I_sys_errlist;
+ i8  *[0]$I__sys_siglist;
+ i8  *[0]$I_sys_siglist;
+ u16   $I_io_bitbuf;
+ u16   *$I_cpdext;
+ u16   *$I_cpdist;
+ u16   *$I_cplens;
+ u16   *$I_cplext;
+ u16   [0]$I_bl_count;
+ u16   [256]$I_pt_table;
+ u16  $I_bi_buf;
+ u32   $I_bitbuf;
+ u32   $I_crc;
+ u32   $I_opt_len;
+ u32   $I_orig_len;
+ u32   $I_rsync_chunk_end;
+ u32   $I_rsync_sum;
+ u32   $I_static_len;
+ u32  $I_blocksize;
+ u32  $I_ins_h;
+ u32  $I_last_dist;
+ u32  $I_last_flags;
+ u32  $I_last_lit;
+ u32  $I_lookahead;
+ u32  $I_max_lazy_match;
+ u32  $I_subbitbuf;
+ u32  *$I_border;
+ u8   $I_flag_bit;
+ u8   $I_flags;
+ u8   [0]$I_depth;
+ u8   [0]$I_flag_buf;
+ u8   [0]$I_length_code;
+ u8   [0]$I_pt_len;
+ u8   [19]$I_bl_order;
+ u8   [256]$I_literal;
+ u8   [512]$I_dist_code;
+$T__IO_FILE  *$I_stderr;
+$T__IO_FILE  *$I_stdin;
+$T__IO_FILE  *$I_stdout;
+$T_option  *$I_longopts;
+$T_stat  $I_istat;
+i32    $I_bytes_in;
+i32    $I_bytes_out;
+i32    $I_header_bytes;
+i32    $I_ifile_size;
+i32    $I_time_stamp;
+i32    $I_total_in;
+i32    $I_total_out;
+i32  $I___daylight;
+i32  $I___getopt_initialized;
+i32  $I___timezone;
+i32  $I_ascii = (0);
+i32  $I_block_mode = (128);
+i32  $I_block_start;
+i32  $I_daylight;
+i32  $I_dbits = (6);
+i32  $I_decompress = (0);
+i32  $I_decrypt;
+i32  $I_do_lzw = (0);
+i32  $I_exit_code = (0);
+i32  $I_ext_header = (0);
+i32  $I_force = (0);
+i32  $I_foreground;
+i32  $I_ifd;
+i32  $I_last_member;
+i32  $I_lbits = (9);
+i32  $I_level = (6);
+i32  $I_list = (0);
+i32  $I_maxbits = (16);
+i32  $I_method = (8);
+i32  $I_nice_match;
+i32  $I_no_name = (-(1));
+i32  $I_no_time = (-(1));
+i32  $I_ofd;
+i32  $I_opterr = (1);
+i32  $I_optind = (1);
+i32  $I_optopt = ('?');
+i32  $I_ordering;
+i32  $I_part_nb;
+i32  $I_pkzip = (0);
+i32  $I_quiet = (0);
+i32  $I_recursive = (0);
+i32  $I_remove_ofname = (0);
+i32  $I_rsync = (0);
+i32  $I_save_orig_name;
+i32  $I_sys_nerr;
+i32  $I_test = (0);
+i32  $I_timezone;
+i32  $I_to_stdout = (0);
+i32  $I_verbose = (0);
+i32  *$I_file_method;
+i8  *$I_env;
+i8  *$I_key;
+i8  *$I_optarg;
+i8  *$I_progname;
+i8  *$I_z_suffix;
+i8  **$I___environ;
+i8  **$I_args = ([v0 *]((0)));
+i8  *[2]$I___tzname;
+i8  *[2]$I_tzname;
+i8  [1024]$I_ifname;
+i8  [1024]$I_ofname;
+u16   *$I_file_type;
+u16   *$I_mask_bits;
+u16   [32768]$I_d_buf;
+u16   [65536]$I_prev;
+u32   $I_bb;
+u32   $I_window_size = (([u32  ]((2)))*(32768));
+u32   $I_z_len;
+u32   *$I_crc_32_tab;
+u32  $I_bk;
+u32  $I_good_match;
+u32  $I_hufts;
+u32  $I_inptr;
+u32  $I_insize;
+u32  $I_match_start;
+u32  $I_max_chain_length;
+u32  $I_outcnt;
+u32  $I_prev_length;
+u32  $I_strstart;
+u8   [0]$I_inbuf;
+u8   [0]$I_outbuf;
+u8   [0]$I_window;
+
+// other code:
+  u16  $I___bswap_16(u16  $I___bsx)
+{
+return ($I___bsx);
+}
+
+  u32  $I___bswap_32(u32  $I___bsx)
+{
+return ($I___bsx);
+}
+
+  u32  $I___bswap_64(u32  $I___bsx)
+{
+return ($I___bsx);
+}
+
+  u16  $I___uint16_identity(u16  $I___x)
+{
+return ($I___x);
+}
+
+  u32  $I___uint32_identity(u32  $I___x)
+{
+return ($I___x);
+}
+
+  u32  $I___uint64_identity(u32  $I___x)
+{
+return ($I___x);
+}
+
 v0 $I_bi_init(i32  $I_zipfile)
 {
 (($I_zfile)=($I_zipfile));
@@ -1997,9 +2001,6 @@ if (($I_match_available)) {
 }
 }
 
- i32 $I_REQUIRE_ORDER = 0;
-i32 $I_PERMUTE = 1;
-i32 $I_RETURN_IN_ORDER = 2 ;
  i8 *$I_strchr( i8 *$I_str, i32 $I_chr)
 {
 while ((*($I_str))) {
@@ -2401,7 +2402,7 @@ i32  $I_e = (*($I___errno_location()));
 (($I_exit_code)=(1));
 }
 
-i32 $I_main(i32 $I_argc, i8 **$I_argv)
+i32 main(i32 $I_argc, i8 **$I_argv)
 {
 i32  $I_file_count;
 i32  $I_proglen;
@@ -2436,7 +2437,7 @@ if (((($I_strcmp((($I_progname)+(1)), ("cat")))==(0))|(($I_strcmp(($I_progname),
 (($I_z_suffix)=(".gz"));
 (($I_z_len)=($I_strlen(($I_z_suffix))));
 while (((($I_optc)=($I_getopt_long(($I_argc), ($I_argv), ("ab:cdfhH?lLmMnNqrS:tvVZ123456789"), ($I_longopts), ([i32 *]((0))))))!=(-(1)))) {
-for (u8 $_W9D7St = 0; $_W9D7St == 0; $_W9D7St = 1) {
+for (u8 $_grTnHt = 0; $_grTnHt == 0; $_grTnHt = 1) {
 if (($I_optc) == ('a')) {
 (($I_ascii)=(1));
 break;

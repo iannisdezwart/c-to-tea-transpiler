@@ -1,13 +1,57 @@
-struct Foo {
-    int yo;
-};
+// struct Foo
+// {
+//     enum
+//     {
+//         A,
+//         B
+//     } c;
+// };
 
-struct Foo lol[1] = {{ 1 }};
+// enum Test
+// {
+//     C,
+//     D
+// };
 
-void test()
+// enum
+// {
+//     E,
+//     F,
+//     G
+// };
+
+// struct LOL
+// {
+//     enum Li
+//     {
+//         H,
+//         I
+//     };
+
+//     enum Li x;
+// };
+
+typedef enum L
 {
-    lol[0].yo = 2;
+    hioesnatioehas
+} g;
+
+void x(g l) {
+    if (l == hioesnatioehas) {
+        return;
+    }
 }
+
+// struct Foo {
+//     int yo;
+// };
+
+// struct Foo lol[1] = {{ 1 }};
+
+// void test()
+// {
+//     lol[0].yo = 2;
+// }
 
 // int test;
 // int test;

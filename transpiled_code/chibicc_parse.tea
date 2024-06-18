@@ -1,14 +1,104 @@
+// enum decls:
+i32 $I_P_ALL = 0;
+i32 $I_P_PID = 1;
+i32 $I_P_PGID = 2;
+i32 $I__CLOCK_REALTIME = 0;
+i32 $I__CLOCK_MONOTONIC = 1;
+i32 $I__CLOCK_PROCESS_CPUTIME_ID = 2;
+i32 $I__CLOCK_THREAD_CPUTIME_ID = 3;
+i32 $I_TK_IDENT = 0;
+i32 $I_TK_PUNCT = 1;
+i32 $I_TK_KEYWORD = 2;
+i32 $I_TK_STR = 3;
+i32 $I_TK_NUM = 4;
+i32 $I_TK_PP_NUM = 5;
+i32 $I_TK_EOF = 6;
+i32 $I_ND_NULL_EXPR = 0;
+i32 $I_ND_ADD = 1;
+i32 $I_ND_SUB = 2;
+i32 $I_ND_MUL = 3;
+i32 $I_ND_DIV = 4;
+i32 $I_ND_NEG = 5;
+i32 $I_ND_MOD = 6;
+i32 $I_ND_BITAND = 7;
+i32 $I_ND_BITOR = 8;
+i32 $I_ND_BITXOR = 9;
+i32 $I_ND_SHL = 10;
+i32 $I_ND_SHR = 11;
+i32 $I_ND_EQ = 12;
+i32 $I_ND_NE = 13;
+i32 $I_ND_LT = 14;
+i32 $I_ND_LE = 15;
+i32 $I_ND_ASSIGN = 16;
+i32 $I_ND_COND = 17;
+i32 $I_ND_COMMA = 18;
+i32 $I_ND_MEMBER = 19;
+i32 $I_ND_ADDR = 20;
+i32 $I_ND_DEREF = 21;
+i32 $I_ND_NOT = 22;
+i32 $I_ND_BITNOT = 23;
+i32 $I_ND_LOGAND = 24;
+i32 $I_ND_LOGOR = 25;
+i32 $I_ND_RETURN = 26;
+i32 $I_ND_IF = 27;
+i32 $I_ND_FOR = 28;
+i32 $I_ND_DO = 29;
+i32 $I_ND_SWITCH = 30;
+i32 $I_ND_CASE = 31;
+i32 $I_ND_BLOCK = 32;
+i32 $I_ND_GOTO = 33;
+i32 $I_ND_GOTO_EXPR = 34;
+i32 $I_ND_LABEL = 35;
+i32 $I_ND_LABEL_VAL = 36;
+i32 $I_ND_FUNCALL = 37;
+i32 $I_ND_EXPR_STMT = 38;
+i32 $I_ND_STMT_EXPR = 39;
+i32 $I_ND_VAR = 40;
+i32 $I_ND_VLA_PTR = 41;
+i32 $I_ND_NUM = 42;
+i32 $I_ND_CAST = 43;
+i32 $I_ND_MEMZERO = 44;
+i32 $I_ND_ASM = 45;
+i32 $I_ND_CAS = 46;
+i32 $I_ND_EXCH = 47;
+i32 $I_TY_VOID = 0;
+i32 $I_TY_BOOL = 1;
+i32 $I_TY_CHAR = 2;
+i32 $I_TY_SHORT = 3;
+i32 $I_TY_INT = 4;
+i32 $I_TY_LONG = 5;
+i32 $I_TY_FLOAT = 6;
+i32 $I_TY_DOUBLE = 7;
+i32 $I_TY_LDOUBLE = 8;
+i32 $I_TY_ENUM = 9;
+i32 $I_TY_PTR = 10;
+i32 $I_TY_FUNC = 11;
+i32 $I_TY_ARRAY = 12;
+i32 $I_TY_VLA = 13;
+i32 $I_TY_STRUCT = 14;
+i32 $I_TY_UNION = 15;
+i32 $I_VOID = 0;
+i32 $I_BOOL = 1;
+i32 $I_CHAR = 2;
+i32 $I_SHORT = 3;
+i32 $I_INT = 4;
+i32 $I_LONG = 5;
+i32 $I_FLOAT = 6;
+i32 $I_DOUBLE = 7;
+i32 $I_OTHER = 8;
+i32 $I_SIGNED = 9;
+i32 $I_UNSIGNED = 10;
 // hoisted nested struct decls:
-class $T_anon_HVpA4T {
+class $T_anon_Lqne5c {
 };
 
 // hoisted empty struct decls:
 class $T___sFILEX {};
 
 // non-empty struct decls:
-class $T_anon_QeFhea {
+class $T_anon_YwHSZM {
 } ;
-class $T_anon_H4xYUY {
+class $T_anon_npRFIr {
 i8 [128]$I___mbstate8;
 i64 $I__mbstateL;
 } ;
@@ -53,36 +143,36 @@ i32 $I___sig;
 $T___darwin_pthread_handler_rec *$I___cleanup_stack;
 i8 [8176]$I___opaque;
 } ;
-class $T_anon_W6XMC5 {
+class $T_anon_JwLyQZ {
 i32   $I___min;
 i32   $I___max;
 i32   $I___map;
 u32  *$I___types;
 } ;
-class $T_anon_pfo9Ni {
+class $T_anon_jWXFr5 {
 i32 $I___nranges;
-$T_anon_W6XMC5 *$I___ranges;
+$T_anon_JwLyQZ *$I___ranges;
 } ;
-class $T_anon_C9pXLi {
+class $T_anon_1cATxe {
 i8 [14]$I___name;
 u32  $I___mask;
 } ;
-class $T_anon_HVeHDH {
+class $T_anon_i5e1WI {
 i8 [8]$I___magic;
 i8 [32]$I___encoding;
 i32   $I___invalid_rune;
 u32  [256]$I___runetype;
 i32   [256]$I___maplower;
 i32   [256]$I___mapupper;
-$T_anon_pfo9Ni $I___runetype_ext;
-$T_anon_pfo9Ni $I___maplower_ext;
-$T_anon_pfo9Ni $I___mapupper_ext;
+$T_anon_jWXFr5 $I___runetype_ext;
+$T_anon_jWXFr5 $I___maplower_ext;
+$T_anon_jWXFr5 $I___mapupper_ext;
 v0 *$I___variable;
 i32 $I___variable_len;
 i32 $I___ncharclasses;
-$T_anon_C9pXLi *$I___charclasses;
+$T_anon_1cATxe *$I___charclasses;
 } ;
-class $T_anon_c7mVbX {
+class $T_anon_KAyajZ {
 u32   $I_gl_pathc;
 i32 $I_gl_matchc;
 u32   $I_gl_offs;
@@ -251,15 +341,15 @@ class $T_rlimit {
 u64   $I_rlim_cur;
 u64   $I_rlim_max;
 } ;
-class $T_anon_1zqkIx {
+class $T_anon_ek9iKe {
 i32 $I_quot;
 i32 $I_rem;
 } ;
-class $T_anon_seCgOz {
+class $T_anon_XcpZXu {
 i32 $I_quot;
 i32 $I_rem;
 } ;
-class $T_anon_6S468f {
+class $T_anon_wV1dbA {
 i64 $I_quot;
 i64 $I_rem;
 } ;
@@ -304,12 +394,12 @@ i32 $I_tm_isdst;
 i32 $I_tm_gmtoff;
 i8 *$I_tm_zone;
 } ;
-class $T_anon_t8QDRB {
+class $T_anon_lhBDg6 {
 i8 **$I_data;
 i32 $I_capacity;
 i32 $I_len;
 } ;
-class $T_anon_TtXQ7B {
+class $T_anon_9fyvgE {
 i8 *$I_name;
 i32 $I_file_no;
 i8 *$I_contents;
@@ -325,7 +415,7 @@ i8 *$I_loc;
 i32 $I_len;
 $T_Type *$I_ty;
 i8 *$I_str;
-$T_anon_TtXQ7B *$I_file;
+$T_anon_9fyvgE *$I_file;
 i8 *$I_filename;
 i32 $I_line_no;
 i32 $I_line_delta;
@@ -357,7 +447,7 @@ $T_Obj *$I_alloca_bottom;
 i32 $I_stack_size;
 i8 $I_is_live;
 i8 $I_is_root;
-$T_anon_t8QDRB $I_refs;
+$T_anon_lhBDg6 $I_refs;
 } ;
 class $T_Relocation {
 $T_Relocation *$I_next;
@@ -435,17 +525,17 @@ i8 $I_is_bitfield;
 i32 $I_bit_offset;
 i32 $I_bit_width;
 } ;
-class $T_anon_ULabG9 {
+class $T_anon_hrMWoN {
 i8 *$I_key;
 i32 $I_keylen;
 v0 *$I_val;
 } ;
-class $T_anon_QZT3hI {
-$T_anon_ULabG9 *$I_buckets;
+class $T_anon_ijePDX {
+$T_anon_hrMWoN *$I_buckets;
 i32 $I_capacity;
 i32 $I_used;
 } ;
-class $T_anon_rykw41 {
+class $T_anon_YcSHOx {
 $T_Obj *$I_var;
 $T_Type *$I_type_def;
 $T_Type *$I_enum_ty;
@@ -453,10 +543,10 @@ i32 $I_enum_val;
 } ;
 class $T_Scope {
 $T_Scope *$I_next;
-$T_anon_QZT3hI $I_vars;
-$T_anon_QZT3hI $I_tags;
+$T_anon_ijePDX $I_vars;
+$T_anon_ijePDX $I_tags;
 } ;
-class $T_anon_d2PPOJ {
+class $T_anon_9Xm4fk {
 i8 $I_is_typedef;
 i8 $I_is_static;
 i8 $I_is_extern;
@@ -481,367 +571,367 @@ $T_Obj *$I_var;
 } ;
 
 // top-level fn decls:
-i8  *$I_strncat(i8 *$I___s1,  i8 *$I___s2, u32   $I___n){}
-i8  $I_file_exists(i8 *$I_path){}
-i32  $I_chmod( i8 *$A_0, u16    $A_1){}
-i32    $I_getline(i8 **$I___linep, u32   *$I___linecapp, $T___sFILE *$I___stream){}
-v0  *$I_memccpy(v0 *$I___dst,  v0 *$I___src, i32 $I___c, u32   $I___n){}
-i8  *$I_ctime_r( i32   *$A_0, i8 *$A_1){}
-v0  $I_hashmap_delete($T_anon_QZT3hI *$I_map, i8 *$I_key){}
-i32  $I_mbtowc(i32   *$A_0,  i8 *$A_1, u32   $A_2){}
-i32  $I_getsubopt(i8 **$A_0, i8 **$A_1, i8 **$A_2){}
-i8  *$I_strtok(i8 *$I___str,  i8 *$I___sep){}
-i32  $I_faccessat(i32 $A_0,  i8 *$A_1, i32 $A_2, i32 $A_3){}
-i32  $I___srget($T___sFILE *$A_0){}
-i8  $I_is_flonum($T_Type *$I_ty){}
-i32  $I_align_to(i32 $I_n, i32 $I_align){}
-v0  *$I_hashmap_get($T_anon_QZT3hI *$I_map, i8 *$I_key){}
-i32  $I_execlp( i8 *$I___file,  i8 *$I___arg0){}
-v0  $I_hashmap_delete2($T_anon_QZT3hI *$I_map, i8 *$I_key, i32 $I_keylen){}
-v0  $I_swab( v0 *$A_0, v0 *$A_1, i32   $A_2){}
-i32  $I_seteuid(u32    $A_0){}
-i8  *$I_ttyname(i32 $A_0){}
-i8  $I_equal($T_Token *$I_tok, i8 *$I_op){}
-i32  $I_putchar_unlocked(i32 $A_0){}
-$T_anon_1zqkIx  $I_div(i32 $A_0, i32 $A_1){}
-i32  $I_unlockpt(i32 $A_0){}
-    i32  $I_clock_getres(i32 $I___clock_id, $T_timespec *$I___res){}
-i32  $I_setpriority(i32 $A_0, u32    $A_1, i32 $A_2){}
-i8  *$I_basename(i8 *$A_0){}
-i8  *$I_strcat(i8 *$I___s1,  i8 *$I___s2){}
-u32     $I_getegid(v0 $A_0){}
-i32    $I_getdelim(i8 **$I___linep, u32   *$I___linecapp, i32 $I___delimiter, $T___sFILE *$I___stream){}
-$T___sFILE  *$I_tmpfile(v0 $A_0){}
-i8  *$I_asctime_r( $T_tm *$A_0, i8 *$A_1){}
-i32  $I_chdir( i8 *$A_0){}
-i32  $I_nrand48(u16 [3]$A_0){}
-u32    $I_clock(v0 $A_0){}
-i32  $I_remove( i8 *$A_0){}
-i32  $I_execvp( i8 *$I___file, i8 **$I___argv){}
-u32    $I_confstr(i32 $A_0, i8 *$A_1, u32   $A_2){}
-i32  $I_execve( i8 *$I___file, i8 **$I___argv, i8 **$I___envp){}
-i8  *$I_getlogin(v0 $A_0){}
-v0  $I_setkey( i8 *$A_0){}
-i32    $I_pwrite(i32 $I___fd,  v0 *$I___buf, u32   $I___nbyte, i64    $I___offset){}
-i32  $I_access( i8 *$A_0, i32 $A_1){}
-u32     $I_ualarm(u32    $A_0, u32    $A_1){}
-v0  $I_srandom(u32 $A_0){}
-v0  $I_init_macros(v0 $A_0){}
-i32  $I_ferror($T___sFILE *$A_0){}
+i32  $I_fclose($T___sFILE *$A_0){}
 i8  *$I_ctermid(i8 *$A_0){}
-i32  $I___vsnprintf_chk(i8 *$A_0, u32   $A_1, i32 $A_2, u32   $A_3,  i8 *$A_4, $T_anon_QeFhea   $A_5){}
+i32  $I_putc_unlocked(i32 $A_0, $T___sFILE *$A_1){}
+i64  $I_atoll( i8 *$A_0){}
+v0  $I_exit(i32 $A_0){}
+i32  $I_getc($T___sFILE *$A_0){}
+i8  *$I_ctime( i32   *$A_0){}
+u32     $I_geteuid(v0 $A_0){}
+i32  $I_mrand48(v0 $A_0){}
+ v0  $I_error_at(i8 *$I_loc, i8 *$I_fmt){}
+u32  $I_sleep(u32 $A_0){}
+i32  $I_lchown( i8 *$A_0, u32    $A_1, u32    $A_2){}
+i32  $I_putc(i32 $A_0, $T___sFILE *$A_1){}
+i32  $I_getlogin_r(i8 *$A_0, u32   $A_1){}
+u32    $I_fwrite( v0 *$I___ptr, u32   $I___size, u32   $I___nitems, $T___sFILE *$I___stream){}
+v0  $I_undef_macro(i8 *$I_name){}
+i64  $I_strtoll( i8 *$I___str, i8 **$I___endptr, i32 $I___base){}
+i32    $I_time(i32   *$A_0){}
+f64  $I_drand48(v0 $A_0){}
+i32  $I_chdir( i8 *$A_0){}
+i32  $I_setegid(u32    $A_0){}
+i32  $I_align_to(i32 $I_n, i32 $I_align){}
+i32     $I_getpgrp(v0 $A_0){}
+i32  $I_fprintf($T___sFILE *$A_0,  i8 *$A_1){}
+v0  $I_funlockfile($T___sFILE *$A_0){}
+i32  $I_chown( i8 *$A_0, u32    $A_1, u32    $A_2){}
+i32  $I_unsetenv( i8 *$A_0){}
+i32  $I_setpgid(i32    $A_0, i32    $A_1){}
+i32     $I_vfork(v0 $A_0){}
+i32  $I_faccessat(i32 $A_0,  i8 *$A_1, i32 $A_2, i32 $A_3){}
+ i32  $I_vsprintf(i8 *$A_0,  i8 *$A_1, $T_anon_YwHSZM   $A_2){}
+u32    $I_confstr(i32 $A_0, i8 *$A_1, u32   $A_2){}
+f64  $I_strtod( i8 *$A_0, i8 **$A_1){}
+$T_Token  *$I_preprocess($T_Token *$I_tok){}
+i32  $I_fileno($T___sFILE *$A_0){}
+i8  *$I_strpbrk( i8 *$I___s,  i8 *$I___charset){}
+i32  $I_mkfifoat(i32 $A_0,  i8 *$A_1, u16    $A_2){}
+i32  $I_access( i8 *$A_0, i32 $A_1){}
+i64  $I_llabs(i64 $A_0){}
+i32  $I_pathconf( i8 *$A_0, i32 $A_1){}
+i32  $I_rand(v0 $A_0){}
+i32  $I_getchar_unlocked(v0 $A_0){}
+i8  *$I_strsignal(i32 $I___sig){}
+v0  $I_setbuf($T___sFILE *$A_0, i8 *$A_1){}
+i32  $I_renameat(i32 $A_0,  i8 *$A_1, i32 $A_2,  i8 *$A_3){}
+i32  $I_vsnprintf(i8 *$I___str, u32   $I___size,  i8 *$I___format, $T_anon_YwHSZM   $A_3){}
+u32    $I_wcstombs(i8 *$A_0,  i32   *$A_1, u32   $A_2){}
+v0  *$I_malloc(u32   $I___size){}
+i8  *$I_ptsname(i32 $A_0){}
+u32     $I_getegid(v0 $A_0){}
+i8  *$I_strtok_r(i8 *$I___str,  i8 *$I___sep, i8 **$I___lasts){}
+i32  $I_remove( i8 *$A_0){}
+$T_anon_XcpZXu  $I_ldiv(i32 $A_0, i32 $A_1){}
+i8  *$I_asctime( $T_tm *$A_0){}
 i32  $I_random(v0 $A_0){}
 i32  $I_mknodat(i32 $A_0,  i8 *$A_1, u16    $A_2, i32    $A_3){}
-v0  $I___assert_rtn( i8 *$A_0,  i8 *$A_1, i32 $A_2,  i8 *$A_3){}
-i32     $I_wait(i32 *$A_0){}
-i32    $I_mktime($T_tm *$A_0){}
+u32     $I_getgid(v0 $A_0){}
+i8  $I_equal($T_Token *$I_tok, i8 *$I_op){}
+i32  $I_link( i8 *$A_0,  i8 *$A_1){}
 i8  $I_is_numeric($T_Type *$I_ty){}
-f64  $I_strtod( i8 *$A_0, i8 **$A_1){}
-v0  *$I_memset(v0 *$I___b, i32 $I___c, u32   $I___len){}
-i8  *$I_ctime( i32   *$A_0){}
-$T_Type  *$I_vla_of($T_Type *$I_base, $T_Node *$I_expr){}
-i8  *$I_strsignal(i32 $I___sig){}
-i32  $I_getc($T___sFILE *$A_0){}
-i32  $I_fputs( i8 *$A_0, $T___sFILE *$A_1){}
-i32     $I_getsid(i32    $A_0){}
-f64  $I_drand48(v0 $A_0){}
-$T_Type  *$I_copy_type($T_Type *$I_ty){}
-i32  $I_getrusage(i32 $A_0, $T_rusage *$A_1){}
-i32  $I_display_width(i8 *$I_p, i32 $I_len){}
-i8  *$I_ecvt(f64 $A_0, i32 $A_1, i32 *$A_2, i32 *$A_3){}
-v0  *$I_hashmap_get2($T_anon_QZT3hI *$I_map, i8 *$I_key, i32 $I_keylen){}
-u32    $I_strftime(i8 *$A_0, u32   $A_1,  i8 *$A_2,  $T_tm *$A_3){}
-i32  $I_mkdirat(i32 $A_0,  i8 *$A_1, u16    $A_2){}
-i8  $I_is_compatible($T_Type *$I_t1, $T_Type *$I_t2){}
-i32  $I_labs(i32 $A_0){}
-v0  $I_setbuf($T___sFILE *$A_0, i8 *$A_1){}
-i32  $I___vsprintf_chk(i8 *$A_0, i32 $A_1, u32   $A_2,  i8 *$A_3, $T_anon_QeFhea   $A_4){}
-i32  $I_mrand48(v0 $A_0){}
-i32  $I_setenv( i8 *$I___name,  i8 *$I___value, i32 $I___overwrite){}
-i32  $I_strtol( i8 *$I___str, i8 **$I___endptr, i32 $I___base){}
-v0  *$I_memcpy(v0 *$I___dst,  v0 *$I___src, u32   $I___n){}
-$T_Type  *$I_pointer_to($T_Type *$I_base){}
-v0  $I_undef_macro(i8 *$I_name){}
-i8  *$I_strtok_r(i8 *$I___str,  i8 *$I___sep, i8 **$I___lasts){}
-i32  $I_mblen( i8 *$I___s, u32   $I___n){}
-$T_Token  *$I_tokenize_file(i8 *$I_filename){}
-i32  $I_scanf( i8 *$A_0){}
-i32  $I_setgid(u32    $A_0){}
-i32  $I_posix_openpt(i32 $A_0){}
-i8  *$I_fgets(i8 *$A_0, i32 $A_1, $T___sFILE *$A_2){}
-i32  $I_vprintf( i8 *$A_0, $T_anon_QeFhea   $A_1){}
-u32  $I_strtoul( i8 *$I___str, i8 **$I___endptr, i32 $I___base){}
-i32  $I_putenv(i8 *$A_0){}
-i8  *$I_ptsname(i32 $A_0){}
-i8  *$I_strdup( i8 *$I___s1){}
-$T___sFILE  *$I_popen( i8 *$A_0,  i8 *$A_1){}
-v0  $I_srand48(i32 $A_0){}
-i32  $I_mkfifoat(i32 $A_0,  i8 *$A_1, u16    $A_2){}
-i32  $I_fchmodat(i32 $A_0,  i8 *$A_1, u16    $A_2, i32 $A_3){}
-f64  $I_atof( i8 *$A_0){}
-i8  *$I_stpncpy(i8 *$I___dst,  i8 *$I___src, u32   $I___n){}
-$T_anon_6S468f  $I_lldiv(i64 $A_0, i64 $A_1){}
-i32  $I_symlink( i8 *$A_0,  i8 *$A_1){}
-v0  $I_globfree($T_anon_c7mVbX *$A_0){}
-i8  *$I_strcpy(i8 *$I___dst,  i8 *$I___src){}
-    i32  $I_timespec_get($T_timespec *$I_ts, i32 $I_base){}
-v0  $I_tzset(v0 $A_0){}
- v0  $I_error_at(i8 *$I_loc, i8 *$I_fmt){}
-v0  $I_sync(v0 $A_0){}
-i32  $I___svfscanf($T___sFILE *$A_0,  i8 *$A_1, $T_anon_QeFhea   $A_2){}
-v0  $I_funlockfile($T___sFILE *$A_0){}
-i8  $I_consume($T_Token **$I_rest, $T_Token *$I_tok, i8 *$I_str){}
-v0  $I__exit(i32 $A_0){}
-$T___sFILE  *$I_fdopen(i32 $A_0,  i8 *$A_1){}
-v0  *$I_calloc(u32   $I___count, u32   $I___size){}
-i32     $I_getpid(v0 $A_0){}
-i32  $I_fpathconf(i32 $A_0, i32 $A_1){}
-i32  $I_putc_unlocked(i32 $A_0, $T___sFILE *$A_1){}
-i32  $I_stat( i8 *$A_0, $T_stat *$A_1){}
-v0  *$I_memchr( v0 *$I___s, i32 $I___c, u32   $I___n){}
-i8  *$I_crypt( i8 *$A_0,  i8 *$A_1){}
-i32     $I_waitpid(i32    $A_0, i32 *$A_1, i32 $A_2){}
-i32  $I_vsnprintf(i8 *$I___str, u32   $I___size,  i8 *$I___format, $T_anon_QeFhea   $A_3){}
-i32    $I_pread(i32 $I___fd, v0 *$I___buf, u32   $I___nbyte, i64    $I___offset){}
-i32     $I_vfork(v0 $A_0){}
-$T_Token  *$I_tokenize($T_anon_TtXQ7B *$I_file){}
-i32  $I_fclose($T___sFILE *$A_0){}
-v0  $I_srand(u32 $A_0){}
- v0  $I_error(i8 *$I_fmt){}
-i32  $I_strncmp( i8 *$I___s1,  i8 *$I___s2, u32   $I___n){}
-$T_tm  *$I_localtime_r( i32   *$A_0, $T_tm *$A_1){}
-i32  $I_getopt(i32 $A_0, i8 **$A_1,  i8 *$A_2){}
-i32    $I_readlink( i8 *$A_0, i8 *$A_1, u32   $A_2){}
-i32  $I_rand_r(u32 *$A_0){}
-$T_Token  *$I_skip($T_Token *$I_tok, i8 *$I_op){}
-i32  $I_strcmp( i8 *$I___s1,  i8 *$I___s2){}
-i32  $I_getlogin_r(i8 *$A_0, u32   $A_1){}
-v0  *$I_malloc(u32   $I___size){}
-$T_Type  *$I_func_type($T_Type *$I_return_ty){}
-u32  $I_alarm(u32 $A_0){}
-i32  $I_setuid(u32    $A_0){}
-i32  $I_ttyname_r(i32 $A_0, i8 *$A_1, u32   $A_2){}
-v0  $I_flockfile($T___sFILE *$A_0){}
-i32  $I_vscanf( i8 *$I___format, $T_anon_QeFhea   $A_1){}
-i32  $I_mkstemp(i8 *$A_0){}
-v0  $I_hashmap_put2($T_anon_QZT3hI *$I_map, i8 *$I_key, i32 $I_keylen, v0 *$I_val){}
-i32  $I_fgetc($T___sFILE *$A_0){}
-i32  $I_utimensat(i32 $I___fd,  i8 *$I___path,  $T_timespec [2]$I___times, i32 $I___flag){}
-$T_anon_TtXQ7B  *$I_new_file(i8 *$I_name, i32 $I_file_no, i8 *$I_contents){}
-    i32  $I_clock_settime(i32 $I___clock_id,  $T_timespec *$I___tp){}
-i32  $I_getchar(v0 $A_0){}
-i32  $I_abs(i32 $A_0){}
-u32  $I____runetype(i32  $A_0){}
-     i32  $I_system( i8 *$A_0){}
-v0  $I_encrypt(i8 *$A_0, i32 $A_1){}
-i64  $I_llabs(i64 $A_0){}
-f64  $I_strtold( i8 *$A_0, i8 **$A_1){}
-u32    $I_fread(v0 *$I___ptr, u32   $I___size, u32   $I___nitems, $T___sFILE *$I___stream){}
-i32  $I_fstatat(i32 $A_0,  i8 *$A_1, $T_stat *$A_2, i32 $A_3){}
-i32  $I_execv( i8 *$I___path, i8 **$I___argv){}
-v0  *$I_realloc(v0 *$I___ptr, u32   $I___size){}
-i32  $I_getgroups(i32 $A_0, u32    *$A_1){}
-i32  $I_fileno($T___sFILE *$A_0){}
-v0  $I_exit(i32 $A_0){}
-i32  $I_printf( i8 *$A_0){}
-v0  $I__Exit(i32 $A_0){}
-f64  $I_difftime(i32   $A_0, i32   $A_1){}
-i8  *$I_format(i8 *$I_fmt){}
-$T___sFILE  *$I_fmemopen(v0 *$I___buf, u32   $I___size,  i8 *$I___mode){}
-u32    $I_strcspn( i8 *$I___s,  i8 *$I___charset){}
-v0  $I_perror( i8 *$A_0){}
-i64     $I_lseek(i32 $A_0, i64    $A_1, i32 $A_2){}
-$T___sFILE  *$I_fopen( i8 *$I___filename,  i8 *$I___mode){}
-i32  $I_isatty(i32 $A_0){}
-i8  *$I_asctime( $T_tm *$A_0){}
-i64  $I_atoll( i8 *$A_0){}
- v0  $I_error_tok($T_Token *$I_tok, i8 *$I_fmt){}
-i32  $I_chown( i8 *$A_0, u32    $A_1, u32    $A_2){}
-v0  $I_rewind($T___sFILE *$A_0){}
-u32   $I_decode_utf8(i8 **$I_new_pos, i8 *$I_p){}
- i8  *$I_tempnam( i8 *$I___dir,  i8 *$I___prefix){}
-i32  $I_dprintf(i32 $A_0,  i8 *$A_1){}
-i32  $I_feof($T___sFILE *$A_0){}
-i32   $I___toupper(i32  $A_0){}
-i8  *$I_getcwd(i8 *$A_0, u32   $A_1){}
-$T_anon_TtXQ7B  **$I_get_input_files(v0 $A_0){}
-    i32  $I_clock_gettime(i32 $I___clock_id, $T_timespec *$I___tp){}
-i32     $I_tcgetpgrp(i32 $A_0){}
-i32  $I_setreuid(u32    $A_0, u32    $A_1){}
-i8  $I_is_ident2(u32  $I_c){}
-i8  *$I_strpbrk( i8 *$I___s,  i8 *$I___charset){}
-i8  *$I_fcvt(f64 $A_0, i32 $A_1, i32 *$A_2, i32 *$A_3){}
-i32  $I_setrlimit(i32 $A_0,  $T_rlimit *$A_1){}
-u32    $I_strxfrm(i8 *$I___s1,  i8 *$I___s2, u32   $I___n){}
-u32    $I_strspn( i8 *$I___s,  i8 *$I___charset){}
-v0  $I_define_macro(i8 *$I_name, i8 *$I_buf){}
-v0  $I_abort(v0 $A_0){}
-i32  $I_getrlimit(i32 $A_0, $T_rlimit *$A_1){}
-i8  *$I_gets(i8 *$A_0){}
-i32  $I_ungetc(i32 $A_0, $T___sFILE *$A_1){}
-i32  $I_vfprintf($T___sFILE *$A_0,  i8 *$A_1, $T_anon_QeFhea   $A_2){}
-i8  *$I_strncpy(i8 *$I___dst,  i8 *$I___src, u32   $I___n){}
-v0  $I_lcong48(u16 [7]$A_0){}
-u32  $I_sleep(u32 $A_0){}
-i32  $I_wctomb(i8 *$A_0, i32   $A_1){}
-i32     $I_setpgrp(v0 $A_0){}
-i32  $I_fchown(i32 $A_0, u32    $A_1, u32    $A_2){}
-i32  $I_unlink( i8 *$A_0){}
-i32    $I_write(i32 $I___fd,  v0 *$I___buf, u32   $I___nbyte){}
-i32  $I___snprintf_chk(i8 *$A_0, u32   $A_1, i32 $A_2, u32   $A_3,  i8 *$A_4){}
-i8  *$I_l64a(i32 $A_0){}
-i32  $I_strncasecmp( i8 *$A_0,  i8 *$A_1, u32   $A_2){}
-u64  $I_strtoull( i8 *$I___str, i8 **$I___endptr, i32 $I___base){}
-i32     $I_getppid(v0 $A_0){}
-i32  $I_futimens(i32 $I___fd,  $T_timespec [2]$I___times){}
-i32  $I_close(i32 $A_0){}
-$T_Type  *$I_enum_type(v0 $A_0){}
-i32  $I_encode_utf8(i8 *$I_buf, u32  $I_c){}
-i32  $I_nanosleep( $T_timespec *$I___rqtp, $T_timespec *$I___rmtp){}
-i32  $I_fflush($T___sFILE *$A_0){}
-i32  $I_mkfifo( i8 *$A_0, u16    $A_1){}
-i8  *$I_initstate(u32 $A_0, i8 *$A_1, u32   $A_2){}
-i8  *$I_realpath( i8 *$A_0, i8 *$A_1){}
-v0  $I_strarray_push($T_anon_t8QDRB *$I_arr, i8 *$I_s){}
-i8  *$I_strchr( i8 *$I___s, i32 $I___c){}
-i32  $I_setvbuf($T___sFILE *$A_0, i8 *$A_1, i32 $A_2, u32   $A_3){}
- i32  $I_vsprintf(i8 *$A_0,  i8 *$A_1, $T_anon_QeFhea   $A_2){}
-i32   $I____tolower(i32  $A_0){}
-i32  $I___swbuf(i32 $A_0, $T___sFILE *$A_1){}
-i32  $I_getchar_unlocked(v0 $A_0){}
-i32  $I_dup2(i32 $A_0, i32 $A_1){}
-i32  $I_strcasecmp( i8 *$A_0,  i8 *$A_1){}
-i32  $I_vsscanf( i8 *$I___str,  i8 *$I___format, $T_anon_QeFhea   $A_2){}
-i8  *$I_setstate( i8 *$A_0){}
- i32  $I_sprintf(i8 *$A_0,  i8 *$A_1){}
-v0  *$I_memmove(v0 *$I___dst,  v0 *$I___src, u32   $I___len){}
-i32  $I_ffs(i32 $A_0){}
-v0  $I_free(v0 *$A_0){}
-i32  $I_unlinkat(i32 $A_0,  i8 *$A_1, i32 $A_2){}
-i32  $I_fseeko($T___sFILE *$I___stream, i64    $I___offset, i32 $I___whence){}
-i32  $I_pipe(i32 [2]$A_0){}
-i32  $I_fsync(i32 $A_0){}
-i32  $I_fputc(i32 $A_0, $T___sFILE *$A_1){}
-i32  $I_strcoll( i8 *$I___s1,  i8 *$I___s2){}
-i32  $I_dup(i32 $A_0){}
-i32  $I_putchar(i32 $A_0){}
-i32  $I_puts( i8 *$A_0){}
-i8  $I_is_ident1(u32  $I_c){}
-i32  $I_waitid(i32 $A_0, u32    $A_1, $T___siginfo *$A_2, i32 $A_3){}
-f32  $I_strtof( i8 *$A_0, i8 **$A_1){}
-i32  $I_ftell($T___sFILE *$A_0){}
- i8  *$I_tmpnam(i8 *$A_0){}
-i8  *$I_strerror(i32 $I___errnum){}
-i32  $I_gethostname(i8 *$A_0, u32   $A_1){}
-i32  $I_execle( i8 *$I___path,  i8 *$I___arg0){}
-i32  $I_jrand48(u16 [3]$A_0){}
-u32     $I_getuid(v0 $A_0){}
-i8  *$I_search_include_paths(i8 *$I_filename){}
-$T_Type  *$I_array_of($T_Type *$I_base, i32 $I_size){}
-i32  $I___sprintf_chk(i8 *$A_0, i32 $A_1, u32   $A_2,  i8 *$A_3){}
-i32  $I___maskrune(i32  $A_0, u32 $A_1){}
-u32    $I_wcstombs(i8 *$A_0,  i32   *$A_1, u32   $A_2){}
-i8  *$I_gcvt(f64 $A_0, i32 $A_1, i8 *$A_2){}
-i32  $I_snprintf(i8 *$I___str, u32   $I___size,  i8 *$I___format){}
-i8  *$I_strstr( i8 *$I___big,  i8 *$I___little){}
-u16     $I_umask(u16    $A_0){}
-u16  *$I_seed48(u16 [3]$A_0){}
-i8  *$I_mktemp(i8 *$A_0){}
-i32  $I_memcmp( v0 *$I___s1,  v0 *$I___s2, u32   $I___n){}
-i8  *$I_strptime( i8 *$A_0,  i8 *$A_1, $T_tm *$A_2){}
-i32  $I_pathconf( i8 *$A_0, i32 $A_1){}
-i32    $I_read(i32 $A_0, v0 *$A_1, u32   $A_2){}
-i32  $I_ftruncate(i32 $A_0, i64    $A_1){}
-i32  $I_fstat(i32 $A_0, $T_stat *$A_1){}
-i32  $I_putc(i32 $A_0, $T___sFILE *$A_1){}
-i32    $I_time(i32   *$A_0){}
-i32  *$I___error(v0 $A_0){}
-i32   $I____toupper(i32  $A_0){}
-i32  $I_strerror_r(i32 $I___errnum, i8 *$I___strerrbuf, u32   $I___buflen){}
-i32  $I_lockf(i32 $A_0, i32 $A_1, i64    $A_2){}
-i32   $I___tolower(i32  $A_0){}
-i8  *$I_strrchr( i8 *$I___s, i32 $I___c){}
-i8  $I_is_integer($T_Type *$I_ty){}
-i32  $I_lchown( i8 *$A_0, u32    $A_1, u32    $A_2){}
-v0  $I_add_type($T_Node *$I_node){}
-v0  $I_codegen($T_Obj *$I_prog, $T___sFILE *$I_out){}
-f64  $I_erand48(u16 [3]$A_0){}
-i32  $I_tcsetpgrp(i32 $A_0, i32    $A_1){}
-u32     $I_geteuid(v0 $A_0){}
-i32  $I_truncate( i8 *$A_0, i64    $A_1){}
-u32    $I_mbstowcs(i32   *$A_0,  i8 *$A_1, u32   $A_2){}
-v0  $I_hashmap_put($T_anon_QZT3hI *$I_map, i8 *$I_key, v0 *$I_val){}
-$T_Type  *$I_struct_type(v0 $A_0){}
-i32  $I_lrand48(v0 $A_0){}
-i32  $I_a64l( i8 *$A_0){}
-i32  $I_posix_memalign(v0 **$I___memptr, u32   $I___alignment, u32   $I___size){}
-$T___sFILE  *$I_open_memstream(i8 **$I___bufp, u32   *$I___sizep){}
-i32  $I_fscanf($T___sFILE *$A_0,  i8 *$A_1){}
-i32  $I_pause(v0 $A_0){}
-i32  $I_gethostid(v0 $A_0){}
-i32  $I_mknod( i8 *$A_0, u16    $A_1, i32    $A_2){}
-i32  $I_setregid(u32    $A_0, u32    $A_1){}
-i32  $I_vfscanf($T___sFILE *$I___stream,  i8 *$I___format, $T_anon_QeFhea   $A_2){}
-i32  $I_rmdir( i8 *$A_0){}
-i32  $I_fseek($T___sFILE *$A_0, i32 $A_1, i32 $A_2){}
-i32  $I_fsetpos($T___sFILE *$A_0,  i64    *$A_1){}
-i32  $I_fprintf($T___sFILE *$A_0,  i8 *$A_1){}
-$T___sFILE  *$I_freopen( i8 *$A_0,  i8 *$A_1, $T___sFILE *$A_2){}
-i64  $I_strtoll( i8 *$I___str, i8 **$I___endptr, i32 $I___base){}
-i32  $I_linkat(i32 $A_0,  i8 *$A_1, i32 $A_2,  i8 *$A_3, i32 $A_4){}
-i32  $I_setegid(u32    $A_0){}
-i32  $I_fgetpos($T___sFILE *$A_0, i64    *$A_1){}
-i32  $I_unsetenv( i8 *$A_0){}
-i32     $I_getpgid(i32    $A_0){}
-$T_Token  *$I_tokenize_string_literal($T_Token *$I_tok, $T_Type *$I_basety){}
-i32     $I_getpgrp(v0 $A_0){}
-i32  $I_renameat(i32 $A_0,  i8 *$A_1, i32 $A_2,  i8 *$A_3){}
-i32  $I_atoi( i8 *$A_0){}
-i8  *$I_strndup( i8 *$I___s1, u32   $I___n){}
-i32  $I_grantpt(i32 $A_0){}
-i32  $I_pclose($T___sFILE *$A_0){}
-i32  $I_ftrylockfile($T___sFILE *$A_0){}
-i32  $I_symlinkat( i8 *$A_0, i32 $A_1,  i8 *$A_2){}
-i32  $I_execl( i8 *$I___path,  i8 *$I___arg0){}
-i32  $I_vdprintf(i32 $A_0,  i8 *$A_1, $T_anon_QeFhea   $A_2){}
-i8  *$I_stpcpy(i8 *$I___dst,  i8 *$I___src){}
-i32  $I_nice(i32 $A_0){}
-i32  $I_rand(v0 $A_0){}
-$T_anon_seCgOz  $I_ldiv(i32 $A_0, i32 $A_1){}
-i32  $I_fchdir(i32 $A_0){}
-v0  $I_hashmap_test(v0 $A_0){}
-i8  *$I_getenv( i8 *$A_0){}
-i8  *$I_dirname(i8 *$A_0){}
-u32    $I_fwrite( v0 *$I___ptr, u32   $I___size, u32   $I___nitems, $T___sFILE *$I___stream){}
-$T_tm  *$I_gmtime( i32   *$A_0){}
-i32    $I_readlinkat(i32 $A_0,  i8 *$A_1, i8 *$A_2, u32   $A_3){}
-i32  $I_sysconf(i32 $A_0){}
-v0  $I_convert_pp_tokens($T_Token *$I_tok){}
-i32     $I_fork(v0 $A_0){}
-v0  *$I_aligned_alloc(u32   $I___alignment, u32   $I___size){}
 i32  $I_sscanf( i8 *$A_0,  i8 *$A_1){}
 $T_tm  *$I_getdate( i8 *$A_0){}
-v0  $I_clearerr($T___sFILE *$A_0){}
-i32  $I_getpriority(i32 $A_0, u32    $A_1){}
-$T_tm  *$I_localtime( i32   *$A_0){}
+u32     $I_ualarm(u32    $A_0, u32    $A_1){}
+i32  $I_getchar(v0 $A_0){}
+i8  *$I_strtok(i8 *$I___str,  i8 *$I___sep){}
+v0  $I_init_macros(v0 $A_0){}
+v0  $I_hashmap_test(v0 $A_0){}
 i64     $I_ftello($T___sFILE *$I___stream){}
-u32     $I_getgid(v0 $A_0){}
-i32  $I_atol( i8 *$A_0){}
-i32  $I_link( i8 *$A_0,  i8 *$A_1){}
-i32  $I_mkdir( i8 *$A_0, u16    $A_1){}
-i32  $I_lstat( i8 *$A_0, $T_stat *$A_1){}
-u32    $I_strnlen( i8 *$I___s1, u32   $I___n){}
+u32  $I_strtoul( i8 *$I___str, i8 **$I___endptr, i32 $I___base){}
+u32    $I_clock(v0 $A_0){}
+i8  $I_is_ident1(u32  $I_c){}
+v0  $I_srand(u32 $A_0){}
+i32  $I_wctomb(i8 *$A_0, i32   $A_1){}
+$T_Type  *$I_struct_type(v0 $A_0){}
 u32    $I_strlen( i8 *$I___s){}
-i32  $I_fchmod(i32 $A_0, u16    $A_1){}
-i32  $I_setpgid(i32    $A_0, i32    $A_1){}
-i32  $I_rename( i8 *$I___old,  i8 *$I___new){}
-$T_tm  *$I_gmtime_r( i32   *$A_0, $T_tm *$A_1){}
-i32     $I_setsid(v0 $A_0){}
+i8  *$I_initstate(u32 $A_0, i8 *$A_1, u32   $A_2){}
+i32  $I_fputs( i8 *$A_0, $T___sFILE *$A_1){}
+i32  $I_puts( i8 *$A_0){}
+i8  *$I_strncpy(i8 *$I___dst,  i8 *$I___src, u32   $I___n){}
+i8  *$I_asctime_r( $T_tm *$A_0, i8 *$A_1){}
+$T_Token  *$I_skip($T_Token *$I_tok, i8 *$I_op){}
+v0  $I_codegen($T_Obj *$I_prog, $T___sFILE *$I_out){}
+u32    $I_strspn( i8 *$I___s,  i8 *$I___charset){}
+i32  $I_setuid(u32    $A_0){}
+i32  $I_feof($T___sFILE *$A_0){}
+i64     $I_lseek(i32 $A_0, i64    $A_1, i32 $A_2){}
+i32    $I_readlink( i8 *$A_0, i8 *$A_1, u32   $A_2){}
+u32   $I_decode_utf8(i8 **$I_new_pos, i8 *$I_p){}
+i32  $I_setvbuf($T___sFILE *$A_0, i8 *$A_1, i32 $A_2, u32   $A_3){}
+i8  *$I_strptime( i8 *$A_0,  i8 *$A_1, $T_tm *$A_2){}
+$T_Type  *$I_pointer_to($T_Type *$I_base){}
 i32  $I_usleep(u32    $A_0){}
-v0  $I_warn_tok($T_Token *$I_tok, i8 *$I_fmt){}
+i8  *$I_stpncpy(i8 *$I___dst,  i8 *$I___src, u32   $I___n){}
+i32  $I_lrand48(v0 $A_0){}
+i32  $I_execl( i8 *$I___path,  i8 *$I___arg0){}
+i32  $I_pipe(i32 [2]$A_0){}
+i32  $I_scanf( i8 *$A_0){}
+    i32  $I_clock_getres(i32 $I___clock_id, $T_timespec *$I___res){}
+i32  $I_gethostname(i8 *$A_0, u32   $A_1){}
+$T_Token  *$I_tokenize_string_literal($T_Token *$I_tok, $T_Type *$I_basety){}
+v0  *$I_calloc(u32   $I___count, u32   $I___size){}
+i8  *$I_fcvt(f64 $A_0, i32 $A_1, i32 *$A_2, i32 *$A_3){}
+i32  $I_mbtowc(i32   *$A_0,  i8 *$A_1, u32   $A_2){}
+v0  *$I_memset(v0 *$I___b, i32 $I___c, u32   $I___len){}
+i32  $I_setreuid(u32    $A_0, u32    $A_1){}
+i32  $I_putchar(i32 $A_0){}
+i32  $I_stat( i8 *$A_0, $T_stat *$A_1){}
+i32   $I____tolower(i32  $A_0){}
+ i32  $I_sprintf(i8 *$A_0,  i8 *$A_1){}
+v0  *$I_memccpy(v0 *$I___dst,  v0 *$I___src, i32 $I___c, u32   $I___n){}
+i32  $I_setgid(u32    $A_0){}
+$T_anon_wV1dbA  $I_lldiv(i64 $A_0, i64 $A_1){}
+i32  $I___maskrune(i32  $A_0, u32 $A_1){}
+i32  $I_fchown(i32 $A_0, u32    $A_1, u32    $A_2){}
+i8  *$I_ttyname(i32 $A_0){}
+i32  $I_fputc(i32 $A_0, $T___sFILE *$A_1){}
+i32  $I___swbuf(i32 $A_0, $T___sFILE *$A_1){}
+i8  *$I_strrchr( i8 *$I___s, i32 $I___c){}
+i8  *$I_realpath( i8 *$A_0, i8 *$A_1){}
+v0  $I__Exit(i32 $A_0){}
+i32  $I_mknod( i8 *$A_0, u16    $A_1, i32    $A_2){}
+$T_Token  *$I_tokenize($T_anon_9fyvgE *$I_file){}
+i32  $I_setrlimit(i32 $A_0,  $T_rlimit *$A_1){}
+ i8  *$I_tmpnam(i8 *$A_0){}
+i32  $I_ungetc(i32 $A_0, $T___sFILE *$A_1){}
+i32  $I_vscanf( i8 *$I___format, $T_anon_YwHSZM   $A_1){}
+v0  $I_lcong48(u16 [7]$A_0){}
+u16  *$I_seed48(u16 [3]$A_0){}
+ v0  $I_error_tok($T_Token *$I_tok, i8 *$I_fmt){}
+i32  $I_dprintf(i32 $A_0,  i8 *$A_1){}
+i8  *$I_basename(i8 *$A_0){}
+i32  $I_posix_memalign(v0 **$I___memptr, u32   $I___alignment, u32   $I___size){}
+i32  $I_labs(i32 $A_0){}
+i8  $I_is_integer($T_Type *$I_ty){}
+i32   $I____toupper(i32  $A_0){}
+i8  *$I_strcat(i8 *$I___s1,  i8 *$I___s2){}
+i32  $I_display_width(i8 *$I_p, i32 $I_len){}
+i32    $I_mktime($T_tm *$A_0){}
+i8  *$I_ecvt(f64 $A_0, i32 $A_1, i32 *$A_2, i32 *$A_3){}
+i32  $I_dup2(i32 $A_0, i32 $A_1){}
+v0  $I_swab( v0 *$A_0, v0 *$A_1, i32   $A_2){}
+v0  $I_globfree($T_anon_KAyajZ *$A_0){}
+i32  $I_lstat( i8 *$A_0, $T_stat *$A_1){}
+i32    $I_getline(i8 **$I___linep, u32   *$I___linecapp, $T___sFILE *$I___stream){}
+i8  *$I_gets(i8 *$A_0){}
+i32   $I___tolower(i32  $A_0){}
+i8  *$I_getlogin(v0 $A_0){}
+i8  *$I_strndup( i8 *$I___s1, u32   $I___n){}
+i32  $I_unlinkat(i32 $A_0,  i8 *$A_1, i32 $A_2){}
+i32  $I_sysconf(i32 $A_0){}
+u16     $I_umask(u16    $A_0){}
+i32  $I___snprintf_chk(i8 *$A_0, u32   $A_1, i32 $A_2, u32   $A_3,  i8 *$A_4){}
+v0  $I_clearerr($T___sFILE *$A_0){}
+i32  $I_fseeko($T___sFILE *$I___stream, i64    $I___offset, i32 $I___whence){}
+$T___sFILE  *$I_fmemopen(v0 *$I___buf, u32   $I___size,  i8 *$I___mode){}
+i32  $I_vfprintf($T___sFILE *$A_0,  i8 *$A_1, $T_anon_YwHSZM   $A_2){}
+$T___sFILE  *$I_popen( i8 *$A_0,  i8 *$A_1){}
+i32  $I_putchar_unlocked(i32 $A_0){}
+i32  $I_getgroups(i32 $A_0, u32    *$A_1){}
+i32  $I_vdprintf(i32 $A_0,  i8 *$A_1, $T_anon_YwHSZM   $A_2){}
+i32  $I_vsscanf( i8 *$I___str,  i8 *$I___format, $T_anon_YwHSZM   $A_2){}
+i32  $I_symlinkat( i8 *$A_0, i32 $A_1,  i8 *$A_2){}
+v0  $I_srand48(i32 $A_0){}
+i32  $I_setenv( i8 *$I___name,  i8 *$I___value, i32 $I___overwrite){}
+i32  $I_vfscanf($T___sFILE *$I___stream,  i8 *$I___format, $T_anon_YwHSZM   $A_2){}
+i32  $I_memcmp( v0 *$I___s1,  v0 *$I___s2, u32   $I___n){}
+f32  $I_strtof( i8 *$A_0, i8 **$A_1){}
+i8  *$I_getcwd(i8 *$A_0, u32   $A_1){}
+i8  *$I_search_include_paths(i8 *$I_filename){}
+i32  $I_a64l( i8 *$A_0){}
+i32  $I_vprintf( i8 *$A_0, $T_anon_YwHSZM   $A_1){}
+i32     $I_setpgrp(v0 $A_0){}
+i32  $I_linkat(i32 $A_0,  i8 *$A_1, i32 $A_2,  i8 *$A_3, i32 $A_4){}
+i32  $I_unlink( i8 *$A_0){}
+v0  $I_sync(v0 $A_0){}
+i32  $I_encode_utf8(i8 *$I_buf, u32  $I_c){}
+i32  $I_waitid(i32 $A_0, u32    $A_1, $T___siginfo *$A_2, i32 $A_3){}
+i8  *$I_strncat(i8 *$I___s1,  i8 *$I___s2, u32   $I___n){}
+i8  *$I_stpcpy(i8 *$I___dst,  i8 *$I___src){}
+i32    $I_write(i32 $I___fd,  v0 *$I___buf, u32   $I___nbyte){}
+i32    $I_pread(i32 $I___fd, v0 *$I___buf, u32   $I___nbyte, i64    $I___offset){}
+i32  $I_close(i32 $A_0){}
+i32  $I_fchdir(i32 $A_0){}
+$T_Type  *$I_array_of($T_Type *$I_base, i32 $I_size){}
+$T_tm  *$I_localtime_r( i32   *$A_0, $T_tm *$A_1){}
+i32  $I___vsnprintf_chk(i8 *$A_0, u32   $A_1, i32 $A_2, u32   $A_3,  i8 *$A_4, $T_anon_YwHSZM   $A_5){}
+i32  $I_ftrylockfile($T___sFILE *$A_0){}
+v0  $I_hashmap_put2($T_anon_ijePDX *$I_map, i8 *$I_key, i32 $I_keylen, v0 *$I_val){}
+i32  $I_snprintf(i8 *$I___str, u32   $I___size,  i8 *$I___format){}
+i32  $I_mblen( i8 *$I___s, u32   $I___n){}
+u32    $I_mbstowcs(i32   *$A_0,  i8 *$A_1, u32   $A_2){}
+i32  $I_strtol( i8 *$I___str, i8 **$I___endptr, i32 $I___base){}
+v0  $I_hashmap_put($T_anon_ijePDX *$I_map, i8 *$I_key, v0 *$I_val){}
+i32  $I_truncate( i8 *$A_0, i64    $A_1){}
+i8  $I_is_ident2(u32  $I_c){}
+i32     $I_fork(v0 $A_0){}
+i32  *$I___error(v0 $A_0){}
+i32  $I_utimensat(i32 $I___fd,  i8 *$I___path,  $T_timespec [2]$I___times, i32 $I___flag){}
+$T_Type  *$I_copy_type($T_Type *$I_ty){}
+i8  *$I_strstr( i8 *$I___big,  i8 *$I___little){}
+i32     $I_getppid(v0 $A_0){}
+i32  $I_setregid(u32    $A_0, u32    $A_1){}
+i32  $I_fsetpos($T___sFILE *$A_0,  i64    *$A_1){}
+i32  $I_strcasecmp( i8 *$A_0,  i8 *$A_1){}
+i32  $I_lockf(i32 $A_0, i32 $A_1, i64    $A_2){}
+u32     $I_getuid(v0 $A_0){}
+v0  $I_convert_pp_tokens($T_Token *$I_tok){}
+i8  $I_file_exists(i8 *$I_path){}
+v0  $I_abort(v0 $A_0){}
+i32  $I_strncmp( i8 *$I___s1,  i8 *$I___s2, u32   $I___n){}
+i32  $I_fstat(i32 $A_0, $T_stat *$A_1){}
+i8  $I_is_compatible($T_Type *$I_t1, $T_Type *$I_t2){}
+v0  *$I_memcpy(v0 *$I___dst,  v0 *$I___src, u32   $I___n){}
+i32  $I___vsprintf_chk(i8 *$A_0, i32 $A_1, u32   $A_2,  i8 *$A_3, $T_anon_YwHSZM   $A_4){}
+i8  *$I_mktemp(i8 *$A_0){}
+i32  $I_strerror_r(i32 $I___errnum, i8 *$I___strerrbuf, u32   $I___buflen){}
+v0  *$I_aligned_alloc(u32   $I___alignment, u32   $I___size){}
+i32  $I_mkdirat(i32 $A_0,  i8 *$A_1, u16    $A_2){}
+i8  *$I_dirname(i8 *$A_0){}
+i32  $I_getrlimit(i32 $A_0, $T_rlimit *$A_1){}
+i32  $I_grantpt(i32 $A_0){}
+i32  $I_gethostid(v0 $A_0){}
+i32  $I_seteuid(u32    $A_0){}
+i8  $I_is_flonum($T_Type *$I_ty){}
+i8  *$I_gcvt(f64 $A_0, i32 $A_1, i8 *$A_2){}
+i32     $I_getpgid(i32    $A_0){}
+i32  $I_abs(i32 $A_0){}
+$T_tm  *$I_gmtime( i32   *$A_0){}
+i32     $I_waitpid(i32    $A_0, i32 *$A_1, i32 $A_2){}
+i32  $I_mkstemp(i8 *$A_0){}
+$T_anon_9fyvgE  *$I_new_file(i8 *$I_name, i32 $I_file_no, i8 *$I_contents){}
+v0  *$I_realloc(v0 *$I___ptr, u32   $I___size){}
+i8  *$I_ctime_r( i32   *$A_0, i8 *$A_1){}
+i32  $I_atoi( i8 *$A_0){}
+u32    $I_strcspn( i8 *$I___s,  i8 *$I___charset){}
+i32    $I_read(i32 $A_0, v0 *$A_1, u32   $A_2){}
+v0  $I_strarray_push($T_anon_lhBDg6 *$I_arr, i8 *$I_s){}
+ i8  *$I_tempnam( i8 *$I___dir,  i8 *$I___prefix){}
+$T_anon_ek9iKe  $I_div(i32 $A_0, i32 $A_1){}
+i32  $I_fgetpos($T___sFILE *$A_0, i64    *$A_1){}
+i32  $I_putenv(i8 *$A_0){}
+i32  $I_strcmp( i8 *$I___s1,  i8 *$I___s2){}
+i32  $I_pclose($T___sFILE *$A_0){}
+i32  $I___srget($T___sFILE *$A_0){}
+i8  *$I_strchr( i8 *$I___s, i32 $I___c){}
+i32  $I___sprintf_chk(i8 *$A_0, i32 $A_1, u32   $A_2,  i8 *$A_3){}
+u32    $I_strxfrm(i8 *$I___s1,  i8 *$I___s2, u32   $I___n){}
+i32  $I_chmod( i8 *$A_0, u16    $A_1){}
+i32   $I___toupper(i32  $A_0){}
+i32     $I_tcgetpgrp(i32 $A_0){}
+i8  *$I_crypt( i8 *$A_0,  i8 *$A_1){}
+v0  *$I_hashmap_get($T_anon_ijePDX *$I_map, i8 *$I_key){}
+i32  $I___svfscanf($T___sFILE *$A_0,  i8 *$A_1, $T_anon_YwHSZM   $A_2){}
+i32  $I_futimens(i32 $I___fd,  $T_timespec [2]$I___times){}
+i32     $I_getpid(v0 $A_0){}
+i8  *$I_strdup( i8 *$I___s1){}
+i32  $I_execlp( i8 *$I___file,  i8 *$I___arg0){}
+v0  $I_hashmap_delete($T_anon_ijePDX *$I_map, i8 *$I_key){}
+i32  $I_ftell($T___sFILE *$A_0){}
+i32  $I_jrand48(u16 [3]$A_0){}
+i32  $I_atol( i8 *$A_0){}
+i32  $I_execv( i8 *$I___path, i8 **$I___argv){}
+i32  $I_pause(v0 $A_0){}
+i32  $I_strncasecmp( i8 *$A_0,  i8 *$A_1, u32   $A_2){}
+i32    $I_readlinkat(i32 $A_0,  i8 *$A_1, i8 *$A_2, u32   $A_3){}
+$T_tm  *$I_localtime( i32   *$A_0){}
+f64  $I_difftime(i32   $A_0, i32   $A_1){}
+v0  $I_free(v0 *$A_0){}
+v0  $I_flockfile($T___sFILE *$A_0){}
+f64  $I_atof( i8 *$A_0){}
+i32  $I_mkdir( i8 *$A_0, u16    $A_1){}
+v0  *$I_hashmap_get2($T_anon_ijePDX *$I_map, i8 *$I_key, i32 $I_keylen){}
+v0  $I_define_macro(i8 *$I_name, i8 *$I_buf){}
+i32  $I_setpriority(i32 $A_0, u32    $A_1, i32 $A_2){}
+v0  $I___assert_rtn( i8 *$A_0,  i8 *$A_1, i32 $A_2,  i8 *$A_3){}
+i32  $I_posix_openpt(i32 $A_0){}
+i32  $I_fstatat(i32 $A_0,  i8 *$A_1, $T_stat *$A_2, i32 $A_3){}
+i32  $I_nice(i32 $A_0){}
 i32  $I_fchownat(i32 $A_0,  i8 *$A_1, u32    $A_2, u32    $A_3, i32 $A_4){}
-$T_Token  *$I_preprocess($T_Token *$I_tok){}
+v0  $I_tzset(v0 $A_0){}
+i32  $I_tcsetpgrp(i32 $A_0, i32    $A_1){}
+i32  $I_rmdir( i8 *$A_0){}
+i32  $I_getsubopt(i8 **$A_0, i8 **$A_1, i8 **$A_2){}
+i32  $I_symlink( i8 *$A_0,  i8 *$A_1){}
+i8  *$I_setstate( i8 *$A_0){}
+$T_Type  *$I_enum_type(v0 $A_0){}
+i32  $I_dup(i32 $A_0){}
+$T_Type  *$I_func_type($T_Type *$I_return_ty){}
+i32  $I_fpathconf(i32 $A_0, i32 $A_1){}
+v0  $I_perror( i8 *$A_0){}
+i32     $I_wait(i32 *$A_0){}
+i8  *$I_getenv( i8 *$A_0){}
+i8  *$I_strerror(i32 $I___errnum){}
+i32  $I_ffs(i32 $A_0){}
+v0  $I_setkey( i8 *$A_0){}
+i32  $I_fflush($T___sFILE *$A_0){}
+v0  $I_rewind($T___sFILE *$A_0){}
+i32  $I_unlockpt(i32 $A_0){}
+i32  $I_execle( i8 *$I___path,  i8 *$I___arg0){}
+i32  $I_execvp( i8 *$I___file, i8 **$I___argv){}
+i32  $I_ttyname_r(i32 $A_0, i8 *$A_1, u32   $A_2){}
+i32     $I_setsid(v0 $A_0){}
+u32  $I_alarm(u32 $A_0){}
+v0  $I_encrypt(i8 *$A_0, i32 $A_1){}
+i8  *$I_format(i8 *$I_fmt){}
+$T_Token  *$I_tokenize_file(i8 *$I_filename){}
+i32  $I_mkfifo( i8 *$A_0, u16    $A_1){}
+v0  $I_add_type($T_Node *$I_node){}
+i8  *$I_strcpy(i8 *$I___dst,  i8 *$I___src){}
+i32  $I_ftruncate(i32 $A_0, i64    $A_1){}
+u32    $I_strnlen( i8 *$I___s1, u32   $I___n){}
+i8  *$I_fgets(i8 *$A_0, i32 $A_1, $T___sFILE *$A_2){}
+i32  $I_ferror($T___sFILE *$A_0){}
+v0  *$I_memchr( v0 *$I___s, i32 $I___c, u32   $I___n){}
+i32  $I_strcoll( i8 *$I___s1,  i8 *$I___s2){}
+$T_tm  *$I_gmtime_r( i32   *$A_0, $T_tm *$A_1){}
+     i32  $I_system( i8 *$A_0){}
+i32  $I_rename( i8 *$I___old,  i8 *$I___new){}
+i32  $I_fchmod(i32 $A_0, u16    $A_1){}
+$T___sFILE  *$I_fopen( i8 *$I___filename,  i8 *$I___mode){}
+i32  $I_printf( i8 *$A_0){}
 i32  $I_getc_unlocked($T___sFILE *$A_0){}
+i32  $I_getpriority(i32 $A_0, u32    $A_1){}
+i8  *$I_l64a(i32 $A_0){}
+    i32  $I_timespec_get($T_timespec *$I_ts, i32 $I_base){}
+u32  $I____runetype(i32  $A_0){}
+i32  $I_getrusage(i32 $A_0, $T_rusage *$A_1){}
+i32  $I_execve( i8 *$I___file, i8 **$I___argv, i8 **$I___envp){}
+i32    $I_pwrite(i32 $I___fd,  v0 *$I___buf, u32   $I___nbyte, i64    $I___offset){}
+$T_anon_9fyvgE  **$I_get_input_files(v0 $A_0){}
+i32  $I_fgetc($T___sFILE *$A_0){}
+i32  $I_rand_r(u32 *$A_0){}
+v0  $I_warn_tok($T_Token *$I_tok, i8 *$I_fmt){}
+$T_Type  *$I_vla_of($T_Type *$I_base, $T_Node *$I_expr){}
+v0  $I_hashmap_delete2($T_anon_ijePDX *$I_map, i8 *$I_key, i32 $I_keylen){}
+ v0  $I_error(i8 *$I_fmt){}
+i32  $I_isatty(i32 $A_0){}
+i32  $I_fchmodat(i32 $A_0,  i8 *$A_1, u16    $A_2, i32 $A_3){}
+i32  $I_fseek($T___sFILE *$A_0, i32 $A_1, i32 $A_2){}
+$T___sFILE  *$I_freopen( i8 *$A_0,  i8 *$A_1, $T___sFILE *$A_2){}
+$T___sFILE  *$I_tmpfile(v0 $A_0){}
+u32    $I_strftime(i8 *$A_0, u32   $A_1,  i8 *$A_2,  $T_tm *$A_3){}
+$T___sFILE  *$I_fdopen(i32 $A_0,  i8 *$A_1){}
+f64  $I_erand48(u16 [3]$A_0){}
+v0  $I_srandom(u32 $A_0){}
+i32  $I_nanosleep( $T_timespec *$I___rqtp, $T_timespec *$I___rmtp){}
+i32  $I_fscanf($T___sFILE *$A_0,  i8 *$A_1){}
+    i32  $I_clock_gettime(i32 $I___clock_id, $T_timespec *$I___tp){}
+v0  $I__exit(i32 $A_0){}
+i32  $I_getopt(i32 $A_0, i8 **$A_1,  i8 *$A_2){}
+f64  $I_strtold( i8 *$A_0, i8 **$A_1){}
+i32  $I_nrand48(u16 [3]$A_0){}
+u64  $I_strtoull( i8 *$I___str, i8 **$I___endptr, i32 $I___base){}
+i32     $I_getsid(i32    $A_0){}
+i32  $I_fsync(i32 $A_0){}
+    i32  $I_clock_settime(i32 $I___clock_id,  $T_timespec *$I___tp){}
+$T___sFILE  *$I_open_memstream(i8 **$I___bufp, u32   *$I___sizep){}
+u32    $I_fread(v0 *$I___ptr, u32   $I___size, u32   $I___nitems, $T___sFILE *$I___stream){}
+i32    $I_getdelim(i8 **$I___linep, u32   *$I___linecapp, i32 $I___delimiter, $T___sFILE *$I___stream){}
+i8  $I_consume($T_Token **$I_rest, $T_Token *$I_tok, i8 *$I_str){}
+v0  *$I_memmove(v0 *$I___dst,  v0 *$I___src, u32   $I___len){}
 
 // top-level var decls:
  $T_Node  *$I_current_switch;
@@ -871,9 +961,9 @@ $T_Type  *$I_ty_void;
 $T___sFILE  *$I___stderrp;
 $T___sFILE  *$I___stdinp;
 $T___sFILE  *$I___stdoutp;
-$T_anon_HVeHDH  $I__DefaultRuneLocale;
-$T_anon_HVeHDH  *$I__CurrentRuneLocale;
-$T_anon_t8QDRB  $I_include_paths;
+$T_anon_i5e1WI  $I__DefaultRuneLocale;
+$T_anon_i5e1WI  *$I__CurrentRuneLocale;
+$T_anon_lhBDg6  $I_include_paths;
 i32  $I___mb_cur_max;
 i32  $I_daylight;
 i32  $I_getdate_err;
@@ -998,84 +1088,6 @@ return ($I___swbuf(($I__c), ($I__p)));
 }
 }
 
-i32 $I_P_ALL = 0;
-i32 $I_P_PID = 1;
-i32 $I_P_PGID = 2 ;
-i32 $I__CLOCK_REALTIME = 0;
-i32 $I__CLOCK_MONOTONIC = 1;
-i32 $I__CLOCK_PROCESS_CPUTIME_ID = 2;
-i32 $I__CLOCK_THREAD_CPUTIME_ID = 3 ;
-i32 $I_TK_IDENT = 0;
-i32 $I_TK_PUNCT = 1;
-i32 $I_TK_KEYWORD = 2;
-i32 $I_TK_STR = 3;
-i32 $I_TK_NUM = 4;
-i32 $I_TK_PP_NUM = 5;
-i32 $I_TK_EOF = 6 ;
-i32 $I_ND_NULL_EXPR = 0;
-i32 $I_ND_ADD = 1;
-i32 $I_ND_SUB = 2;
-i32 $I_ND_MUL = 3;
-i32 $I_ND_DIV = 4;
-i32 $I_ND_NEG = 5;
-i32 $I_ND_MOD = 6;
-i32 $I_ND_BITAND = 7;
-i32 $I_ND_BITOR = 8;
-i32 $I_ND_BITXOR = 9;
-i32 $I_ND_SHL = 10;
-i32 $I_ND_SHR = 11;
-i32 $I_ND_EQ = 12;
-i32 $I_ND_NE = 13;
-i32 $I_ND_LT = 14;
-i32 $I_ND_LE = 15;
-i32 $I_ND_ASSIGN = 16;
-i32 $I_ND_COND = 17;
-i32 $I_ND_COMMA = 18;
-i32 $I_ND_MEMBER = 19;
-i32 $I_ND_ADDR = 20;
-i32 $I_ND_DEREF = 21;
-i32 $I_ND_NOT = 22;
-i32 $I_ND_BITNOT = 23;
-i32 $I_ND_LOGAND = 24;
-i32 $I_ND_LOGOR = 25;
-i32 $I_ND_RETURN = 26;
-i32 $I_ND_IF = 27;
-i32 $I_ND_FOR = 28;
-i32 $I_ND_DO = 29;
-i32 $I_ND_SWITCH = 30;
-i32 $I_ND_CASE = 31;
-i32 $I_ND_BLOCK = 32;
-i32 $I_ND_GOTO = 33;
-i32 $I_ND_GOTO_EXPR = 34;
-i32 $I_ND_LABEL = 35;
-i32 $I_ND_LABEL_VAL = 36;
-i32 $I_ND_FUNCALL = 37;
-i32 $I_ND_EXPR_STMT = 38;
-i32 $I_ND_STMT_EXPR = 39;
-i32 $I_ND_VAR = 40;
-i32 $I_ND_VLA_PTR = 41;
-i32 $I_ND_NUM = 42;
-i32 $I_ND_CAST = 43;
-i32 $I_ND_MEMZERO = 44;
-i32 $I_ND_ASM = 45;
-i32 $I_ND_CAS = 46;
-i32 $I_ND_EXCH = 47 ;
-i32 $I_TY_VOID = 0;
-i32 $I_TY_BOOL = 1;
-i32 $I_TY_CHAR = 2;
-i32 $I_TY_SHORT = 3;
-i32 $I_TY_INT = 4;
-i32 $I_TY_LONG = 5;
-i32 $I_TY_FLOAT = 6;
-i32 $I_TY_DOUBLE = 7;
-i32 $I_TY_LDOUBLE = 8;
-i32 $I_TY_ENUM = 9;
-i32 $I_TY_PTR = 10;
-i32 $I_TY_FUNC = 11;
-i32 $I_TY_ARRAY = 12;
-i32 $I_TY_VLA = 13;
-i32 $I_TY_STRUCT = 14;
-i32 $I_TY_UNION = 15 ;
  i32 $I_align_down(i32 $I_n, i32 $I_align)
 {
 return ($I_align_to(((($I_n)-($I_align))+(1)), ($I_align)));
@@ -1093,11 +1105,11 @@ $T_Scope  *$I_sc = ($I_calloc((1), (0)));
 (($I_scope)=(($I_scope)->$I_next));
 }
 
- $T_anon_rykw41 *$I_find_var($T_Token *$I_tok)
+ $T_anon_YcSHOx *$I_find_var($T_Token *$I_tok)
 {
 for ($T_Scope  *$I_sc = ($I_scope);
 ($I_sc); (($I_sc)=(($I_sc)->$I_next))) {
-$T_anon_rykw41  *$I_sc2 = ($I_hashmap_get2((&(($I_sc)->$I_vars)), (($I_tok)->$I_loc), (($I_tok)->$I_len)));
+$T_anon_YcSHOx  *$I_sc2 = ($I_hashmap_get2((&(($I_sc)->$I_vars)), (($I_tok)->$I_loc), (($I_tok)->$I_len)));
 if (($I_sc2)) {
 return ($I_sc2);
 }
@@ -1188,9 +1200,9 @@ $T_Node  *$I_node = ($I_calloc((1), (0)));
 return ($I_node);
 }
 
- $T_anon_rykw41 *$I_push_scope(i8 *$I_name)
+ $T_anon_YcSHOx *$I_push_scope(i8 *$I_name)
 {
-$T_anon_rykw41  *$I_sc = ($I_calloc((1), (0)));
+$T_anon_YcSHOx  *$I_sc = ($I_calloc((1), (0)));
 ($I_hashmap_put((&(($I_scope)->$I_vars)), ($I_name), ($I_sc)));
 return ($I_sc);
 }
@@ -1293,7 +1305,7 @@ return ($I_strndup((($I_tok)->$I_loc), (($I_tok)->$I_len)));
  $T_Type *$I_find_typedef($T_Token *$I_tok)
 {
 if (((($I_tok)->$I_kind)==($I_TK_IDENT))) {
-$T_anon_rykw41  *$I_sc = ($I_find_var(($I_tok)));
+$T_anon_YcSHOx  *$I_sc = ($I_find_var(($I_tok)));
 if (($I_sc)) {
 return (($I_sc)->$I_type_def);
 }
@@ -1306,19 +1318,8 @@ return ([v0 *]((0)));
 ($I_hashmap_put2((&(($I_scope)->$I_tags)), (($I_tok)->$I_loc), (($I_tok)->$I_len), ($I_ty)));
 }
 
- $T_Type *$I_declspec($T_Token **$I_rest, $T_Token *$I_tok, $T_anon_d2PPOJ *$I_attr)
+ $T_Type *$I_declspec($T_Token **$I_rest, $T_Token *$I_tok, $T_anon_9Xm4fk *$I_attr)
 {
-i32 $I_VOID = 0;
-i32 $I_BOOL = 1;
-i32 $I_CHAR = 2;
-i32 $I_SHORT = 3;
-i32 $I_INT = 4;
-i32 $I_LONG = 5;
-i32 $I_FLOAT = 6;
-i32 $I_DOUBLE = 7;
-i32 $I_OTHER = 8;
-i32 $I_SIGNED = 9;
-i32 $I_UNSIGNED = 10 ;
 $T_Type  *$I_ty = ($I_ty_int);
 i32  $I_counter = (0);
 i8  $I_is_atomic = (0);
@@ -1461,7 +1462,7 @@ else {
 }
 }
 }
-for (u8 $_9HqHNq = 0; $_9HqHNq == 0; $_9HqHNq = 1) {
+for (u8 $_Bgh0ou = 0; $_Bgh0ou == 0; $_Bgh0ou = 1) {
 if (($I_counter) == ($I_VOID)) {
 (($I_ty)=($I_ty_void));
 break;
@@ -1760,7 +1761,7 @@ i8  *$I_name = ($I_get_ident(($I_tok)));
 if (($I_equal(($I_tok), ("=")))) {
 (($I_val)=($I_const_expr((&($I_tok)), (($I_tok)->$I_next))));
 }
-$T_anon_rykw41  *$I_sc = ($I_push_scope(($I_name)));
+$T_anon_YcSHOx  *$I_sc = ($I_push_scope(($I_name)));
 ((($I_sc)->$I_enum_ty)=($I_ty));
 ((($I_sc)->$I_enum_val)=(($I_val)++));
 }
@@ -1817,7 +1818,7 @@ $T_Node  *$I_node = ($I_new_unary(($I_ND_FUNCALL), ($I_new_var_node(($I_builtin_
 return ($I_node);
 }
 
- $T_Node *$I_declaration($T_Token **$I_rest, $T_Token *$I_tok, $T_Type *$I_basety, $T_anon_d2PPOJ *$I_attr)
+ $T_Node *$I_declaration($T_Token **$I_rest, $T_Token *$I_tok, $T_Type *$I_basety, $T_anon_9Xm4fk *$I_attr)
 {
 $T_Node  $I_head;
 $T_Node  *$I_cur = (&($I_head));
@@ -1889,7 +1890,7 @@ if ((($I_init)->$I_is_flexible)) {
 ((*($I_init))=(*($I_new_initializer(($I_array_of(((($I_init)->$I_ty)->$I_base), ((($I_tok)->$I_ty)->$I_array_len))), (0)))));
 }
 i32  $I_len;
-for (u8 $_WB5cUc = 0; $_WB5cUc == 0; $_WB5cUc = 1) {
+for (u8 $_9LJqp1 = 0; $_9LJqp1 == 0; $_9LJqp1 = 1) {
 if ((((($I_init)->$I_ty)->$I_base)->$I_size) == (1)) {
 i8  *$I_str = (($I_tok)->$I_str);
 for (i32  $I_i = (0);
@@ -2406,7 +2407,7 @@ i8  *$I_buf = ($I_calloc((1), ((($I_var)->$I_ty)->$I_size)));
 
  i8 $I_is_typename($T_Token *$I_tok)
 {
- $T_anon_QZT3hI  $I_map;
+ $T_anon_ijePDX  $I_map;
 if (((($I_map).$I_capacity)==(0))) {
  i8  **$I_kw;
 for (i32  $I_i = (0);
@@ -2629,7 +2630,7 @@ $T_Node  *$I_cur = (&($I_head));
 ($I_enter_scope());
 while ((!($I_equal(($I_tok), ("}"))))) {
 if ((($I_is_typename(($I_tok)))&(!($I_equal((($I_tok)->$I_next), (":")))))) {
-$T_anon_d2PPOJ  $I_attr;
+$T_anon_9Xm4fk  $I_attr;
 $T_Type  *$I_basety = ($I_declspec((&($I_tok)), ($I_tok), (&($I_attr))));
 if ((($I_attr).$I_is_typedef)) {
 (($I_tok)=($I_parse_typedef(($I_tok), ($I_basety))));
@@ -2689,7 +2690,7 @@ return ($I_eval2(($I_node), ([v0 *]((0)))));
 if (($I_is_flonum((($I_node)->$I_ty)))) {
 return ($I_eval_double(($I_node)));
 }
-for (u8 $_GVu1V8 = 0; $_GVu1V8 == 0; $_GVu1V8 = 1) {
+for (u8 $_0DcUdu = 0; $_0DcUdu == 0; $_0DcUdu = 1) {
 if ((($I_node)->$I_kind) == ($I_ND_ADD)) {
 return (($I_eval2((($I_node)->$I_lhs), ($I_label)))+($I_eval((($I_node)->$I_rhs))));
 }
@@ -2770,7 +2771,7 @@ return (($I_eval((($I_node)->$I_lhs)))|($I_eval((($I_node)->$I_rhs))));
 else if ((($I_node)->$I_kind) == ($I_ND_CAST)) {
 i64   $I_val = ($I_eval2((($I_node)->$I_lhs), ($I_label)));
 if (($I_is_integer((($I_node)->$I_ty)))) {
-for (u8 $_wRWJ6E = 0; $_wRWJ6E == 0; $_wRWJ6E = 1) {
+for (u8 $_UVQzDF = 0; $_UVQzDF == 0; $_UVQzDF = 1) {
 if (((($I_node)->$I_ty)->$I_size) == (1)) {
 }
 else if (((($I_node)->$I_ty)->$I_size) == (2)) {
@@ -2816,7 +2817,7 @@ return (($I_node)->$I_val);
 
  i64  $I_eval_rval($T_Node *$I_node, i8 ***$I_label)
 {
-for (u8 $_Z6Azv1 = 0; $_Z6Azv1 == 0; $_Z6Azv1 = 1) {
+for (u8 $_9yEHoQ = 0; $_9yEHoQ == 0; $_9yEHoQ = 1) {
 if ((($I_node)->$I_kind) == ($I_ND_VAR)) {
 if (((($I_node)->$I_var)->$I_is_local)) {
 ($I_error_tok((($I_node)->$I_tok), ("not a compile-time constant")));
@@ -2837,7 +2838,7 @@ return (($I_eval_rval((($I_node)->$I_lhs), ($I_label)))+((($I_node)->$I_member)-
  i8 $I_is_const_expr($T_Node *$I_node)
 {
 ($I_add_type(($I_node)));
-for (u8 $_HPXsnW = 0; $_HPXsnW == 0; $_HPXsnW = 1) {
+for (u8 $_ZhM0Av = 0; $_ZhM0Av == 0; $_ZhM0Av = 1) {
 if ((($I_node)->$I_kind) == ($I_ND_ADD)) {
 return (($I_is_const_expr((($I_node)->$I_lhs)))&($I_is_const_expr((($I_node)->$I_rhs))));
 }
@@ -2925,7 +2926,7 @@ return ([u32 ](($I_eval(($I_node)))));
 }
 return ($I_eval(($I_node)));
 }
-for (u8 $_kw0q7N = 0; $_kw0q7N == 0; $_kw0q7N = 1) {
+for (u8 $_8JqvNJ = 0; $_8JqvNJ == 0; $_8JqvNJ = 1) {
 if ((($I_node)->$I_kind) == ($I_ND_ADD)) {
 return (($I_eval_double((($I_node)->$I_lhs)))+($I_eval_double((($I_node)->$I_rhs))));
 }
@@ -3350,7 +3351,7 @@ $T_Member  $I_head;
 $T_Member  *$I_cur = (&($I_head));
 i32  $I_idx = (0);
 while ((!($I_equal(($I_tok), ("}"))))) {
-$T_anon_d2PPOJ  $I_attr;
+$T_anon_9Xm4fk  $I_attr;
 $T_Type  *$I_basety = ($I_declspec((&($I_tok)), ($I_tok), (&($I_attr))));
 i8  $I_first = (1);
 if (((((($I_basety)->$I_kind)==($I_TY_STRUCT))|((($I_basety)->$I_kind)==($I_TY_UNION)))&($I_consume((&($I_tok)), ($I_tok), (";"))))) {
@@ -3778,7 +3779,7 @@ $T_Node  *$I_node = ($I_new_node(($I_ND_EXCH), ($I_tok)));
 return ($I_node);
 }
 if (((($I_tok)->$I_kind)==($I_TK_IDENT))) {
-$T_anon_rykw41  *$I_sc = ($I_find_var(($I_tok)));
+$T_anon_YcSHOx  *$I_sc = ($I_find_var(($I_tok)));
 ((*($I_rest))=(($I_tok)->$I_next));
 if (((($I_sc)&(($I_sc)->$I_var))&((($I_sc)->$I_var)->$I_is_function))) {
 if (($I_current_fn)) {
@@ -3874,7 +3875,7 @@ $T_Scope  *$I_sc = ($I_scope);
 while ((($I_sc)->$I_next)) {
 (($I_sc)=(($I_sc)->$I_next));
 }
-$T_anon_rykw41  *$I_sc2 = ($I_hashmap_get((&(($I_sc)->$I_vars)), ($I_name)));
+$T_anon_YcSHOx  *$I_sc2 = ($I_hashmap_get((&(($I_sc)->$I_vars)), ($I_name)));
 if (((($I_sc2)&(($I_sc2)->$I_var))&((($I_sc2)->$I_var)->$I_is_function))) {
 return (($I_sc2)->$I_var);
 }
@@ -3896,7 +3897,7 @@ if (($I_fn)) {
 }
 }
 
- $T_Token *$I_function($T_Token *$I_tok, $T_Type *$I_basety, $T_anon_d2PPOJ *$I_attr)
+ $T_Token *$I_function($T_Token *$I_tok, $T_Type *$I_basety, $T_anon_9Xm4fk *$I_attr)
 {
 $T_Type  *$I_ty = ($I_declarator((&($I_tok)), ($I_tok), ($I_basety)));
 if ((!(($I_ty)->$I_name))) {
@@ -3950,7 +3951,7 @@ if ((($I_ty)->$I_is_variadic)) {
 return ($I_tok);
 }
 
- $T_Token *$I_global_variable($T_Token *$I_tok, $T_Type *$I_basety, $T_anon_d2PPOJ *$I_attr)
+ $T_Token *$I_global_variable($T_Token *$I_tok, $T_Type *$I_basety, $T_anon_9Xm4fk *$I_attr)
 {
 i8  $I_first = (1);
 while ((!($I_consume((&($I_tok)), ($I_tok), (";"))))) {
@@ -4028,7 +4029,7 @@ $T_Obj *$I_parse($T_Token *$I_tok)
 ($I_declare_builtin_functions());
 (($I_globals)=([v0 *]((0))));
 while (((($I_tok)->$I_kind)!=($I_TK_EOF))) {
-$T_anon_d2PPOJ  $I_attr;
+$T_anon_9Xm4fk  $I_attr;
 $T_Type  *$I_basety = ($I_declspec((&($I_tok)), ($I_tok), (&($I_attr))));
 if ((($I_attr).$I_is_typedef)) {
 (($I_tok)=($I_parse_typedef(($I_tok), ($I_basety))));
@@ -4051,4 +4052,4 @@ return ($I_globals);
 }
 
 
-v0 main() {}
+v0 main () {}
